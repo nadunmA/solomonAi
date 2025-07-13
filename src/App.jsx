@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import Hero from "./components/Hero/Hero";
 import ImageSlider from "./components/ImageSlider/ImageSlider";
 import PromptPage from "./Pages/PromptPage";
@@ -14,6 +14,7 @@ import About from "./Pages/About";
 import ScrollToTop from "./components/Scroll/ScrollToTop";
 import News from "./Pages/News";
 import FifthPromptPage from "./Pages/FifthPromptPage";
+
 function Home() {
   return (
     <>
@@ -45,86 +46,85 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col">
-        {loading ? (
-          <Preloader />
-        ) : (
-          <>
-            <ScrollToTop />
+      <HashRouter>
+        <div className="min-h-screen flex flex-col">
+          {loading ? (
+            <Preloader />
+          ) : (
+            <>
+              <ScrollToTop />
 
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <LayOut>
-                    <Home />
-                  </LayOut>
-                }
-              />
-              <Route
-                path="/prompt"
-                element={
-                  <LayOut>
-                    <PromptPage />
-                  </LayOut>
-                }
-              />
-              <Route
-                path="/secondprompt"
-                element={
-                  <LayOut>
-                    <SecondPromptPage />
-                  </LayOut>
-                }
-              />
-              <Route
-                path="/thirdprompt"
-                element={
-                  <LayOut>
-                    <ThirdPromptPage />
-                  </LayOut>
-                }
-              />
-              <Route
-                path="/forthpromptpage"
-                element={
-                  <LayOut>
-                    <ForthPromptPage />
-                  </LayOut>
-                }
-              />
-
-              <Route
-                path="/fifthpromptpage"
-                element={
-                  <LayOut>
-                    <FifthPromptPage />
-                  </LayOut>
-                }
-              />
-
-              <Route
-                path="/about"
-                element={
-                  <LayOut>
-                    <About />
-                  </LayOut>
-                }
-              />
-
-              <Route
-                path="/news"
-                element={
-                  <LayOut>
-                    <News />
-                  </LayOut>
-                }
-              />
-              <Route path="/element" element={<LayOut></LayOut>} />
-            </Routes>
-          </>
-        )}
-      </div>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <LayOut>
+                      <Home />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/prompt"
+                  element={
+                    <LayOut>
+                      <PromptPage />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/secondprompt"
+                  element={
+                    <LayOut>
+                      <SecondPromptPage />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/thirdprompt"
+                  element={
+                    <LayOut>
+                      <ThirdPromptPage />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/forthpromptpage"
+                  element={
+                    <LayOut>
+                      <ForthPromptPage />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/fifthpromptpage"
+                  element={
+                    <LayOut>
+                      <FifthPromptPage />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={
+                    <LayOut>
+                      <About />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/news"
+                  element={
+                    <LayOut>
+                      <News />
+                    </LayOut>
+                  }
+                />
+                <Route path="/element" element={<LayOut></LayOut>} />
+              </Routes>
+            </>
+          )}
+        </div>
+      </HashRouter>
     </>
   );
 }
