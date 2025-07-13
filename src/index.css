@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.navbar-blur {
+  backdrop-filter: blur(12px);
+  background: rgb(0, 0, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-shine {
+  background: linear-gradient(
+    90deg,
+    rgba(156, 163, 175, 0.8) 0%,
+    rgba(255, 255, 255, 1) 30%,
+    rgba(156, 163, 175, 0.8) 60%,
+    rgba(75, 85, 99, 0.6) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 6s infinite ease-in-out;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-shine:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.2);
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-shine:hover::after {
+  width: 100%;
+}
+
+@keyframes shine {
+  0%,
+  100% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: -100% 0;
+  }
+}
+
+.menu-slide {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to right,
+    rgba(93, 20, 202, 0.671),
+    rgba(90, 17, 199, 0.685),
+    rgba(0, 0, 0, 0.904)
+  );
+}
+
+.navbar-blur {
+  background: linear-gradient(
+    to right,
+    rgba(79, 26, 202, 0.2),
+    rgba(30, 2, 82, 0.2)
+  );
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hamburger-line {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, #ffffff, #e5e7eb);
+}
+
+.hamburger-active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.logo-glow {
+  background: linear-gradient(135deg, #ffffff, #e5e7eb, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.mobile-menu-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 4px 0;
+}
+
+.mobile-menu-item:hover {
+  transform: translateX(8px);
+}
+
+.nav-shadow {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/*preloader css*/
+/* Preloader.css */
+.absolute {
+  position: absolute;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.loader {
+  display: flex;
+  margin: 0.25em 0;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.w-2 {
+  width: 0.5em;
+}
+
+.dash {
+  animation: dashArray 2s ease-in-out infinite, dashOffset 2s linear infinite;
+}
+
+.spin {
+  animation: spinDashArray 2s ease-in-out infinite, spin 8s ease-in-out infinite,
+    dashOffset 2s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes dashArray {
+  0% {
+    stroke-dasharray: 0 1 359 0;
+  }
+
+  50% {
+    stroke-dasharray: 0 359 1 0;
+  }
+
+  100% {
+    stroke-dasharray: 359 1 0 0;
+  }
+}
+
+@keyframes spinDashArray {
+  0% {
+    stroke-dasharray: 270 90;
+  }
+
+  50% {
+    stroke-dasharray: 0 360;
+  }
+
+  100% {
+    stroke-dasharray: 270 90;
+  }
+}
+
+@keyframes dashOffset {
+  0% {
+    stroke-dashoffset: 365;
+  }
+
+  100% {
+    stroke-dashoffset: 5;
+  }
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+
+  12.5%,
+  25% {
+    rotate: 270deg;
+  }
+
+  37.5%,
+  50% {
+    rotate: 540deg;
+  }
+
+  62.5%,
+  75% {
+    rotate: 810deg;
+  }
+
+  87.5%,
+  100% {
+    rotate: 1080deg;
+  }
+}
+
+/* Scrollbar style for Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom right, #4c1d95, #000000, #1e40af);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4c1d95 #111827;
+}
+
+body {
+  background-image: url("/solomon.png");
+}
