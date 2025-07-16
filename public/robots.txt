@@ -1,3 +1,15 @@
 User-agent: *
 Allow: /
+Crawl-delay: 1
+
+# Block admin/private folders (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+
+# Common files to block
+Disallow: /404.html
+Disallow: /search.html
+
+# Sitemap location
 Sitemap: https://solomonprompts.site/sitemap.xml
