@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, HashRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Hero from "./components/Hero/Hero";
 import ImageSlider from "./components/ImageSlider/ImageSlider";
 import PromptPage from "./Pages/PromptPage";
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <>
-      <HashRouter>
+      <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           {loading ? (
             <Preloader />
@@ -124,7 +125,7 @@ function App() {
             </>
           )}
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 }
