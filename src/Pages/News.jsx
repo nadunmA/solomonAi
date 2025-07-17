@@ -15,7 +15,7 @@ const News = () => {
         "We just added 100+ new prompt templates to our AI prompt site. Check them out now!",
     },
     {
-      id: 101,
+      id: 2101,
       image: pNews,
       title: "Images now load faster.",
       date: "2025-07-17",
