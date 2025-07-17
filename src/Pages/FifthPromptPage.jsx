@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import copilot from "../assets/pilot.png";
 import { motion } from "framer-motion";
 
-import collage101 from "../assets/photos/collage101.png";
+import collage101 from "../assets/photos/collage101.webp";
 
 const FifthPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
