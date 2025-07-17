@@ -28,7 +28,6 @@ import collage49 from "../assets/photos/collage49.webp";
 import collage50 from "../assets/photos/collage50.webp";
 import copilot from "../assets/pilot.png";
 import { motion } from "framer-motion";
-import PromptPage from "./Pages/PromptPage";
 
 const SecondPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
