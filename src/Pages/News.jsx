@@ -1,14 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import collage101 from "../assets/photos/collage101.webp";
+import pNews from "../assets/pNews.webp";
+
 const News = () => {
   const newsItems = [
     {
-      id: 1,
+      id: 101,
+      image: collage101,
       title: "New AI Prompt Collection Released!",
       date: "2025-07-13",
       description:
         "We just added 100+ new prompt templates to our AI prompt site. Check them out now!",
+    },
+    {
+      id: 101,
+      image: pNews,
+      title: "Images now load faster.",
+      date: "2025-07-17",
+      description: "Increased performance and faster image loading.",
     },
   ];
 
