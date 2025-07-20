@@ -29,14 +29,6 @@ const News = () => {
       description:
         "We just added 100+ new prompt templates to our AI prompt site. Check them out now!",
     },
-    {
-      id: 20040,
-      image: newsImg,
-      title: "New AI Prompt Collection Released!",
-      date: "2025-07-13",
-      description:
-        "We just added 100+ new prompt templates to our AI prompt site. Check them out now!",
-    },
   ];
 
   return (
