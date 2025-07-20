@@ -246,6 +246,7 @@ const PromptPage = () => {
 
         {/* Floating orbs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-violet-600/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
+
         <div
           className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}

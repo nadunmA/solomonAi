@@ -3,9 +3,13 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../../variants";
 import gptt from "../../assets/gpt.png";
 import copilot from "../../assets/pilot.png";
+import DynamicIsland from "../dyanamic islanda/DynamicIsland";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const [currentPrompt, setCurrentPrompt] = useState(0);
+
+  //testing part
 
   const prompts = [
     "A majestic dragon soaring through neon-lit cyberpunk clouds",
@@ -133,14 +137,7 @@ const Hero = () => {
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center text-white max-w-4xl mx-auto">
           <div className="mb-12 space-y-4 animate-fadeInUp">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-8 h-8 text-yellow-400 mr-2 text-2xl animate-sparkle">
-                ✨
-              </div>
-              <span className="text-yellow-400 font-semibold tracking-wider uppercase text-sm">
-                AI Magic Unleashed
-              </span>
-            </div>
+            <DynamicIsland></DynamicIsland>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight">
               Transform Words Into
               <br />

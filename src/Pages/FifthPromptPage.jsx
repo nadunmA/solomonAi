@@ -4,6 +4,16 @@ import copilot from "../assets/pilot.png";
 import { motion } from "framer-motion";
 
 import collage101 from "../assets/photos/collage101.webp";
+import collage102 from "../assets/photos/collage102.webp";
+import collage103 from "../assets/photos/collage103.webp";
+import collage104 from "../assets/photos/collage104.webp";
+import collage105 from "../assets/photos/collage105.webp";
+import collage106 from "../assets/photos/collage106.webp";
+import collage107 from "../assets/photos/collage107.webp";
+import collage108 from "../assets/photos/collage108.webp";
+import collage109 from "../assets/photos/collage109.webp";
+import collage110 from "../assets/photos/collage110.webp";
+import collage111 from "../assets/photos/collage111.webp";
 
 const FifthPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
@@ -20,6 +30,76 @@ const FifthPromptPage = () => {
       alt: "Images",
       prompt:
         "Grungy analog photo of [ tupac ] circa 1999 playing [ Games ] on Playstation 1 on a 90s CRT TV in a dimly lit bedroom with me . Both sitting on the floor in front of the TV holding the Playstation 1 cotroller in one hand and locking back at the camera taking the photo while the game is on the background visible to us, Flash photography, unedited",
+    },
+    {
+      id: 102,
+      image: collage102,
+      alt: "Images",
+      prompt:
+        "Use face above uploaded photo A sharply styled man with wet, slicked-back hair stands beneath a moody, overcast sky, rain lightly falling and catching in the strands of his hair and the folds of his open black shirt. His face is captured in a close-up side profile, lips gently parted as he exhales smoke from a cigarette held between tattooed fingers. Droplets trace down his skin and silver chain, adding raw texture and realism. The ambient light reflects subtly on his sunglasses and metallic accessories, while dramatic shadows carve out his jawline and neck. Behind him, a blurred urban backdrop fades into desaturated tones, heightening the cinematic atmosphere with a sense of introspective solitude and quiet tension.",
+    },
+    {
+      id: 103,
+      image: collage103,
+      alt: "Images",
+      prompt:
+        "Use face above uploaded photo A cinematic, ultra-realistic image of a confident use my real face in his 27s, wearing a blue shirt and jeans, and sunglasses, stepping into a modern black helicopter. hia front foot is on the helicopter's step, one hand is holding the door or frame, and his denim jacket and hair are blowing in the strong wind from the spinning blades. Dust and dry leaves are swirling around due to the rotor wind. he looks focused and stylish, like a movie hero boarding for a secret mission.",
+    },
+    {
+      id: 104,
+      image: collage104,
+      alt: "Images",
+      prompt:
+        "Use face above uploaded photo Create an ultra-realistic 3D cinematic render of the same person, preserving facial features. He sits in a lounge chair (teal, burnt orange), legs crossed, holding a steaming coffee cup. Outfit: fitted T-shirt, rolled-up jeans, sneakers, sunglasses, and wristwatch. Background: soft gradient, minimalist décor. Lighting: warm key, cool rim, soft fill, steam glow. Style: 8K detail, shallow depth, teal-orange tones, cinematic.",
+    },
+    {
+      id: 105,
+      image: collage105,
+      alt: "Images",
+      prompt:
+        "Use face above uploaded photo A cinematic double exposure portrait of a man (use uploaded face) staring calmly into the distance. Inside his silhouette, a dramatic cliffside vista is revealed with waves crashing below, wind pulling at the coat of a lone figure standing at the edge (himself), overlooking a stormy sea. Lightning flickers behind clouds in the far horizon. The outer portrait is dark and windswept, with sharp contrast and misty tones",
+    },
+    {
+      id: 106,
+      image: collage106,
+      alt: "Images",
+      prompt:
+        "Create a hyper-realistic, cinematic portrait of the man in the uploaded reference image. He appears in side profile, exuding confidence and mystery. He wears a fitted, deep red button-up shirt that adds intensity and contrast to the composition. The lighting is dramatic and stylized, dominated by a neon red color palette.",
+    },
+    {
+      id: 107,
+      image: collage107,
+      alt: "Images",
+      prompt:
+        "A hyper-realistic, cinematic 9:16 portrait of a man standing on a bustling city street at twilight. He’s wearing dark sunglasses with warm-toned reflections of neon signs visible in the lenses. The man is dressed in a dark wool overcoat layered over a high-neck black turtleneck. The background is an out-of-focus mix of vibrant city lights—reds, oranges, yellows, and blues—creating a dreamy bokeh effect with a moody urban vibe. He gazes slightly upward, exuding calm confidence and introspection. The lighting is soft and diffused, with a warm amber glow on the face and coat. Use the exact facial features, skin texture, hairstyle, beard, and natural tone from the uploaded selfie. No retouching, no smoothing—keep the face fully original. Match the same camera lighting style, and background atmosphere as in the reference photo. Slight filmic grain and depth-of-field for realistic viewing.",
+    },
+    {
+      id: 108,
+      image: collage108,
+      alt: "Images",
+      prompt:
+        "Create a moody portrait with dramatic studio lighting. The subject should stand slightly off-center in front of a large, soft golden spotlight circle on a deep navy background. Use soft shadows and a cinematic feel. The subject must wear a plain black t-shirt, have slightly long, wavy hair, flawless fair skin, and no glasses or facial hair. Lighting should fall from the top-left casting a clear shadow to the right. Maintain a 4:3 aspect ratio and keep the camera angle and distance consistent with classic editorial portraits?.",
+    },
+    {
+      id: 109,
+      image: collage109,
+      alt: "Images",
+      prompt:
+        "Cinematic travel shot of me sitting at the front of a traditional Thai long-tail boat, cruising through crystal-clear turquoise waters surrounded by towering limestone cliffs and lush green vegetation. I’m smiling, wearing black sunglasses, beachwear and a straw hat, facing forward, enjoying the view under a bright blue sky. Other similar boats float in the distance, adding to the tropical atmosphere. Sunlight reflects off the water’s surface, casting shimmering patterns onto the wooden deck. 35mm film aesthetic, warm tropical tones.",
+    },
+    {
+      id: 110,
+      image: collage110,
+      alt: "Images",
+      prompt:
+        "Cinematic night portrait using subject's selfie. Subject stands outdoors, slightly turned, head tilted back/left, looking away calmly with parted lips. Background: tall apartment with glowing yellow-orange bokeh windows, deep shadows around. Red neon light from front-left casts bold tones; strong shadows on right create dramatic contrast. Wears dark puffer jacket over shirt and sweater. Hair is thicker, wind-swept, tousled. Dark, moody color palette with soft grain and vignette. 3:4 vertical. Style: urban, cinematic, editorial.",
+    },
+    {
+      id: 111,
+      image: collage111,
+      alt: "Images",
+      prompt:
+        "An stands in a fish-eye lens photo booth from above, where every wall and ceiling are covered with posters of rock and metal bands—Nirvana, Metallica, AC/DC, Blink-182, Queen, Ghost, Slipknot, Guns N’ Roses, and Pink Floyd, Helloween, Bon Jovi, Maroon 5, Sepultura. He’s fair-skinned and short-haired, his face fitting the photo, wearing an oversized black T-shirt with a flaming Harley Davidson motorcycle, jeans, black combat boots, and an olive green trucker hat turned backwards. He stands with his body leaning toward the camera, making his head appear slightly larger than his body and legs, his legs spread wide, he smiles confidently, with his rock metal hands outstretched toward the camera. The bright studio lighting highlights their confident poses and the intense texture of the poster-covered backdrop. The vibe is loud, alternative, and rebellious—a stylish young couple with a rock-and-roll aesthetic, a 3:4 aspect ratio.",
     },
   ];
 
