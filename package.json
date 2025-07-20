@@ -6,8 +6,7 @@
   "homepage": "https://solomonprompts.site/",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && copy _routes.json dist\\",
-
+    "build": "vite build && copy _routes.json dist\\_routes.json",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
