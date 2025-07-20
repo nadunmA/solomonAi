@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 import newsImg from "../assets/newsImg.webp";
 import pNews from "../assets/pNews.webp";
+import Dayanamic from "../assets/dyanamic.png";
 
 const News = () => {
   const newsItems = [
     {
-      id: 2000,
-      image: newsImg,
-      title: "New AI Prompt Collection Released!",
-      date: "2025-07-13",
-      description:
-        "We just added 100+ new prompt templates to our AI prompt site. Check them out now!",
+      id: 2102,
+      image: Dayanamic,
+      title: "Quick navigation!",
+      date: "2025-07-20",
+      description: "Quick navigate new prompts",
     },
     {
       id: 2101,
@@ -20,6 +20,14 @@ const News = () => {
       title: "Images now load faster.",
       date: "2025-07-17",
       description: "Increased performance and faster image loading.",
+    },
+    {
+      id: 2000,
+      image: newsImg,
+      title: "New AI Prompt Collection Released!",
+      date: "2025-07-13",
+      description:
+        "We just added 100+ new prompt templates to our AI prompt site. Check them out now!",
     },
   ];
 
