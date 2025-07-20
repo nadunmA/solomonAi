@@ -15,7 +15,7 @@ import About from "./Pages/About";
 import ScrollToTop from "./components/Scroll/ScrollToTop";
 import News from "./Pages/News";
 import FifthPromptPage from "./Pages/FifthPromptPage";
-import { HashRouter } from "react-router-dom";
+//import { HashRouter } from "react-router-dom";
 
 function Home() {
   return (
@@ -48,7 +48,7 @@ function App() {
 
   return (
     <>
-      <HashRouter>
+      <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           {loading ? (
             <Preloader />
@@ -127,7 +127,7 @@ function App() {
             </>
           )}
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 }
