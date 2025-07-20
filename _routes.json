@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [],
+  "fallback": {
+    "dest": "/index.html",
+    "status": 200
+  }
+}
