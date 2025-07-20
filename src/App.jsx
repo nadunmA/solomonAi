@@ -15,7 +15,7 @@ import About from "./Pages/About";
 import ScrollToTop from "./components/Scroll/ScrollToTop";
 import News from "./Pages/News";
 import FifthPromptPage from "./Pages/FifthPromptPage";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 function Home() {
   return (
