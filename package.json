@@ -6,7 +6,7 @@
   "homepage": "https://solomonprompts.site/",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+     "build": "vite build && node copyRoutes.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
