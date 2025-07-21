@@ -14,6 +14,7 @@ import collage108 from "../assets/photos/collage108.webp";
 import collage109 from "../assets/photos/collage109.webp";
 import collage110 from "../assets/photos/collage110.webp";
 import collage111 from "../assets/photos/collage111.webp";
+import collage112 from "../assets/photos/collage112.webp";
 
 const FifthPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
@@ -100,6 +101,13 @@ const FifthPromptPage = () => {
       alt: "Images",
       prompt:
         "An stands in a fish-eye lens photo booth from above, where every wall and ceiling are covered with posters of rock and metal bands—Nirvana, Metallica, AC/DC, Blink-182, Queen, Ghost, Slipknot, Guns N’ Roses, and Pink Floyd, Helloween, Bon Jovi, Maroon 5, Sepultura. He’s fair-skinned and short-haired, his face fitting the photo, wearing an oversized black T-shirt with a flaming Harley Davidson motorcycle, jeans, black combat boots, and an olive green trucker hat turned backwards. He stands with his body leaning toward the camera, making his head appear slightly larger than his body and legs, his legs spread wide, he smiles confidently, with his rock metal hands outstretched toward the camera. The bright studio lighting highlights their confident poses and the intense texture of the poster-covered backdrop. The vibe is loud, alternative, and rebellious—a stylish young couple with a rock-and-roll aesthetic, a 3:4 aspect ratio.",
+    },
+    {
+      id: 112,
+      image: collage112,
+      alt: "Images",
+      prompt:
+        "A cinematic black-and-white portrait of a young man with sharp features, light stubble, and tousled dark hair. He is wearing a striped button-down shirt, slightly open at the collar. The lighting is soft yet directional, casting moody shadows across his face and highlighting the texture of his skin and shirt. The background is a plain dark grey, and the overall tone is dramatic, editorial, and minimalist. Photographed with a shallow depth of field using a professional DSLR camera, high contrast, matte finish.",
     },
   ];
 

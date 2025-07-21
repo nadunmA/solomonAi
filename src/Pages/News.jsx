@@ -4,9 +4,17 @@ import { Link } from "react-router-dom";
 import newsImg from "../assets/newsImg.webp";
 import pNews from "../assets/pNews.webp";
 import Dayanamic from "../assets/dyanamic.png";
+import copilott from "../assets/copilot.png";
 
 const News = () => {
   const newsItems = [
+    {
+      id: 2103,
+      image: copilott,
+      title: "Click Copilot Image",
+      date: "2025-07-20",
+      description: "Click Copilot and generate images easily",
+    },
     {
       id: 2102,
       image: Dayanamic,
