@@ -33,7 +33,7 @@ export default function DynamicIsland() {
 
         {/* Dynamic Island Container */}
         <div
-          className={`relative bg-black border border-gray-800 transition-all duration-500 ease-out cursor-pointer mx-auto ${
+          className={`relative bg-black border border-purple-600 transition-all duration-500 ease-out cursor-pointer mx-auto ${
             isExpanded
               ? "rounded-3xl px-4 sm:px-6 py-3 sm:py-4 w-72 sm:w-80 max-w-sm"
               : "rounded-full px-3 sm:px-4 py-2 sm:py-3 w-52 sm:w-64 max-w-xs"
