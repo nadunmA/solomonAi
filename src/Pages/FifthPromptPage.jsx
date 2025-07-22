@@ -15,6 +15,7 @@ import collage109 from "../assets/photos/collage109.webp";
 import collage110 from "../assets/photos/collage110.webp";
 import collage111 from "../assets/photos/collage111.webp";
 import collage112 from "../assets/photos/collage112.webp";
+import collage113 from "../assets/photos/collage113.webp";
 
 const FifthPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
@@ -108,6 +109,13 @@ const FifthPromptPage = () => {
       alt: "Images",
       prompt:
         "A cinematic black-and-white portrait of a young man with sharp features, light stubble, and tousled dark hair. He is wearing a striped button-down shirt, slightly open at the collar. The lighting is soft yet directional, casting moody shadows across his face and highlighting the texture of his skin and shirt. The background is a plain dark grey, and the overall tone is dramatic, editorial, and minimalist. Photographed with a shallow depth of field using a professional DSLR camera, high contrast, matte finish.",
+    },
+    {
+      id: 113,
+      image: collage113,
+      alt: "Images",
+      prompt:
+        "Ultra high-definition, cinematic portrait of a Red Bull Racing F1 driver walking confidently through a pit lane. The image should appear sharp and highly detailed, with subtle cinematic grain, controlled vignetting, and rich contrast. Use a high-gloss professional motorsport aesthetic — neutral blacks, silvers, and whites, with signature Red Bull accents like deep blue, red, and yellow. The driver is wearing official Red Bull Racing gear (full suit, gloves, boots) and holding a Red Bull helmet. His face is visible, unedited, and natural — no retouching. Skin texture must remain intact. Sunglasses optional. The lighting should highlight his facial features and gear textures realistically. The F1 bolide behind him is a Red Bull Racing car, slightly out of focus due to shallow depth of field (85mm lens look), parked at an angle behind him in the pit lane. Background includes blurred crew members, photographers, and a warm sun haze for cinematic flair. The final result must evoke the energy and status of a Netflix sports documentary still or a premium racing magazine cover.",
     },
   ];
 
