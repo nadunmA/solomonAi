@@ -16,6 +16,14 @@ import collage110 from "../assets/photos/collage110.webp";
 import collage111 from "../assets/photos/collage111.webp";
 import collage112 from "../assets/photos/collage112.webp";
 import collage113 from "../assets/photos/collage113.webp";
+import collage114 from "../assets/photos/collage114.webp";
+import collage115 from "../assets/photos/collage115.webp";
+import collage116 from "../assets/photos/collage116.webp";
+import collage117 from "../assets/photos/collage117.webp";
+import collage118 from "../assets/photos/collage118.webp";
+import collage119 from "../assets/photos/collage119.webp";
+import collage120 from "../assets/photos/collage120.webp";
+import collage121 from "../assets/photos/collage121.webp";
 
 const FifthPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
@@ -116,6 +124,62 @@ const FifthPromptPage = () => {
       alt: "Images",
       prompt:
         "Ultra high-definition, cinematic portrait of a Red Bull Racing F1 driver walking confidently through a pit lane. The image should appear sharp and highly detailed, with subtle cinematic grain, controlled vignetting, and rich contrast. Use a high-gloss professional motorsport aesthetic — neutral blacks, silvers, and whites, with signature Red Bull accents like deep blue, red, and yellow. The driver is wearing official Red Bull Racing gear (full suit, gloves, boots) and holding a Red Bull helmet. His face is visible, unedited, and natural — no retouching. Skin texture must remain intact. Sunglasses optional. The lighting should highlight his facial features and gear textures realistically. The F1 bolide behind him is a Red Bull Racing car, slightly out of focus due to shallow depth of field (85mm lens look), parked at an angle behind him in the pit lane. Background includes blurred crew members, photographers, and a warm sun haze for cinematic flair. The final result must evoke the energy and status of a Netflix sports documentary still or a premium racing magazine cover.",
+    },
+    {
+      id: 114,
+      image: collage114,
+      alt: "Images",
+      prompt:
+        "Create Image showing a in his with a good physique sitting alone on a park bench during a rainy night. with a middle part hairstyle looks wet from the rain, wearing a dark gray jacket over a white t-shirt, and dark trousers. He also wears light colored sneakers (white with black accents). His posture suggests sadness or contemplation, his head is looking at the sky with his face slightly turned towards the camera and his hands are intertwined or holding something in his lap. The expression looks sad because his head is looking at the sky. Foreground The park bench is made of wood with a black iron frame, looks wet from the rain. Puddles of water are visible on the ground in front of the bench, reflecting the light of street lamps and lights in the distance. The wet texture and reflection of light add a realistic feel to the rainy atmosphere. Background and Atmosphere The rain is clearly visible with streaks of water falling. There is a street lamp post to the left of the man, with a bright orange lamp that casts light around the man and the bench. The light creates a halo and shadow effect. In the distance, the silhouettes of city buildings with their lights on, as well as the headlights of vehicles on the streets, can be seen. Electric or telephone cables stretch above, adding to the urban detail. A tree with sparse leaves is visible in the upper left corner, wet from the rain. The overall atmosphere is melancholic, lonely, and cold, typical of a rainy night in the city. Style and Aesthetics The use of color is dominated by dark blue, gray, and black shades for the sky and the wet environment, with a strong contrast from the yellowish orange light from the streetlights. In short, this photo depicts a gloomy and introspective scene of a man contemplating in the middle of a rainy night in a city. Photo Ratio 3:4",
+    },
+    {
+      id: 115,
+      image: collage115,
+      alt: "Images",
+      prompt:
+        "A fashion-forward man sits confidently in a vintage convertible, sunlight casting sharp highlights over his tattooed arm and modern accessories — Cartier earring, black smartwatch, dark Ray-Ban sunglasses. Dressed in a navy long-sleeve shirt, he embodies cinematic nonchalance. A tan canvas duffle hints at transient luxury and urban escapism. Editorial-style composition, sharp shadows, muted tones with bold contrast.",
+    },
+    {
+      id: 116,
+      image: collage116,
+      alt: "Images",
+      prompt:
+        "Cinematic portrait of a man holding a cracked, burning mask in front of his face. The mask has flames on one side and is partially broken. The man stares at it seriously, wearing a beige sweater. Dark background, moody lighting, symbolic theme of identity and transformation.",
+    },
+    {
+      id: 117,
+      image: collage117,
+      alt: "Images",
+      prompt:
+        "the man sitting relaxed in the middle of the military airport runway, with one leg folded. The right hand is placed on the asphalt. He wears an oversize black t-shirt, light gray jogger pants, and black adidas samba shoes. Behind him, stood a dark gray fighter jet, looking symmetrical and dashing, facing directly to the camera. On the left side of the man is a maroon luxury sports car (Mercedes AMG GT), and on the right side is a Lamborghini Huracán sports car in a striking neon green color. The background shows the atmosphere of an open airport with a dramatic sky full of thick dark gray and white clouds, giving the impression of being cloudy but not raining. The sunlight is spread softly from behind the clouds, creating a contrast of shadows and highlights that emphasize the shape of the car and jet. The shooting was taken from an eye-level angle with a symmetrical composition—cars, jets, and men were right in the middle of the yellow line on the runway. Perspective lines and clouds add depth and dramatic impression to the image. There is a large hangar building on the left and a crowd of people and vehicles in the distance on the right. aspect ratio 9:16",
+    },
+    {
+      id: 118,
+      image: collage118,
+      alt: "Images",
+      prompt:
+        "Take a photo of a white Nissan GT-R sports car with a wide Liberty Walk body kit, gold racing wheels, and a large spoiler stopping at a Chevron gas station at night. The lighting comes from the top lights on the roof of the gas station, creating a warm and dramatic feel, with sharp shadows on the concrete floor. Low angle shooting angle from the back of the right side of the car, showing aggressive details of the bodykit and a very low car stance. Next to the car, stood a 25-year-old Southeast Asian man. He wears a plain black t-shirt, shorts, and clean white sneakers. The man's pose relaxed face looking at the camera, sitting leaning on the car door slightly sideways while staring at the camera, with one hand in his pants pocket. This photo style gives an urban and cool impression, with a warm night feel and a typical atmosphere of street automotive culture. Ratio 9:16",
+    },
+    {
+      id: 119,
+      image: collage119,
+      alt: "Images",
+      prompt:
+        "A confident teenage boy sitting on the hood of a heavily modified classic Mercedes-Benz car with custom graffiti-style doors in a gritty, dimly lit warehouse. The car has neon green underglow lights and a gold grille. The left car door says ‘‘Why not meri jaan?’’ and the right one says ‘‘ALWAYS STRIVE AND PROSPER’’ The boy is wearing stylish oversized streetwear: a bold patterned sleeveless sweater over a printed long-sleeve shirt, baggy cargo pants, and sneakers. He’s wearing black sunglasses and looking cool, relaxed, and fearless. Industrial ceiling lights hang above, and warm and cool lighting contrast gives it a high-fashion urban editorial style. Cinematic color grading, moody shadows, and strong attitude Important: Do not change the face — it must be exactly the same as in the attached photo.",
+    },
+    {
+      id: 120,
+      image: collage120,
+      alt: "Images",
+      prompt:
+        "A stylish young man confidently walks across golden sand dunes at sunrise, dressed in a light beige linen shirt with rolled-up sleeves, loose white trousers, and brown leather sandals. He wears aviator sunglasses and a thin scarf draped loosely around his neck, fluttering in the wind. A brown canvas backpack is slung over one shoulder, and he carries a wide-brimmed hat in one hand. The vast desert stretches endlessly behind him, with rippling dunes and a warm, soft glow of morning light casting long shadows. The mood is adventurous and serene, capturing the spirit of exploration and solitude. Shot in natural daylight with cinematic tones and shallow depth of field.",
+    },
+    {
+      id: 121,
+      image: collage121,
+      alt: "Images",
+      prompt:
+        "Wearing an oversized black t-shirt,baggy pants,snekers.using an umbrella on the sidewalk about to cross the road at a red light many trees,beside the sidewalk.heavy rain.",
     },
   ];
 

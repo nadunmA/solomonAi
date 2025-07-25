@@ -5,9 +5,17 @@ import newsImg from "../assets/newsImg.webp";
 import pNews from "../assets/pNews.webp";
 import Dayanamic from "../assets/dyanamic.png";
 import copilott from "../assets/copilot.png";
+import newp from "../assets/addp.png";
 
 const News = () => {
   const newsItems = [
+    {
+      id: 2104,
+      image: newp,
+      title: "Adding new prompts",
+      date: "2025-07-25",
+      description: "explore new prompts",
+    },
     {
       id: 2103,
       image: copilott,
