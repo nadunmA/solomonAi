@@ -16,6 +16,7 @@ import ScrollToTop from "./components/Scroll/ScrollToTop";
 import News from "./Pages/News";
 import FifthPromptPage from "./Pages/FifthPromptPage";
 import { HashRouter } from "react-router-dom";
+import AllPrompts from "./Pages/AllPrompts";
 
 function Home() {
   return (
@@ -123,6 +124,15 @@ function App() {
                 />
 
                 <Route path="/element" element={<LayOut></LayOut>} />
+
+                <Route
+                  path="/allRandom"
+                  element={
+                    <LayOut>
+                      <AllPrompts />
+                    </LayOut>
+                  }
+                />
               </Routes>
             </>
           )}

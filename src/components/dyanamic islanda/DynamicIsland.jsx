@@ -56,7 +56,7 @@ export default function DynamicIsland() {
 
               <div className="flex flex-col">
                 <span className="text-white text-xs sm:text-sm font-medium">
-                  VIEW NEW PROMPTS
+                  VIEW RANDOM PROMPTS
                 </span>
                 {isExpanded && (
                   <div className="text-orange-300 text-xs mt-1 animate-in slide-in-from-left duration-300">
@@ -73,7 +73,7 @@ export default function DynamicIsland() {
                   className="bg-gradient-to-r from-purple-900 to-purple-800 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold hover:from-orange-600 hover:to-purple-600 transition-all duration-200 transform hover:scale-105 animate-in slide-in-from-right duration-300"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate("/fifthpromptpage");
+                    navigate("/allRandom");
                   }}
                 >
                   View Now

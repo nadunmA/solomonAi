@@ -22,7 +22,7 @@ import collage43 from "../assets/photos/collage43.webp";
 import collage44 from "../assets/photos/collage44.webp";
 import collage45 from "../assets/photos/collage45.webp";
 import collage46 from "../assets/photos/collage46.webp";
-import collage47 from "../assets/photos/collage47.webp";
+import collage47 from "../assets/photos/collage47.webp"; //promptData instead display data
 import collage48 from "../assets/photos/collage48.webp";
 import collage49 from "../assets/photos/collage49.webp";
 import collage50 from "../assets/photos/collage50.webp";
@@ -33,6 +33,8 @@ const SecondPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
   const [copiedPromptId, setCopiedPromptId] = useState(null);
   const [copyClickedId, setCopyClickedId] = useState(null);
+  const [isRandomizing, setIsRandomizing] = useState(false);
+  const [displayData, setDisplayData] = useState([]);
 
   const ThirdPromptPage = useNavigate();
   const PromptPage = useNavigate();
@@ -217,7 +219,46 @@ const SecondPromptPage = () => {
 
   //const SecondPromptPage = useNavigate();
 
-  // Using placeholder images since we can't access your assets
+  // Initialize displayData with original order
+  React.useEffect(() => {
+    setDisplayData([...promptData]);
+  }, []);
+
+  // Fisher-Yates shuffle algorithm
+  const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  const handleRandomize = () => {
+    setIsRandomizing(true);
+    const totalDuration = 1000; // ms
+    const shuffleSteps = 10;
+    const interval = totalDuration / shuffleSteps;
+
+    let currentStep = 0;
+    let lastUpdate = performance.now();
+
+    const animate = (now) => {
+      if (now - lastUpdate >= interval) {
+        setDisplayData(shuffleArray(promptData));
+        lastUpdate = now;
+        currentStep++;
+      }
+
+      if (currentStep < shuffleSteps) {
+        requestAnimationFrame(animate);
+      } else {
+        setIsRandomizing(false);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
 
   const handleImageClick = (id) => {
     setClickedImageId(id);
@@ -290,11 +331,67 @@ const SecondPromptPage = () => {
               Discover stunning AI-generated images with their creative prompts.
               Click to explore, copy to create.
             </p>
+
+            {/* Randomize Button */}
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={handleRandomize}
+                disabled={isRandomizing}
+                className={`min-w-[130px] px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group relative overflow-hidden ${
+                  isRandomizing
+                    ? "bg-gradient-to-r from-orange-500 to-red-500 text-white scale-105 shadow-lg shadow-orange-500/25 cursor-not-allowed"
+                    : "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-500 hover:to-blue-500 hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25"
+                }`}
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2 font-ubuntu">
+                  {isRandomizing ? (
+                    <>
+                      <svg
+                        className="w-4 h-4 animate-spin"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        />
+                      </svg>
+                      Shuffling...
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        />
+                      </svg>
+                      Randomize
+                    </>
+                  )}
+                </span>
+
+                {/* Button pulse effect */}
+                {isRandomizing && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-400/20 animate-pulse rounded-xl"></div>
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Gallery Grid */}
           <div className="space-y-16 sm:space-y-20">
-            {promptData.map((item, index) => (
+            {displayData.map((item, index) => (
               <div
                 key={item.id}
                 className={`flex flex-col ${

@@ -6,9 +6,17 @@ import pNews from "../assets/pNews.webp";
 import Dayanamic from "../assets/dyanamic.png";
 import copilott from "../assets/copilot.png";
 import newp from "../assets/addp.png";
+import random from "../assets/random.png";
 
 const News = () => {
   const newsItems = [
+    {
+      id: 2105,
+      image: random,
+      title: "Try Random prompts",
+      date: "2025-07-25",
+      description: "Now Try Random prompts",
+    },
     {
       id: 2104,
       image: newp,
