@@ -440,10 +440,10 @@ const ThirdPromptPage = () => {
                       </div>
                     </div>
 
-                    {/* Floating badge */}
+                    {/* Floating badge 
                     <div className="absolute -top-3 -right-3 bg-gradient-to-r from-violet-600 to-pink-600 text-white text-sm font-bold px-3 py-1 rounded-full shadow-lg">
                       #{item.id}
-                    </div>
+                    </div>*/}
                   </div>
                 </div>
 

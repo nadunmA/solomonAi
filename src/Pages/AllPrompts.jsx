@@ -126,6 +126,10 @@ import collage118 from "../assets/photos/collage118.webp";
 import collage119 from "../assets/photos/collage119.webp";
 import collage120 from "../assets/photos/collage120.webp";
 import collage121 from "../assets/photos/collage121.webp";
+import collage122 from "../assets/photos/collage122.webp";
+import collage123 from "../assets/photos/collage123.webp";
+import collage124 from "../assets/photos/collage124.webp";
+import collage125 from "../assets/photos/collage125.webp";
 
 import copilot from "../assets/pilot.png";
 import { motion } from "framer-motion";
@@ -815,6 +819,35 @@ const PromptPage = () => {
       alt: "Images",
       prompt:
         "Wearing an oversized black t-shirt,baggy pants,snekers.using an umbrella on the sidewalk about to cross the road at a red light many trees,beside the sidewalk.heavy rain.",
+    },
+
+    {
+      id: 122,
+      image: collage122,
+      alt: "Images",
+      prompt:
+        "Design a cinematic fashion portrait that oozes quiet dominance and retro-luxury flair. The subject is seated regally on a baroque-style throne chair, legs wide, posture unbothered - a vision of Gen Z aristocracy. He's styled in a soft pinstriped co-ord suit with a relaxed fit, worn over a muted tank top, paired unexpectedly with chunky white sneakers that ground the look in modern streetwear. Accessories are subtle yet declarative: stacked rings, layered chains, and narrow retro sunglasses elevate the energy with cool restraint. Lighting is bold and theatrical: a vibrant two-tone gradient floods the backdrop and wraps around the subject - golden amber on one side, deep violet on the other — casting sharp-edged shadows that contour his silhouette and the ornate curves of jaekalaaihbat This contrast of opulent old-world decor with contemporary styling cues creates a hybrid aesthetic: fashion royalty meets downtown swagger. Mood: luxurious, commanding, and unapologetically elevated. Tags: regal streetwea arm-cool gradient liahtina. neo-baroque sitorial. sneaker",
+    },
+    {
+      id: 123,
+      image: collage123,
+      alt: "Images",
+      prompt:
+        "Capture an ultra-stylized fashion portrait with bold cinematic attitude, placing the subject in the center of a blazing monochromatic red environment. The subject stands in a wide, commanding pose, shot from a dramatic high angle that emphasizes swagger and scale. Styled in a glossy black leather trench coat layered over a black base, they accessorize with thick gold chains, stacked rings, and statement sunglasses. A black beanie embroidered with subtle text tops off the look, reinforcing the urban luxe attitude. The lighting is punchy and clean, allowing the red backdrop to wrap around the figure with intensity, while subtle highlights bounce off the leather, jewelry, and eyewear. Retro analog film borders frame the image, giving it an archival, fashion-magazine feel. Footwear - bright red and white sneakers — senhadidaabat the scene and mirror the color palette, grounding the look in classic street culture. Mood: bold, braggadocious, and editorially cinematic. Tags: monochrome power, leather culture, analog flex, fashion n.I. street glamor.",
+    },
+    {
+      id: 124,
+      image: collage124,
+      alt: "Images",
+      prompt:
+        "Create a bold overhead fashion portrait that fuses softness with street edge, capturing a youthful subject squatting beneath a studio spotlight in a cocoon of comfort and attitude. The figure wears a plush, cream-colored sherpa hoodie with the hood drawn tightly over their head — wrapping them in warmth like modern armor. Paired with wide-wale corduroy pants in a complementary beige, the textures clash subtly against the crisp, icy-blue gradient studio backdrop. The focal point: a pair of standout olive green and white Air Jordan 1s, presented prominently in the lower third of the frame, giving the image sneaker editorial energy. Lighting is overhead and cinematic, casting natural shadows that contour the folds of fabric and the curvature of the hood exhildi. lahbat enhancing skin texture and gaze intensity. The mood is introspective yet confident — a visual essay in coziness, self-protection, and youthful defiance. Tags: street coziness, sneaker culture portraiture, fleece armor, soft power, Gen Z loungewear editorial.",
+    },
+    {
+      id: 125,
+      image: collage125,
+      alt: "Images",
+      prompt:
+        "Stage a hyperrealistic, studio-lit fashion portrait that fuses icy luxury with urban dominance. The subject squats in a commanding pose, draped in a voluminous, high-shine silver-white puffer jacket layered over an off-white tonal base: oversized cargo trousers and a soft textured sweatshirt. The palette is strictly monochrome arctic — whites, silvers, and creams — with one subtle pop: a translucent pink toy accessory clutched casually in hand, injecting playful contrast into the otherwise militant styling. Set against a seamless cool-grey gradient backdrop, the lighting is top-down and studio-crisp, highlighting the puffed volume, shoe detailing, and sharp lens reflections. The futuristic wraparound visor glasses add a sci-fi edge, while chunky, sculpted sneakers root the look in contemporary streetweaf.@criadritizBat the contrast between techwear sophistication and childlike irony, creating a striking editorial that feels both sub-zero and subversive. Tags: glacier streetwear, puffed armor, tonal futurism, icy masculine energy, next-gen luxury.",
     },
 
     {
