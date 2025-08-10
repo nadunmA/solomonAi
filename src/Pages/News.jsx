@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import newsImg from "../assets/newsImg.webp";
 import pNews from "../assets/pNews.webp";
@@ -7,9 +8,19 @@ import Dayanamic from "../assets/dyanamic.png";
 import copilott from "../assets/copilot.png";
 import newp from "../assets/addp.png";
 import random from "../assets/random.png";
+import tNew from "../assets/tryNew.png";
 
 const News = () => {
+  const SixthPromptPage = useNavigate();
+
   const newsItems = [
+    {
+      id: 2106,
+      image: tNew,
+      title: "new prompts added",
+      date: "2025-08-11",
+      description: "Try new prompts now",
+    },
     {
       id: 2105,
       image: random,
@@ -72,7 +83,10 @@ const News = () => {
             <h2 className="text-2xl font-semibold mb-2">{news.title}</h2>
             <p className="text-gray-400 text-sm mb-2">{news.date}</p>
             <p className="mb-4">{news.description}</p>
-            <button className="bg-gradient-to-r from-purple-700 to-blue-600 text-white px-4 py-2 rounded-full">
+            <button
+              className="bg-gradient-to-r from-purple-700 to-blue-600 text-white px-4 py-2 rounded-full"
+              onClick={() => SixthPromptPage("/sixthpromptpage")}
+            >
               Read More
             </button>
           </div>
