@@ -17,6 +17,7 @@ import News from "./Pages/News";
 import FifthPromptPage from "./Pages/FifthPromptPage";
 import { HashRouter } from "react-router-dom";
 import AllPrompts from "./Pages/AllPrompts";
+import SixthPromptPage from "./Pages/SixthPromptPage";
 
 function Home() {
   return (
@@ -103,6 +104,14 @@ function App() {
                   element={
                     <LayOut>
                       <FifthPromptPage />
+                    </LayOut>
+                  }
+                />
+                <Route
+                  path="/sixthpromptpage"
+                  element={
+                    <LayOut>
+                      <SixthPromptPage />
                     </LayOut>
                   }
                 />

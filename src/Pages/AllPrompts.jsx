@@ -1,6 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import collage126 from "../assets/photos/collage126.webp";
+import collage127 from "../assets/photos/collage127.webp";
+import collage128 from "../assets/photos/collage128.webp";
+import collage129 from "../assets/photos/collage129.webp";
+import collage130 from "../assets/photos/collage130.webp";
+import collage131 from "../assets/photos/collage131.webp";
+import collage132 from "../assets/photos/collage132.webp";
+import collage133 from "../assets/photos/collage133.webp";
+import collage134 from "../assets/photos/collage134.webp";
+import collage135 from "../assets/photos/collage135.webp";
+import collage136 from "../assets/photos/collage136.webp";
+import collage137 from "../assets/photos/collage137.webp";
+import collage138 from "../assets/photos/collage138.webp";
+import collage139 from "../assets/photos/collage139.webp";
+import collage140 from "../assets/photos/collage140.webp";
+
 import collage1 from "../assets/photos/collage1.webp";
 import collage2 from "../assets/photos/collage2.webp";
 import collage3 from "../assets/photos/collage3.webp";
@@ -144,6 +160,111 @@ const PromptPage = () => {
   const PromptPage = useNavigate();
 
   const promptData = [
+    {
+      id: 126,
+      image: collage126,
+      alt: "Professional Portrait",
+      prompt:
+        "Craft a moody, introspective winter editorial with a cinematic stillness. The subject sits gracefully in a soft cocoon of oversized winterwear - a pale mint-green puffer jacket layered over textured knits and creamy wide-leg pants. A ribbed beanie hugs the head, and the styling is elevated with stacked silver rings and layered chain necklaces that glint under the moody light. Lighting is key: use a focused beam from a low angle to mimic golden-hour window light cutting through darkness, casting long shadows and highlighting skin texture and fabric grain. The set is minimalist, with a deep blue-to-black gradient backdrop that suggests early evening solitude. The subject's eyes are closed, face lifteg'oafafi.lahbat bathing in a fleeting moment of warmth. The scene evokes the calm after the chaos - personal, stylish, and grounded. Tags: cinematic quiet, winter softness, editorial calm, light therapy aesthetic, cozy minimalism.",
+    },
+    {
+      id: 127,
+      image: collage127,
+      alt: "Professional Portrait",
+      prompt:
+        "Craft a hyperrealistic, futuristic fashion editorial featuring a solitary male figure seated with assertive composure at the center of a minimalist void. The subject wears oversized, dramatically voluminous black trousers with rich fabric texture and an equally stark, structured black blazer layered over a matte-black turtleneck — all contributing to a monolithic silhouette that feels both powerful and enigmatic. Accessories include sleek, reflective cyberpunk-style visor glasses, adding a high-tech element that contrasts with the analog quiet of the scene. Lighting is sculptural and cinematic: a cold, studio-grade blue-toned key light from high above casts deep shadows beneath the folds of the garment and chair, isolating the digdirtehbat and exaggerating his geometry. The background is a clean gradient from ice blue to soft slate, creating spatial depth and emotional detachment. Use a low, eye-level camera angle to emphasize scale, negative space, and the overwhelming architecture of",
+    },
+    {
+      id: 128,
+      image: collage128,
+      alt: "Professional Portrait",
+      prompt:
+        "Ultra-realistic 8K studio portrait of a young man sitting on the floor with one leg extended toward the camera in a dramatic foreshortened perspective. He wears modern streetwear: a white hoodie layered under a black bomber jacket with gold-accented INSIGHT branding on the sleeve and pants. Large white sneakers dominate the foreground. The subject wears round, dark sunglasses and has a confident expression.",
+    },
+    {
+      id: 129,
+      image: collage129,
+      alt: "Professional Portrait",
+      prompt:
+        "The man leans his forearm against the open car window, elbow bent with effortless poise. He wears mirrored aviator shades that catch the late afternoon sun, casting brilliant flares off the chrome doorframe and side mirror. The soft rumble of the idling engine hums beneath him. His expression is calm, unfazed, with a cigarette resting loosely between his fingers — untouched, burning slowly. A hot desert wind tousles the edge of his sun-bleached jacket, and dust swirls lightly across the asphalt. In the background, the two-lane desert highway stretches endlessly forward, rippling with heat mirages, flanked by cacti and faded road signs. The golden hour sun washes everything in warm amber tones, wrapping the scene in nostalgic brilliance. Long shadows fall across the worn dashboard, where a classic rock cassette case lies beside a pair of leather gloves. Style: Retro Americana realism, 50mm lens, sun-bleached colors, ultra-sharp chrome reflections, shallow depth of field, textured skin and fabric details Mood: Cool independence, rebellious serenity, timeless freedom",
+    },
+    {
+      id: 130,
+      image: collage130,
+      alt: "Professional Portrait",
+      prompt:
+        "In an opulent, dimly-lit library lined with ancient tomes and dark wood shelves, a introspective man sits with one leg crossed over the other in a green velvet armchair, reading an old book. A single golden desk lamp lights the face and hands, throwing long shadows across the polished floor. He’s wearing casuall clothing. Ultra-detailed 4K, warm cinematic tones, 50mm lens, shallow focus on hands and face, ambient shadows.",
+    },
+    {
+      id: 131,
+      image: collage131,
+      alt: "Professional Portrait",
+      prompt:
+        "A cinematic portrait of me at night in an urban environment, standing casually with a slight lean backward, hands resting in my pockets. My shoulders are loose, exuding a confident yet laid-back attitude. I’m dressed in a sleek black bomber jacket layered over a clean white T-shirt, paired with dark joggers featuring visible drawstrings. My head is gently tilted upward and slightly to the left, while my gaze is locked directly on the camera. Behind me, a blur of city lights in warm red,",
+    },
+    {
+      id: 132,
+      image: collage132,
+      alt: "Professional Portrait",
+      prompt:
+        "Use 100% face above uploaded photo Subject: A handsome, successful man in his early 27s with styled black hair and black beard like uploaded photo and wearing sun glasses gold Attire: An impeccable black long coat over a charcoal grey three-piece suit with a dark, open-collared shirt. Setting: The airstairs of a luxury private jet on an airport tarmac. Lighting: Cinematic golden hour lighting. The warm, low sun acts as a strong backlight, creating a glowing rim light on the subject's hair and shoulders, with a subtle lens flare. Style: Hyper-realistic, high-end fashion or advertising photography. Extremely sharp details, 8K resolution, capturing a feeling of wealth, power, and elegance.",
+    },
+    {
+      id: 133,
+      image: collage133,
+      alt: "Professional Portrait",
+      prompt:
+        "Depict the subject as a charismatic back-alley gambler in a gritty, urban underground setting, mid-roll in a street craps game surrounded by cheering spectators. He’s crouched low to the ground, wearing a bomber jacket, black jeans, and scuffed white sneakers. The alley is damp, lit by flickering neon signs and steam vents. Style: Full-body action shot, captured from a low angle with a 35mm DSLR, in 16:9 ultra-realistic 4K resolution Lighting: Harsh, cinematic lighting from nearby neon signage reflecting off puddles; backlight from a corner streetlamp cutting through smoke and steam. Detail: The dice frozen mid-air, fingers still outstretched in the throw; grit on his boots, dust and oil-slicked pavement underfoot; sharply detailed urban textures—brick walls, graffiti, crumpled bills and cigarette butts. Mood: Raw energy, fast cash, high risk—modern outlaw charisma.",
+    },
+    {
+      id: 134,
+      image: collage134,
+      alt: "Professional Portrait",
+      prompt:
+        "A hyper-realistic, ultra-HD cinematic scene of a man(use uploaded photo) in a sleek futuristic black leather trench coat performing an iconic bullet-dodge move in slow motion, inspired by the Matrix. He leans back impossibly as high-velocity bullets slice through the air in front of him, creating ripples and sonic shockwaves. Time is frozen – shell casings suspended mid-air, motion blur trailing behind each bullet. The background features a gritty, digital cityscape with neon signs, glitching effects, and code raining down like green digital waterfalls. The camera is in dynamic motion, orbiting around him at a tilted angle, capturing the moment from a low, dramatic perspective. His expression is focused, calm, and calculating, with short, jet-black hair swept to the side, and a glowing aura reflecting off his face from the ambient neon lights. Rendered in cinematic lighting with volumetric fog and particle effects, depth of field focused on the subject, using an 85mm lens, f/1.4 - photo-realism, 8K, ultra-detailed, ray tracing, DOF, cinematic color grading. 9:16 portrait",
+    },
+    {
+      id: 135,
+      image: collage135,
+      alt: "Professional Portrait",
+      prompt:
+        "Use 100% face above uploaded photo A powerful, dramatic digital portrait of a an yound man in last 27s with a soft smile appearance and a black beard and black hair like uploaded photo. He wears black-rimmed glasses, and his eyes glow with intense fiery white light, suggesting supernatural or demonic power. The artwork features a split-themed composition: the left side of his face dissolves into dark, smoky shadows, while the right side erupts into vivid, fiery textures with orange and red flames. The background is mostly white, with abstract black and red ink splatters blending into his form. A lone black bird, possibly a crow or raven, flies in the bottom right, adding a symbolic, ominous touch. The style is highly detailed, dark fantasy mixed with watercolor and digital painting aesthetics. Cinematic lighting and high contrast, 8k resolution, aspect ratio 4:5.",
+    },
+    {
+      id: 136,
+      image: collage136,
+      alt: "Professional Portrait",
+      prompt:
+        "Use 100 % face above uploaded photo Cinematic portrait of a handsome, rugged man in his late 27 with dark hair and a black beard like uploaded photo. He is wearing a vibrant, retro color-block hooded jacket (yellow and blue) over a white t-shirt. He stands on a city street at night, looking off-camera with a serious, contemplative expression. The scene is illuminated by dramatic, warm golden light from the side, sculpting his features. The background is a soft bokeh of glowing purple and pink neon signs, with fiery sparks and embers floating in the air on one side. Photorealistic, ultra-detailed, sharp focus on the subject, shallow depth of field, moody atmosphere, 8K",
+    },
+    {
+      id: 137,
+      image: collage137,
+      alt: "Professional Portrait",
+      prompt:
+        "Use face above uploaded photo Hyperrealistic portrait of a man. He wears a large, ornate gold crown slightly tilted on his head, studded with jewels and pearls, reminiscent of the aesthetic of royal rappers. His expression is intense and stoic, his gaze straight ahead, his lips slightly pursed in a strong and composed manner. The lighting is bold and studio-quality, with sharp contrasts and shadows across his face. His skin tone, texture, and facial features are rendered in grayscale (black and white). while the crown remains a bright gold accented with jewels. The background is a deep, rich red, creating a striking pop-art look. He wears a thick gold chain around his neck, wearing thick-framed Mascot glasses, and a vintage Slipknot metal band t-shirt. The overall frame is a tight, short haircut that falls over his head and shoulders, looking directly at the camera, styled like an iconic hip-hop magazine cover photo. Urban, royal, legendary. No text.",
+    },
+    {
+      id: 138,
+      image: collage138,
+      alt: "Professional Portrait",
+      prompt:
+        " Use face above uploaded photo Dynamic point-of-view action photograph, GoPro style. A handsome, athletic young man with tanned skin, a rugged beard, and wet, sun-bleached black hair is surfing inside the barrel of a crystal-clear ocean wave. He is looking directly into the camera with a confident expression, as if taking a selfie. The curling, translucent blue wave perfectly frames his face and shoulders. Bright, natural sunlight filters through the water, creating a vibrant turquoise glow and highlighting water splashes frozen in mid-air. Ultra-sharp focus, hyper-detailed, fast shutter speed, professional sports photography.",
+    },
+    {
+      id: 139,
+      image: collage139,
+      alt: "Professional Portrait",
+      prompt:
+        "3-A cinematic portrait of a stylish young man, wearing a black jacket and black pants. He is standing outdoors in soft golden hour lighting, with a confident and calm expression as he looks over his shoulder toward the camera. The background features a vertical green garden wall with plants and a soft pink panel, giving a modern and urban vibe. The setting is clean and minimalistic with smooth pavement underfoot.",
+    },
+    {
+      id: 140,
+      image: collage140,
+      alt: "Professional Portrait",
+      prompt:
+        "Me stands on a dimly lit urban street in front of closed shop shutters and parked motorbikes. I am holding a newspaper that is dramatically engulfed in flames. The overall tone is cinematic and moody, with rich, warm colors and soft shadows. Do not change, edit, smooth, or retouch my face. Keep all skin texture, facial hair, and lighting exactly as in the original photo.",
+    },
     {
       id: 26,
       image: collage26,
