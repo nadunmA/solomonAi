@@ -16,6 +16,10 @@ import collage137 from "../assets/photos/collage137.webp";
 import collage138 from "../assets/photos/collage138.webp";
 import collage139 from "../assets/photos/collage139.webp";
 import collage140 from "../assets/photos/collage140.webp";
+import collage141 from "../assets/photos/collage141.webp";
+import collage142 from "../assets/photos/collage142.webp";
+import collage143 from "../assets/photos/collage143.webp";
+import collage144 from "../assets/photos/collage144.webp";
 
 import collage1 from "../assets/photos/collage1.webp";
 import collage2 from "../assets/photos/collage2.webp";
@@ -160,6 +164,34 @@ const PromptPage = () => {
   const PromptPage = useNavigate();
 
   const promptData = [
+    {
+      id: 141,
+      image: collage141,
+      alt: "Professional Portrait",
+      prompt:
+        "A stylish young man sits in front of a graffiti-covered wall featuring the Adidas logo and the word 'THINK'. He wears a light jacket with an 'H' emblem, camouflage pants, and white sneakers. The urban setting is enhanced by blurred motion lights in the background, creating a dynamic and edgy streetwear aesthetic.",
+    },
+    {
+      id: 142,
+      image: collage142,
+      alt: "Professional Portrait",
+      prompt:
+        "A futuristic portrait of a man standing against a vibrant orange backdrop. He wears high-tech sunglasses and a black hoodie with glowing orange patterns, featuring the Nike logo. The overall look blends cyberpunk aesthetics with modern sportswear design.",
+    },
+    {
+      id: 143,
+      image: collage143,
+      alt: "Professional Portrait",
+      prompt:
+        "use original face in his wearing matte black sunglasses and a light beige overcoat over a plain black shirt. He faces slightly away from the camera with a confident expression. His voluminous hair is neatly styled, and his trimmed beard adds sharpness to his look. The background is dark grey with soft lighting that highlights his facial structure and outfit texture in ultra-detailed 4K clarity.",
+    },
+    {
+      id: 144,
+      image: collage144,
+      alt: "Professional Portrait",
+      prompt:
+        "use original face a surreal, ultra -detailed portrait of a with messy, tousled black hair and a short beard, holding a vibrant blue rose close to his face. he is wearing a plain oversized white sweatshirt and a thin silver chain necklace. his fingers are adorned with rings. the background is minimalistic and shadowy, emphasizing his presence. the portrait is styled with a digital glitch effect -parts of his face and body are fragmented into horizontal.pixel streaks in",
+    },
     {
       id: 126,
       image: collage126,
