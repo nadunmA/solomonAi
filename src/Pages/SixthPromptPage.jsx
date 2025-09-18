@@ -22,6 +22,17 @@ import collage141 from "../assets/photos/collage141.webp";
 import collage142 from "../assets/photos/collage142.webp";
 import collage143 from "../assets/photos/collage143.webp";
 import collage144 from "../assets/photos/collage144.webp";
+import collage145 from "../assets/photos/collage145.webp";
+import collage146 from "../assets/photos/collage146.webp";
+import collage147 from "../assets/photos/collage147.webp";
+import collage148 from "../assets/photos/collage148.webp";
+import collage149 from "../assets/photos/collage149.webp";
+import collage150 from "../assets/photos/collage150.webp";
+import collage151 from "../assets/photos/collage151.webp";
+
+import gpt from "../assets/gpt.png";
+import nano from "../assets/nano.png";
+import grok from "../assets/grok.png";
 
 const SixthPromptPage = () => {
   const [clickedImageId, setClickedImageId] = useState(null);
@@ -166,6 +177,55 @@ const SixthPromptPage = () => {
       alt: "Professional Portrait",
       prompt:
         "use original face a surreal, ultra -detailed portrait of a with messy, tousled black hair and a short beard, holding a vibrant blue rose close to his face. he is wearing a plain oversized white sweatshirt and a thin silver chain necklace. his fingers are adorned with rings. the background is minimalistic and shadowy, emphasizing his presence. the portrait is styled with a digital glitch effect -parts of his face and body are fragmented into horizontal.pixel streaks in",
+    },
+    {
+      id: 145,
+      image: collage145,
+      alt: "Professional Portrait",
+      prompt:
+        "A confident young man wearing a stylish white suit with a black shirt underneath, standing with hands in pockets, looking slightly upward with a serious expression. He has short dark hair and glasses. The background is dark and smoky with dramatic lighting, giving a cinematic, powerful vibe.",
+    },
+    {
+      id: 146,
+      image: collage146,
+      alt: "Professional Portrait",
+      prompt:
+        "A hyper-realistic cinematic editorial portrait of the uploaded person (preserve face 100%). He stands tall in a dark moody studio,surrounded by soft drifting smoke under a dramatic spotlight.Outfit:Oversized slate-blue luxury suit with wide-leg trousers, paired with a slightly unbuttoned white silk shirt. Both hands tucked casually in pockets, shoulders relaxed, confident expression, head tilted slightly upward",
+    },
+    {
+      id: 147,
+      image: collage147,
+      alt: "Professional Portrait",
+      prompt:
+        " Create a retro vintage grainy but bright image of the reference picture but draped in a perfect red wine color Pinteresty aesthetic red shirt with white pant and holding a rose flower in hands. It must feel like a 90s movie and romanticising windy environment. The boy is standing against a solid wall deep shadows and contrast drama, creating a mysterious and artistic atmosphere where the lighting is warm with a golden tones of evoking a sunset or golden hour glow. The background is minimalist and slightly textured the expression on his face is moody, calm yet happy and introspective.",
+    },
+    {
+      id: 148,
+      image: collage148,
+      alt: "Professional Portrait",
+      prompt:
+        "A hyper-realistic cinematic editorial portrait of the uploaded person (preserve face 100%). He stands tall in a dark moody studio, surrounded by soft drifting smoke under a dramatic spotlight. Outfit: Oversized maroon luxury suit with wide-leg trousers, paired with a slightly unbuttoned white silk shirt. The body is slim, but the suit remains oversized for a bold fashion-forward look. Both hands tucked casually in pockets, shoulders relaxed, confident expression, head tilted slightly upward. His face has a subtle glow, and he wears a thin gold necklace. The studio room background has a dark maroon tone to match the suit color, enhancing the atmosphere.",
+    },
+    {
+      id: 149,
+      image: collage149,
+      alt: "Professional Portrait",
+      prompt:
+        "sitting on a wooden chair in a dimly lit vintage room. He has wears a skin colour oversized jacket. The sunlight filters through window blinds, casting dramatic striped shadows across hi Sace and the wall. The atmosphere feels nostalgic and contemplative, with a soft golden hue and warm tones. Pls Face should remain same 9:16 ratio",
+    },
+    {
+      id: 150,
+      image: collage150,
+      alt: "Professional Portrait",
+      prompt:
+        "Create a retro vintage grainy but bright image of the reference picture but draped in a perfect red wine color Pinteresty aesthetic retro shirt with white pant and holding a rose flower in hands. It must feel like a 90s movie and romanticising windy environment. The boy is standing against a solid wall deep shadows",
+    },
+    {
+      id: 151,
+      image: collage151,
+      alt: "Professional Portrait",
+      prompt:
+        "Turn this photo into a dark cinematic scene of a mysterious young man sitting on a modern leather chair in a dark room. He is wearing a cool oversized maroon vintage jersey, oversized faded black baggy jeans, and stylish white sneakers with dark accents. His expression is indifferent and calm with one hand on his chin and one leg raised. The wall is made of textured concrete filled with gravity, which gives it an urban and rough feel. The overall feel is gloomy and intense, with dramatic lighting and shadows. Highly detailed, with a realistic finish.",
     },
   ];
 
@@ -401,30 +461,123 @@ const SixthPromptPage = () => {
                 {/* Prompt Section */}
                 <div className="w-full lg:w-1/2">
                   <div className="space-y-6">
-                    <div className="flex items-center space-x-2">
-                      {" "}
-                      {/* Added a parent div */}
-                      <a
-                        href="https://copilot.microsoft.com/chats/4Ko47LdB3zMW1BjGaC3oY?msockid=3e46ba9f4fef690e021bafa94e42682b"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-9 h-9"
-                      >
-                        <motion.img
-                          src={copilot}
-                          alt=""
-                          animate={{ y: [0, -18, 0] }}
-                          transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className="w-full h-full object-cover rounded-lg shadow-2xl"
-                        />
-                      </a>
-                      <h3 className="flex text-xl sm:text-2xl font-bold text-white font-ubuntu">
-                        Use Copilot
-                      </h3>
+                    <div className="space-y-4">
+                      {/* Header */}
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <h3 className="text-lg sm:text-xl font-bold text-white font-ubuntu">
+                          Try these AI platforms:
+                        </h3>
+                      </div>
+
+                      {/* AI Platform Logos Grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-md">
+                        {/* Copilot */}
+                        <a
+                          href="https://copilot.microsoft.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={copilot}
+                              alt="Microsoft Copilot"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            Copilot
+                          </span>
+                        </a>
+
+                        {/* ChatGPT */}
+                        <a
+                          href="https://chatgpt.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={gpt}
+                              alt="ChatGPT"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 1,
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            ChatGPT
+                          </span>
+                        </a>
+
+                        {/* Nano (Claude) */}
+                        <a
+                          href="https://gemini.google.com/app"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={nano}
+                              alt="Gemini"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 2,
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            Gemini
+                          </span>
+                        </a>
+
+                        {/* Grok */}
+                        <a
+                          href="https://grok.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={grok}
+                              alt="Grok"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 3,
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            Grok
+                          </span>
+                        </a>
+                      </div>
                     </div>
 
                     {/* Prompt container with glassmorphism */}

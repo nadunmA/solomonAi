@@ -26,6 +26,10 @@ import collage97 from "../assets/photos/collage97.webp";
 import collage98 from "../assets/photos/collage98.webp";
 import collage99 from "../assets/photos/collage99.webp";
 import collage100 from "../assets/photos/collage100.webp";
+
+import gpt from "../assets/gpt.png";
+import nano from "../assets/nano.png";
+import grok from "../assets/grok.png";
 import copilot from "../assets/pilot.png";
 import { motion } from "framer-motion";
 
@@ -450,30 +454,123 @@ const ForthPromptPage = () => {
                 {/* Prompt Section */}
                 <div className="w-full lg:w-1/2">
                   <div className="space-y-6">
-                    <div className="flex items-center space-x-2">
-                      {" "}
-                      {/* Added a parent div */}
-                      <a
-                        href="https://copilot.microsoft.com/chats/4Ko47LdB3zMW1BjGaC3oY?msockid=3e46ba9f4fef690e021bafa94e42682b"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-9 h-9"
-                      >
-                        <motion.img
-                          src={copilot}
-                          alt=""
-                          animate={{ y: [0, -18, 0] }}
-                          transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className="w-full h-full object-cover rounded-lg shadow-2xl"
-                        />
-                      </a>
-                      <h3 className="flex text-xl sm:text-2xl font-bold text-white font-ubuntu">
-                        Use Copilot
-                      </h3>
+                    <div className="space-y-4">
+                      {/* Header */}
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <h3 className="text-lg sm:text-xl font-bold text-white font-ubuntu">
+                          Try these AI platforms:
+                        </h3>
+                      </div>
+
+                      {/* AI Platform Logos Grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-md">
+                        {/* Copilot */}
+                        <a
+                          href="https://copilot.microsoft.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={copilot}
+                              alt="Microsoft Copilot"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            Copilot
+                          </span>
+                        </a>
+
+                        {/* ChatGPT */}
+                        <a
+                          href="https://chatgpt.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={gpt}
+                              alt="ChatGPT"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 1,
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            ChatGPT
+                          </span>
+                        </a>
+
+                        {/* Nano (Claude) */}
+                        <a
+                          href="https://gemini.google.com/app"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={nano}
+                              alt="Claude AI"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 2,
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            Gemini
+                          </span>
+                        </a>
+
+                        {/* Grok */}
+                        <a
+                          href="https://grok.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
+                            <motion.img
+                              loading="lazy"
+                              src={grok}
+                              alt="Grok AI"
+                              animate={{ y: [0, -8, 0] }}
+                              transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 3,
+                              }}
+                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                            Grok
+                          </span>
+                        </a>
+                      </div>
                     </div>
 
                     {/* Prompt container with glassmorphism */}
