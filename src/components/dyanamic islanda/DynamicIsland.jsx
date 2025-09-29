@@ -30,7 +30,7 @@ export default function DynamicIsland() {
     setIsExpanded(!isExpanded);
   };
 
-  const SixthPromptPage = useNavigate();
+  const AllPrompts = useNavigate();
 
   const handleButtonClick = (buttonType, path) => {
     console.log(`${buttonType} button clicked`);
@@ -132,7 +132,7 @@ export default function DynamicIsland() {
               {isExpanded && (
                 <button
                   className="bg-gradient-to-r from-purple-600 via-purple-700 to-orange-600 text-white px-3 py-1.5 rounded-full text-xs font-bold hover:from-orange-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-110 animate-in slide-in-from-right duration-500 shadow-lg hover:shadow-purple-500/25"
-                  onClick={() => SixthPromptPage("/sixthpromptpage")}
+                  onClick={() => AllPrompts("/allRandom")}
                 >
                   ✨ Try Now
                 </button>
