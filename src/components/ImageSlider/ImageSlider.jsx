@@ -2,10 +2,10 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, memo } from "react";
-import aiImage1 from "../../assets/c2.png";
-import aiImage2 from "../../assets/c8.png";
-import aiImage3 from "../../assets/c9.png";
-import aiImage4 from "../../assets/c10.png";
+import aiImage1 from "../../assets/c2.webp";
+import aiImage2 from "../../assets/c8.webp";
+import aiImage3 from "../../assets/c9.webp";
+import aiImage4 from "../../assets/c10.webp";
 
 // Static data — module scope, never recreated on render
 const FLOATING_IMAGES = [
