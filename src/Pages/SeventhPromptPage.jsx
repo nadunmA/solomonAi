@@ -3,31 +3,13 @@ import React, { useState, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import collage26 from "../assets/photos/collage26.webp";
-import collage27 from "../assets/photos/collage27.webp";
-import collage28 from "../assets/photos/collage28.webp";
-import collage29 from "../assets/photos/collage29.webp";
-import collage30 from "../assets/photos/collage30.webp";
-import collage31 from "../assets/photos/collage31.webp";
-import collage32 from "../assets/photos/collage32.webp";
-import collage33 from "../assets/photos/collage33.webp";
-import collage34 from "../assets/photos/collage34.webp";
-import collage35 from "../assets/photos/collage35.webp";
-import collage36 from "../assets/photos/collage36.webp";
-import collage37 from "../assets/photos/collage37.webp";
-import collage38 from "../assets/photos/collage38.webp";
-import collage39 from "../assets/photos/collage39.webp";
-import collage40 from "../assets/photos/collage40.webp";
-import collage41 from "../assets/photos/collage41.webp";
-import collage42 from "../assets/photos/collage42.webp";
-import collage43 from "../assets/photos/collage43.webp";
-import collage44 from "../assets/photos/collage44.webp";
-import collage45 from "../assets/photos/collage45.webp";
-import collage46 from "../assets/photos/collage46.webp";
-import collage47 from "../assets/photos/collage47.webp";
-import collage48 from "../assets/photos/collage48.webp";
-import collage49 from "../assets/photos/collage49.webp";
-import collage50 from "../assets/photos/collage50.webp";
+import collage152 from "../assets/photos/c152.webp";
+import collage153 from "../assets/photos/c153.webp";
+import collage154 from "../assets/photos/c154.webp";
+import collage155 from "../assets/photos/c155.webp";
+import collage156 from "../assets/photos/c156.webp";
+import collage157 from "../assets/photos/c157.webp";
+import collage158 from "../assets/photos/c158.webp";
 
 import copilot from "../assets/pilot.png";
 import gpt from "../assets/gpt.png";
@@ -77,183 +59,57 @@ const EngineGrid = memo(function EngineGrid() {
 
 const promptData = [
   {
-    id: 26,
-    image: collage26,
-    alt: "Images",
+    id: 152,
+    image: collage152,
+    alt: "Professional Portrait",
     prompt:
-      "A laid-back young man reclines on a vintage red couch, lost in music with earphones in and a smartphone in hand. Scattered vinyl records surround him on a wooden floor, alongside a classic record player, a worn paperback novel, and a pack of cigarettes. The lighting is soft and moody, casting nostalgic shadows across the scene. The atmosphere evokes lazy afternoons, analog warmth, and introspective vibes. Retro color grading, shallow depth of field, cinematic framing, 3:2 aspect ratio.",
+      "Do not change the face shape, hairstyle, beard, skin tone, jawline, eyes, nose, lips, smile, or expression. Create an ultra-realistic cinematic artwork of a delicate transparent skeleton leaf held between fingers during golden hour sunset. Inside the leaf, engrave the same face as a detailed pencil-sketch portrait naturally blended into the leaf veins and texture, appearing artistically carved with fine-line shading and realistic detailing. Warm sunlight passes through the leaf, creating glowing amber and orange tones with dramatic backlighting. Background should be heavily blurred with creamy sunset bokeh and cinematic depth of field. Focus sharply on the leaf artwork while keeping the fingers slightly soft. Hyper-realistic DSLR quality, ultra HD, emotional aesthetic, warm cinematic color grading, premium Instagram viral photography style.",
   },
   {
-    id: 27,
-    image: collage27,
-    alt: "Images",
+    id: 153,
+    image: collage153,
+    alt: "Professional Portrait",
     prompt:
-      "A cinematic black and white portrait of a muscular man standing alone in a dark studio environment. The man is wearing a loose olive green T-shirt and dark pants.His arms are slightly flexed, revealing defined muscles and veins. A soft spotlight from 7 above casts dramatic shadows across his body and face, highlighting his form while the background fades into deep black. The image has a moodyeditorial tone with a U high contrast, matte finish.",
+      "Leo Image Creator 📷: A high-resolution, cinematic, and photorealistic close-up profile portrait of a man. The image features dramatic split-lighting with a vibrant, glowing red light illuminating the top of his face and a contrasting, cool neon blue light casting a soft glow on his jawline and neck. He has a contemplative expression, looking upwards and away from the camera. The focus is sharp on his eye, with a dark, minimalist background. The style is moody, ethereal, and high-fashion.",
   },
   {
-    id: 28,
-    image: collage28,
-    alt: "Images",
+    id: 154,
+    image: collage154,
+    alt: "Professional Portrait",
     prompt:
-      "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
+      "Use reference photo to create Ultra-realistic cinematic vertical mirror portrait of a young man Use 100% same facel with voluminous short curly mullet hair. He is wearing a Black Beige full sleeves folded shirt and a slim Gold chain and Luxury Gold Frame Round sunglasses, posing stylishly before a modern LED-lit mirror in a dark. The shot is from behind, showing a clear, sharp reflection of his face with a neutral, looking into camera. Soft cinematic.",
   },
   {
-    id: 29,
-    image: collage29,
-    alt: "Images",
+    id: 155,
+    image: collage155,
+    alt: "Professional Portrait",
     prompt:
-      "Ultra-realistic full-body portrait of a 28 years old, 164 cm tall, medium build, side-parted hair styled with pomade, clean look, wearing a white oversized T-shirt from Uniqlo, olive green cargo pants from H&M, white Nike Air Force 1 sneakers, denim sling bag, posing on Jalan Braga Bandung, surrounded by classic Dutch-style buildings, textured walls, vintage street lamps, soft afternoon lighting, fashion lookbook photography style, DSLR camera feel, 32k, 9:16 aspect ratio.",
+      "Use my uploaded photo as the main reference and keep my face, body shape, hairstyle, skin tone, and overall proportions completely unchanged and realistic. Create a stylish mirror selfie portrait in a minimalist luxury room with warm beige lighting and a large circular mirror. I am wearing a fitted black satin shirt with slightly open collar, holding a premium pastel pink flower bouquet with white roses, pink roses, purple daisies, and baby's breath wrapped in soft pink paper. Keep the same natural pose and physique from my original image — no body reshaping, face modification, or unrealistic edits. Add soft cinematic lighting, clean aesthetic background, luxury lifestyle vibe, realistic skin texture, subtle shadows, elegant watch details, shallow depth of field, ultra-realistic photography, DSLR quality, high detail, Instagram aesthetic, vertical composition 9:16.",
   },
   {
-    id: 30,
-    image: collage30,
-    alt: "Images",
+    id: 156,
+    image: collage156,
+    alt: "Professional Portrait",
     prompt:
-      "An overhead cinematic shot of me, leaning against the hood of a black M3 gtr on the street, wearing a black suit, left hand in my pocket, right hand smoking a cigarette. I have good gyn physique. A blurry crowd of cars and people are running on the street around me. Gloomy lighting, 35mm film style, shallow depth of field, sharp focus on me. Aspect ratio 9:16. 8K resolution",
+      "Same face, same energy now standing next to Leo Messi Not a random face swap: it's about placing a real person into a believable moment while keeping identity, proportions, lighting, and presence intact. Al as direction, not magic. From a simple photo to an unexpected selfie, with intention and control.",
   },
   {
-    id: 31,
-    image: collage31,
-    alt: "Images",
+    id: 157,
+    image: collage157,
+    alt: "Professional Portrait",
     prompt:
-      "Produce a luxurious rooftop portrait with skyline in the background. Maintain the original selfie's face without any Al face modification. The subject is in a smart-casual outfit — open collar shirt, linen blazer, watch visible on wrist and black sunglasses. Sunset lighting casts soft golden tones across the skin. Behind, a modern city skyline fades into warm bokeh. Clean, editorial look with professional photography vibes. 4K clarity, vertical 9:16.",
+      "A 100% authentic and unedited photorealistic portrait, in medium format, of a stunning Brazilian man, photographed from an extremely low angle, looking up against a bright blue sky with scattered altocumulus clouds. Face and Likeness: He has precise and mature masculine features. His expression is confident, melancholic, and naturally cool. Hair: Short hair, with a fade on the sides, voluminous and jet black. The dark, textured, and tousled waves catch a subtle contour light. Pose and Framing: Extremely low angle, close-up. His head is dynamically tilted to the right, projecting slightly into the frame, creating an intimate and imposing perspective. Clothing: Dark gray, faded denim jacket with visible stitching, rustic texture, and structural details on the collar, worn casually over the shoulders. Lighting and camera effects: Strong and dramatic backlighting from the bright, penetrating afternoon sun, positioned low behind her left shoulder. This creates an authentic anamorphic horizontal sunglow and a prismatic rainbow lens flare that extends across the lower third of the frame, naturally casting a soft, atmospheric shadow on her face. Technical specifications: Shot with a Hasselblad H6D-100c, 85mm f/1.4 lens, 1/2000s shutter speed, sharp focus on facial features, realistic film grain texture similar to Kodak Portra 400 film. High-fidelity photography, realistic skin textures, organic imperfections, natural light scattering, strictly no CGI, no digital rendering, no artificial smooth 3D effect. 9:16 aspect ratio.",
   },
   {
-    id: 32,
-    image: collage32,
-    alt: "Images",
+    id: 158,
+    image: collage158,
+    alt: "Professional Portrait",
     prompt:
-      "A cinematic overhead portrait of a man exactly in the image lying relaxed on a red couch, surrounded by a chaotic and stylish retro setup. He has thick wavy hair and a beard, wearing a dark checkered shirt, brown trousers, sunglasses, and earphones connected to a smartphone resting on his chest. His arm is resting top on a stack of books, including The 5 People You Meet in Heaven and Horace Silver, with visible cigarette packs and vinyl records nearby.",
-  },
-  {
-    id: 33,
-    image: collage33,
-    alt: "Images",
-    prompt:
-      "A cinematic side-profile portrait of a young man in a black suit, illuminated from behind by a glowing orange neon halo ring. The background is dark with warm tones, emphasizing the silhouette and creating a dramatic, moody atmosphere. Soft shadows and high contrast, professional studio lighting, 35mm film look.",
-  },
-  {
-    id: 34,
-    image: collage34,
-    alt: "Images",
-    prompt:
-      "A tense, dystopian moment captured in a fluorescent-lit corridor—centered on a defiant protagonist wearing a worn green tracksuit marked “456,” staring down the lens with weary determination. The hallway is filled with similarly dressed players in deep shadow, faces blurred in motion or anxiety. Harsh top-down lighting creates dramatic silhouettes and oppressive atmosphere.  Moody composition, shallow depth of field, grainy textures, editorial tone with cinematic color grading—think bleak, hyperreal aesthetic with cultural overlays and social commentary.",
-  },
-  {
-    id: 35,
-    image: collage35,
-    alt: "Images",
-    prompt:
-      "A dynamic mid-air shot of a young man leaping above a glowing futuristic cityscape at dusk, wearing a modern white streetwear t-shirt emblazoned with bold, colorful text XTREME — cinematic ultra-wide angle, strong backlighting casting long shadows, blurred neon lights below suggesting speed and altitude, sense of gravity-defying motion, inspired by parkour action, editorial sports photography style, cool-toned color grading, shallow depth of field, dramatic sky with urban skyline fade-out — shot on 50mm f/1.4 lens, ISO 400, shutter speed 1/1000s",
-  },
-  {
-    id: 36,
-    image: collage36,
-    alt: "Images",
-    prompt:
-      "A confident young man leans casually against an open car door on a moody city street. He wears a black leather jacket and matching black shirt, exuding cool intensity. The background is softly blurred with hints of urban grit—distant neon signs, muted building silhouettes, and the subtle glint of wet pavement reflecting city lights. Capture a dramatic editorial vibe with low-angle lighting, soft shadows, and a shallow depth of field to accentuate his silhouette. Moody tones of charcoal, steel blue, and espresso dominate the palette. Style the frame with cinematic flair—like a still from a modern action film noir.",
-  },
-  {
-    id: 37,
-    image: collage37,
-    alt: "Images",
-    prompt:
-      "Take a picture of a Southeast Asian man standing casually on the banks of the Seine river, facing slightly to the right, not looking directly at the camera. Behind it, the Eiffel Tower lights up majestically with golden yellow lighting, creating a dramatic contrast with the dense night sky. The highlights of the city lights and the light of the Eiffel Tower are beautifully reflected on the calm but slightly rissing river surface because of the passing boat. This man wears a stylish and elegant outfit: a white turtle neck t-shirt, covered with a light beige long coat, combined with light beige chino trousers and a classic black belt. The style is simple but fashionable, giving a modern and sophisticated impression. His pose is relaxed but confident, his right hand holds the edge of the river barrier wall, while his left hand is allowed to relax beside the body. His gaze was directed to the bottom right, as if he was enjoying the beauty of Paris at night. Shooting is done with an eye-level angle, the camera position is parallel to the subject's chest. The lighting is dominated by the warm yellow light from the Eiffel Tower and street lights, creating a romantic and iconic atmosphere typical of Paris. Light reflection in river water adds a rich and cinematic visual dimension. The background shows the iconic Paris bridge, the city buildings in the distance, and the tourist boat traffic on the quiet Seine River. The evening atmosphere feels elegant, full of charm, and iconic. Aspect ratio 9:16",
-  },
-  {
-    id: 38,
-    image: collage38,
-    alt: "Images",
-    prompt:
-      "A sharply dressed man in a black suit and tie walks confidently alongside a majestic black horse on an empty road surrounded by mist. The man has a modern, well-groomed haircut and a composed expression, holding the horse’s reins with one hand. The horse is strong and elegant, with a white diamond mark on its forehead. The background is softly blurred with muted tones and fog, creating a cinematic, mysterious atmosphere. The scene conveys calm power, elegance, and control",
-  },
-  {
-    id: 39,
-    image: collage39,
-    alt: "Images",
-    prompt:
-      "A young man sitting confidently inside a sleek, white luxury supercar with butterfly doors open at day. The car interior is a striking red and black with racing seats and a modern dashboard featuring a digital display and Ferrari logo on the steering wheel e man is wearing a white suit and white shoes",
-  },
-  {
-    id: 40,
-    image: collage40,
-    alt: "Images",
-    prompt:
-      "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
-  },
-  {
-    id: 41,
-    image: collage41,
-    alt: "Images",
-    prompt:
-      "create a shot of a man in the photo uploaded with the same face details, standing in the middle in a suit, red tie and there are thousands of press and paparazzi, surrounding him with cameras and microphones, everyone is looking at him but he is looking up at the camera, Birds Eye shot, taken with a digital camera, London, should look like a scene from a movie with dramatic lighting, keep my face details as you can.",
-  },
-  {
-    id: 42,
-    image: collage42,
-    alt: "Images",
-    prompt:
-      "a man whose face and upper body are split into two distinct halves. The left side (from the viewer's perspective) appears normal, depicting a man with dark hair, a beard, and a serious expression, wearing a dark green or black suit jacket over a dark shirt. The right side of his face and body is transformed, appearing icy blue and cracked, with electric blue veins or energy coursing through it. His right eye glows with an intense blue light, and the right side of his suit jacket also appears to be covered in ice or frost, with a frosty, textured appearance. The overall impression is one of a duality, perhaps representing a human side and a supernatural or elemental (ice/cold) side.",
-  },
-  {
-    id: 43,
-    image: collage43,
-    alt: "Images",
-    prompt:
-      "Photography realistic dramatic portrait of a young man in uploaded photo with same face details, in 3:4 ratio. He has shoulder length wavy black hair, a thin mustache, and no beard. His expression is confident with a subtle smirk. He wears a dark high-collared leather jacket. His left hand is extended toward the viewer as he throws several playing cards (ace of spades, hearts, clubs, diamonds) floating mid-air surrounded by smoke effects. Dramatic lighting with a gradient background from dark blue to black. Ultra-realistic style, resembling a fantasy-action movie or game character poster in realistic",
-  },
-  {
-    id: 44,
-    image: collage44,
-    alt: "Images",
-    prompt:
-      "wearing an oversized black shirt. His face is illuminated by glowing green digital code streams, similar to The Matrix aesthetic. The environment is futuristic cyberpunk cityscape at night, with digital rain of binary codes falling from the sky, some projecting onto his skin like a hologram interface. He tilts his head slightly upward with eyes closed, immersed in data. Ratio 3:4, detailed lighting, neon glow",
-  },
-  {
-    id: 45,
-    image: collage45,
-    alt: "Images",
-    prompt:
-      "Grunge-style analog photos around 2025. I was taking picture in front of bmw m3gtr car together. Where tokiyo Japan, I was sitting in the front engine car with a post model style turn toward camera, wearing black t-shirts outfit baggy jeans and Nike air Jordan low shoes, using flash",
-  },
-  {
-    id: 46,
-    image: collage46,
-    alt: "Images",
-    prompt:
-      "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
-  },
-  {
-    id: 47,
-    image: collage47,
-    alt: "Images",
-    prompt:
-      "Create a high-resolution, cinematic black-and-white portrait of me standing on a side view under a dramatic spotlight in a dark, moody studio. The spotlight creates a powerful beam of light from above, casting deep shadows down a muscular body and intense contrast across his torso and face. With faint smoke surrounding the scene and making the beam of light stand out Important: Use the my real face from the original reference image exactly as it is — no editing, no retouching, no smoothing, no alterations. Preserve all natural skin texture, facial hair, expression, and lighting on the face. Maintain the raw, authentic look of the original. I should have a confident yet mysterious aura, dark trousers. The atmosphere is cinematic, bold, and dramatic — similar to a fashion editorial or performance art scene. The background is dark with soft gradients, and the spotlight fades into the shadows behind him. Format: Vertical 9:16, ultra-sharp DSLR-style detail, with professional-grade lighting and depth.",
-  },
-  {
-    id: 48,
-    image: collage48,
-    alt: "Images",
-    prompt:
-      "the lighting is cinematic with a dual tone neon red and blue light setup.creating a deep . high contrast atmosi. the background is dark and minimal. his pose and expression are intense evoking a mysterious and thougghtfull mood . shot in ultra .detailed . hyper . realistic style with soft shadows and professional studio quality. cinematic color tone with neon lighting...",
-  },
-  {
-    id: 49,
-    image: collage49,
-    alt: "Images",
-    prompt:
-      "A cinematic low-angle portrait of a stylish man in a dark trench coat sitting in an urban cityscape at night, towering skyscrapers in the background, moody green atmospheric lighting, dramatic shadows on the face, intense expression, multiple silver rings and accessories on fingers, hand extended toward the camera, cloudy night sky, Gotham city vibe, shot with a wide-angle lens, dramatic perspective, neon tones, gritty street aesthetic.",
-  },
-  {
-    id: 50,
-    image: collage50,
-    alt: "Images",
-    prompt:
-      "A stylish young man stands confidently, wearing a sleek black dress shirt with the sleeves rolled up and matching black trousers. His hair is neatly styled back with volume on top, and he has a calm, serious expression. The background is dark and minimal, making him the focal point of the image. Studio lighting creates a dramatic and professional atmosphere.",
+      "Use my face from the original photo and keep the same hairstyle as in the image. Create a handsome man wearing a black polo shirt, white pants, white shoes, a Rolex watch, black square eyeglasses, and an outdoor hiking cap. He is sitting on a camping chair with his legs crossed by the stream, with a white Toyota Land Cruiser SUV slightly blurred in the background.",
   },
 ];
 
-const SecondPromptPage = () => {
+const SixthPromptPage = () => {
   const navigate = useNavigate();
   const [clickedImageId, setClickedImageId] = useState(null);
   const [copiedPromptId, setCopiedPromptId] = useState(null);
@@ -626,4 +482,4 @@ const SecondPromptPage = () => {
   );
 };
 
-export default SecondPromptPage;
+export default SixthPromptPage;

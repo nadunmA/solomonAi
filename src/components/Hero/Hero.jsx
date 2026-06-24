@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // 👈 navigate කරන්න useNavigate එකතු කළා
 import { motion } from "framer-motion";
 import gpt from "../../assets/gpt.png";
 import copilot from "../../assets/pilot.png";
@@ -14,7 +14,6 @@ const PROMPTS = [
   "Vintage robot reading poetry in a cozy library",
   "Crystalline ice palace floating in aurora skies",
 ];
-//d
 
 const ENGINES = [
   { name: "ChatGPT", url: "https://chatgpt.com/", icon: gpt },
@@ -116,16 +115,58 @@ const PromptDecoder = memo(function PromptDecoder() {
 });
 
 const Hero = () => {
+  const navigate = useNavigate(); // 👈 Navigation වැඩ කරන්න අවශ්‍යයි
+  const [showAlert, setShowAlert] = useState(true); // 👈 Alert එක පාලනය කරන්න state එක
+
   return (
     <div className="relative min-h-screen bg-[var(--void)] bg-grid overflow-hidden">
       <AnnouncementBanner />
 
-      {/* ambient glow blobs */}
-      <div className="absolute -top-32 -left-20 w-[28rem] h-[28rem] bg-[var(--violet)]/20 rounded-full blur-3xl animate-drift pointer-events-none" />
-      <div className="absolute top-1/3 -right-24 w-[24rem] h-[24rem] bg-[var(--cyan)]/10 rounded-full blur-3xl animate-drift-rev pointer-events-none" />
-      <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-[var(--magenta)]/10 rounded-full blur-3xl animate-drift pointer-events-none" />
+      {/* Glow blobs වල size සහ opacity එකත් මෙතනින් තව චුට්ටක් වැඩි කළා */}
+      <div className="absolute -top-32 -left-20 w-[32rem] h-[32rem] bg-[var(--violet)]/25 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
+      <div className="absolute top-1/3 -right-24 w-[36rem] h-[36rem] bg-[var(--cyan)]/20 rounded-full blur-[140px] animate-drift-rev pointer-events-none mix-blend-screen" />
+      <div className="absolute bottom-0 left-1/3 w-[28rem] h-[28rem] bg-[var(--magenta)]/15 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-24">
+        {/* ── Cyberpunk System Update Alert ── */}
+        {showAlert && (
+          <div className="w-full max-w-7xl mx-auto mb-10 font-mono text-xs">
+            <div className="flex items-center justify-between px-4 py-3 bg-black/40 border border-[var(--magenta)]/30 rounded-xl backdrop-blur-md shadow-[0_0_15px_rgba(217,70,239,0.15)]">
+              <div className="flex items-center gap-3 text-[var(--text-primary)]">
+                {/* Blinking Neon Dot */}
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--magenta)] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--magenta)]"></span>
+                </span>
+                <span className="text-[var(--magenta)] font-bold">
+                  [SYSTEM UPDATE]:
+                </span>
+                <span className="hidden sm:inline">
+                  New highly advanced prompt architectures deployed to
+                </span>
+                <span className="text-[var(--cyan)] font-bold">Page 07</span>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => navigate("/seventhpromptpage")}
+                  className="px-3 py-1 font-mono text-[10px] uppercase font-bold tracking-wider text-black bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] rounded-md hover:opacity-90 transition-opacity"
+                >
+                  Access Terminal →
+                </button>
+                <button
+                  onClick={() => setShowAlert(false)}
+                  className="text-[var(--text-muted)] hover:text-red-400 font-bold px-1"
+                  title="Close Update"
+                >
+                  [X]
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Main Content Grid ── */}
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-8 items-center">
           {/* LEFT — copy column */}
           <motion.div

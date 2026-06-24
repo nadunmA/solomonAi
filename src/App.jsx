@@ -18,6 +18,7 @@ import FifthPromptPage from "./Pages/FifthPromptPage";
 import { HashRouter } from "react-router-dom";
 import AllPrompts from "./Pages/AllPrompts";
 import SixthPromptPage from "./Pages/SixthPromptPage";
+import SeventhPromptPage from "./Pages/SeventhPromptPage";
 
 function Home() {
   return (
@@ -115,6 +116,15 @@ function App() {
                     </LayOut>
                   }
                 />
+                <Route
+                  path="/seventhpromptpage"
+                  element={
+                    <LayOut>
+                      <SeventhPromptPage />
+                    </LayOut>
+                  }
+                />
+
                 <Route
                   path="/about"
                   element={

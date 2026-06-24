@@ -530,17 +530,87 @@ const ThirdPromptPage = () => {
               </motion.div>
             ))}
 
-            {/* ── Navigation ── */}
-            <div className="flex justify-center gap-4 mt-10">
+            {/* ── Dynamic HUD Navigation ── */}
+            <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
+              {/* PREV - Disabled dynamically if on Page 1 */}
               <button
-                onClick={() => navigate("/secondprompt")}
-                className="px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-colors"
+                disabled={window.location.hash === "#/prompt"}
+                onClick={() => navigate("/prompt")}
+                className={`px-4 py-2.5 rounded-full font-mono text-xs border transition-all ${
+                  window.location.hash === "#/prompt"
+                    ? "border-[var(--glass-border)] text-[var(--text-muted)] opacity-30 cursor-not-allowed"
+                    : "border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)]"
+                }`}
               >
-                ← BACK
+                ← PREV
               </button>
+
+              {/* Divider */}
+              <span className="text-[var(--text-muted)] font-mono text-xs opacity-40 mx-1">
+                |
+              </span>
+
+              {/* Page numbers */}
+              {[
+                { label: "01", path: "/prompt" },
+                { label: "02", path: "/secondprompt" },
+                { label: "03", path: "/thirdprompt" },
+                { label: "04", path: "/forthpromptpage" },
+                { label: "05", path: "/fifthpromptpage" },
+                { label: "06", path: "/sixthpromptpage" },
+                { label: "07", path: "/seventhpromptpage" },
+              ].map((p, i, arr) => {
+                const isActive = window.location.hash.endsWith(p.path);
+
+                return (
+                  <React.Fragment key={p.label}>
+                    <button
+                      onClick={() => navigate(p.path)}
+                      className={`w-10 h-10 rounded-full font-mono text-xs transition-all duration-200 border ${
+                        isActive
+                          ? "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white border-transparent shadow-[0_0_15px_rgba(139,92,246,0.4)] font-bold"
+                          : "border-[var(--glass-border)] text-[var(--text-muted)] hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)]"
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                    {i < arr.length - 1 && (
+                      <span className="text-[var(--text-muted)] font-mono text-xs opacity-40">
+                        |
+                      </span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+
+              {/* Divider */}
+              <span className="text-[var(--text-muted)] font-mono text-xs opacity-40 mx-1">
+                |
+              </span>
+
+              {/* NEXT - Disabled dynamically if on the last page */}
               <button
-                onClick={() => navigate("/forthpromptpage")}
-                className="px-7 py-2.5 rounded-full bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white font-mono text-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all"
+                disabled={window.location.hash === "#/sixthpromptpage"}
+                onClick={() => {
+                  const currentHash = window.location.hash;
+                  if (currentHash.endsWith("/prompt"))
+                    navigate("/secondprompt");
+                  else if (currentHash.endsWith("/secondprompt"))
+                    navigate("/thirdprompt");
+                  else if (currentHash.endsWith("/thirdprompt"))
+                    navigate("/forthpromptpage");
+                  else if (currentHash.endsWith("/forthpromptpage"))
+                    navigate("/fifthpromptpage");
+                  else if (currentHash.endsWith("/fifthpromptpage"))
+                    navigate("/sixthpromptpage");
+                  else if (currentHash.endsWith("/sixthpromptpage"))
+                    navigate("/seventhpromptpage");
+                }}
+                className={`px-4 py-2.5 rounded-full font-mono text-xs border transition-all ${
+                  window.location.hash === "#/seventhpromptpage"
+                    ? "border-[var(--glass-border)] text-[var(--text-muted)] opacity-30 cursor-not-allowed"
+                    : "border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)]"
+                }`}
               >
                 NEXT →
               </button>
