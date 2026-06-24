@@ -1,16 +1,101 @@
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-10px) rotate(120deg);
-  }
-  66% {
-    transform: translateY(5px) rotate(240deg);
-  }
+/* Add to your main CSS file (e.g. index.css) */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --void: #05050a;
+  --panel: #0d0d18;
+  --cyan: #00f5ff;
+  --magenta: #ff2ec4;
+  --violet: #8b5cf6;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f5f5fa;
+  --text-muted: #8a8aa0;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.font-display {
+  font-family: "Space Grotesk", sans-serif;
+}
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+.animate-scanline {
+  animation: scanline 3s linear infinite;
+}
+
+@keyframes blink-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+.animate-blink-dot {
+  animation: blink-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -20px);
+  }
+}
+.animate-drift {
+  animation: drift 12s ease-in-out infinite;
+}
+
+@keyframes drift-rev {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-25px, 25px);
+  }
+}
+.animate-drift-rev {
+  animation: drift-rev 14s ease-in-out infinite;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.glass-panel {
+  background: rgba(13, 13, 24, 0.55);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scanline,
+  .animate-blink-dot,
+  .animate-drift,
+  .animate-drift-rev {
+    animation: none;
+  }
 }

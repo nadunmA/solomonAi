@@ -1,282 +1,205 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect, memo } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { fadeIn } from "../../variants";
 import gpt from "../../assets/gpt.png";
 import copilot from "../../assets/pilot.png";
 import nano from "../../assets/nano.png";
 import grok from "../../assets/grok.png";
-import DynamicIsland from "../dyanamic islanda/DynamicIsland";
-import { useNavigate } from "react-router-dom";
+import AnnouncementBanner from "../announcement-banner/AnnouncementBanner";
 
-const Hero = () => {
-  const [currentPrompt, setCurrentPrompt] = useState(0);
-  const navigate = useNavigate();
+const PROMPTS = [
+  "A majestic dragon soaring through neon-lit cyberpunk clouds",
+  "Ethereal forest spirit dancing in moonlit mist",
+  "Vintage robot reading poetry in a cozy library",
+  "Crystalline ice palace floating in aurora skies",
+];
+//d
 
-  const prompts = [
-    "A majestic dragon soaring through neon-lit cyberpunk clouds",
-    "Ethereal forest spirit dancing in moonlit mist",
-    "Vintage robot reading poetry in a cozy library",
-    "Crystalline ice palace floating in aurora skies",
-  ];
+const ENGINES = [
+  { name: "ChatGPT", url: "https://chatgpt.com/", icon: gpt },
+  { name: "Microsoft", url: "https://copilot.microsoft.com/", icon: copilot },
+  { name: "Google", url: "https://gemini.google.com/app", icon: nano },
+  { name: "Grok", url: "https://grok.com/", icon: grok },
+];
 
-  const aiPlatforms = [
-    {
-      name: "ChatGPT",
-      url: "https://chatgpt.com/",
-      icon: gpt,
-      delay: 0,
-    },
-    {
-      name: "Microsoft Copilot",
-      url: "https://copilot.microsoft.com/",
-      icon: copilot,
-      delay: 1,
-    },
-    {
-      name: "Google Gemini",
-      url: "https://gemini.google.com/app",
-      icon: nano,
-      delay: 2,
-    },
-    {
-      name: "Grok",
-      url: "https://grok.com/",
-      icon: grok,
-      delay: 3,
-    },
-  ];
+const STATS = [
+  { value: "1,000+", label: "Prompts" },
+  { value: "4", label: "AI engines" },
+  { value: "0s", label: "Setup needed" },
+];
 
-  const features = [
-    {
-      icon: "📋",
-      title: "Copy & Paste",
-      desc: "One click to copy perfect prompts",
-    },
-    {
-      icon: "⚡",
-      title: "Instant Results",
-      desc: "Works with any AI image generator",
-    },
-    {
-      icon: "✨",
-      title: "Pro Quality",
-      desc: "Crafted by prompt engineering experts",
-    },
-  ];
+// Isolated decoder — only this re-renders on the interval tick
+const PromptDecoder = memo(function PromptDecoder() {
+  const [index, setIndex] = useState(0);
+  const [display, setDisplay] = useState("");
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPrompt((prev) => (prev + 1) % prompts.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [prompts.length]);
+    let charIndex = 0;
+    setDisplay("");
+    const target = PROMPTS[index];
+    const typeInterval = setInterval(() => {
+      charIndex++;
+      setDisplay(target.slice(0, charIndex));
+      if (charIndex >= target.length) clearInterval(typeInterval);
+    }, 28);
+    return () => clearInterval(typeInterval);
+  }, [index]);
+
+  useEffect(() => {
+    const rotate = setInterval(() => {
+      setIndex((prev) => (prev + 1) % PROMPTS.length);
+    }, 4200);
+    return () => clearInterval(rotate);
+  }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 pt-20 px-4 sm:px-6 lg:px-12">
-      {/* Optimized floating particles */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-white/30 rounded-full"
-            initial={{
-              x: `${Math.random() * 100}%`,
-              y: `${Math.random() * 100}%`,
-              opacity: 0,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+    <div className="relative glass-panel rounded-2xl p-5 sm:p-6 overflow-hidden">
+      {/* corner brackets */}
+      <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/70 rounded-tl" />
+      <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--cyan)]/70 rounded-tr" />
+      <span className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--cyan)]/70 rounded-bl" />
+      <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/70 rounded-br" />
+
+      {/* scanline */}
+      <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+        <div className="absolute left-0 right-0 h-1/3 bg-gradient-to-b from-transparent via-[var(--cyan)]/10 to-transparent animate-scanline" />
       </div>
 
-      {/* Animated background gradients */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 bg-purple-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-blue-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
+      <div className="relative flex items-center justify-between mb-4 font-mono text-[10px] sm:text-xs text-[var(--text-muted)]">
+        <span className="flex items-center gap-1.5">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--magenta)] animate-blink-dot" />
+          </span>
+          DECODING_PROMPT
+        </span>
+        <span>
+          #{String(index + 1).padStart(2, "0")}/
+          {String(PROMPTS.length).padStart(2, "0")}
+        </span>
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center text-white max-w-6xl mx-auto">
-        {/* Header section */}
-        <motion.div
-          className="mb-8 sm:mb-12 space-y-4"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <DynamicIsland />
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Transform Words Into
-            <br />
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-              Visual Masterpieces
-            </span>
-          </h1>
-        </motion.div>
+      <p className="relative font-mono text-sm sm:text-base text-[var(--text-primary)] leading-relaxed min-h-[4.5rem]">
+        <span className="text-[var(--cyan)]">{">"}</span> {display}
+        <span className="inline-block w-2 h-4 bg-[var(--cyan)] align-middle ml-1 animate-blink-dot" />
+      </p>
 
-        {/* Subtitle */}
-        <motion.p
-          className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-12 leading-relaxed opacity-90 max-w-4xl px-4"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        >
-          Copy our expertly crafted prompts, paste into any AI tool, and watch
-          your imagination come to life in stunning detail. No experience
-          needed—just pure creative magic.
-        </motion.p>
-
-        {/* Current prompt display */}
-        <motion.div
-          className="mb-8 sm:mb-12 p-4 sm:p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 max-w-2xl"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <p className="text-sm text-gray-300 mb-2">Try this prompt:</p>
-          <motion.p
-            key={currentPrompt}
-            className="text-lg sm:text-xl font-medium text-white"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-          >
-            "{prompts[currentPrompt]}"
-          </motion.p>
-        </motion.div>
-
-        {/* AI Platform logos */}
-        <motion.div
-          className="mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-        >
-          <p className="text-sm text-gray-400 mb-4">
-            Works with these AI platforms:
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            {aiPlatforms.map((platform, index) => (
-              <motion.a
-                key={platform.name}
-                href={platform.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="w-12 h-12 sm:w-14 sm:h-14 mb-2">
-                  <motion.img
-                    src={platform.icon}
-                    alt={platform.name}
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: platform.delay,
-                    }}
-                    className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                  />
-                </div>
-                <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 block">
-                  {platform.name.split(" ")[0]}
-                </span>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Feature cards */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full max-w-4xl"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              className="group p-4 sm:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-              whileHover={{ y: -5, scale: 1.02 }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: 1.2 + index * 0.2,
-                ease: "easeOut",
-              }}
+      {/* RUNS ON */}
+      <div className="relative mt-5 pt-4 border-t border-[var(--glass-border)]">
+        <span className="font-mono text-[10px] text-[var(--text-muted)] block mb-3">
+          RUNS ON
+        </span>
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
+          {ENGINES.map((engine) => (
+            <a
+              key={engine.name}
+              href={engine.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-2 rounded-xl border border-[var(--glass-border)] bg-black/30 py-3 px-2 hover:border-[var(--cyan)]/60 hover:bg-black/50 transition-colors"
+              title={engine.name}
             >
-              <motion.div
-                className="text-3xl sm:text-4xl mb-3 sm:mb-4"
-                whileHover={{
-                  scale: 1.2,
-                  rotate: [0, -10, 10, 0],
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {feature.icon}
-              </motion.div>
-              <h3 className="font-semibold mb-2 text-lg sm:text-xl text-white">
-                {feature.title}
-              </h3>
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                {feature.desc}
-              </p>
-            </motion.div>
+              <img
+                src={engine.icon}
+                alt={engine.name}
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-lg group-hover:scale-110 transition-transform"
+              />
+              <span className="font-mono text-[9px] sm:text-[10px] text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors text-center leading-tight">
+                {engine.name}
+              </span>
+            </a>
           ))}
-        </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+});
 
-        {/* CTA Button */}
-        <motion.div
-          className="mt-12 sm:mt-16"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.8 }}
-        >
-          {/*<motion.button
-            onClick={() => navigate("/prompts")}
-            className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-full text-lg shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
+const Hero = () => {
+  return (
+    <div className="relative min-h-screen bg-[var(--void)] bg-grid overflow-hidden">
+      <AnnouncementBanner />
+
+      {/* ambient glow blobs */}
+      <div className="absolute -top-32 -left-20 w-[28rem] h-[28rem] bg-[var(--violet)]/20 rounded-full blur-3xl animate-drift pointer-events-none" />
+      <div className="absolute top-1/3 -right-24 w-[24rem] h-[24rem] bg-[var(--cyan)]/10 rounded-full blur-3xl animate-drift-rev pointer-events-none" />
+      <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-[var(--magenta)]/10 rounded-full blur-3xl animate-drift pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-24">
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-8 items-center">
+          {/* LEFT — copy column */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="lg:pt-12"
           >
-            Explore Prompts →
-          </motion.button>*/}
-        </motion.div>
+            <p className="font-mono text-xs sm:text-sm text-[var(--cyan)] tracking-widest mb-5">
+              // PROMPT LIBRARY FOR AI IMAGE TOOLS
+            </p>
+
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] text-[var(--text-primary)]">
+              Stop typing
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--magenta)] via-[var(--violet)] to-[var(--cyan)]">
+                from scratch.
+              </span>
+            </h1>
+
+            <p className="mt-6 text-base sm:text-lg text-[var(--text-muted)] max-w-lg leading-relaxed">
+              Copy a prompt that's already been tested, paste it into ChatGPT,
+              Gemini, Copilot, or Grok, and get the image you imagined — not
+              five rounds of guessing.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link to="/sixthpromptpage">
+                <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white font-semibold text-sm sm:text-base shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:shadow-[0_0_45px_rgba(139,92,246,0.6)] transition-shadow">
+                  Browse prompts
+                </button>
+              </Link>
+              <button className="px-6 py-3 rounded-xl border border-[var(--glass-border)] text-[var(--text-primary)] font-medium text-sm sm:text-base hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-colors">
+                How it works
+              </button>
+            </div>
+
+            {/* stats row — each stat staggered */}
+            <div className="mt-12 flex gap-8">
+              {STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.4 + i * 0.1,
+                    ease: "easeOut",
+                  }}
+                >
+                  <p className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                    {stat.value}
+                  </p>
+                  <p className="font-mono text-[10px] sm:text-xs text-[var(--text-muted)] tracking-wide mt-1">
+                    {stat.label.toUpperCase()}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* RIGHT — HUD signature panel */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="lg:-mt-2"
+          >
+            <PromptDecoder />
+          </motion.div>
+        </div>
       </div>
     </div>
   );

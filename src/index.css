@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 body {
@@ -153,11 +154,15 @@ body {
 }
 
 .dash {
-  animation: dashArray 2s ease-in-out infinite, dashOffset 2s linear infinite;
+  animation:
+    dashArray 2s ease-in-out infinite,
+    dashOffset 2s linear infinite;
 }
 
 .spin {
-  animation: spinDashArray 2s ease-in-out infinite, spin 8s ease-in-out infinite,
+  animation:
+    spinDashArray 2s ease-in-out infinite,
+    spin 8s ease-in-out infinite,
     dashOffset 2s linear infinite;
   transform-origin: center;
 }
@@ -243,6 +248,98 @@ body {
   scrollbar-color: #4c1d95 #111827;
 }
 
-/*body {
-  background-image: url("/solomon.png");
-}*/
+/* ============================================
+   HERO REDESIGN — bold/futuristic glass + neon tokens
+   ============================================ */
+:root {
+  --void: #05050a;
+  --panel: #0d0d18;
+  --cyan: #00f5ff;
+  --magenta: #ff2ec4;
+  --violet: #8b5cf6;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f5f5fa;
+  --text-muted: #8a8aa0;
+}
+
+.font-display {
+  font-family: "Space Grotesk", sans-serif;
+}
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+.animate-scanline {
+  animation: scanline 3s linear infinite;
+}
+
+@keyframes blink-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+.animate-blink-dot {
+  animation: blink-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -20px);
+  }
+}
+.animate-drift {
+  animation: drift 12s ease-in-out infinite;
+}
+
+@keyframes drift-rev {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-25px, 25px);
+  }
+}
+.animate-drift-rev {
+  animation: drift-rev 14s ease-in-out infinite;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scanline,
+  .animate-blink-dot,
+  .animate-drift,
+  .animate-drift-rev {
+    animation: none;
+  }
+}

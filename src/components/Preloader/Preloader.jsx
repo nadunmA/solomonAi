@@ -1,18 +1,17 @@
-// src/components/Preloader.jsx
 import React from "react";
 
 const Preloader = () => {
   return (
-    <div className="loader bg-black">
+    <div className="loader bg-[var(--void)]">
       <svg height="0" width="0" viewBox="0 0 64 64" className="absolute">
         <defs>
           <linearGradient id="b" x1="0" y1="62" x2="0" y2="2">
-            <stop stopColor="#973BED" />
-            <stop stopColor="#007CFF" offset="1" />
+            <stop stopColor="#8B5CF6" />
+            <stop stopColor="#00F5FF" offset="1" />
           </linearGradient>
           <linearGradient id="c" x1="0" y1="64" x2="0" y2="0">
-            <stop stopColor="#FFC800" />
-            <stop stopColor="#F0F" offset="1" />
+            <stop stopColor="#FF2EC4" />
+            <stop stopColor="#00F5FF" offset="1" />
             <animateTransform
               attributeName="gradientTransform"
               type="rotate"
@@ -23,8 +22,8 @@ const Preloader = () => {
             />
           </linearGradient>
           <linearGradient id="d" x1="0" y1="62" x2="0" y2="2">
-            <stop stopColor="#00E0ED" />
-            <stop stopColor="#00DA72" offset="1" />
+            <stop stopColor="#00F5FF" />
+            <stop stopColor="#8B5CF6" offset="1" />
           </linearGradient>
         </defs>
       </svg>

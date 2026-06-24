@@ -1,5 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import gpt from "../assets/gpt.png";
+import nano from "../assets/nano.png";
+import grok from "../assets/grok.png";
+import copilot from "../assets/pilot.png";
 
 import collage145 from "../assets/photos/collage145.webp";
 import collage146 from "../assets/photos/collage146.webp";
@@ -158,20 +164,66 @@ import collage123 from "../assets/photos/collage123.webp";
 import collage124 from "../assets/photos/collage124.webp";
 import collage125 from "../assets/photos/collage125.webp";
 
-import gpt from "../assets/gpt.png";
-import nano from "../assets/nano.png";
-import grok from "../assets/grok.png";
-import copilot from "../assets/pilot.png";
-import { motion } from "framer-motion";
+const ENGINES = [
+  { name: "Microsoft", url: "https://copilot.microsoft.com/", icon: copilot },
+  { name: "ChatGPT", url: "https://chatgpt.com/", icon: gpt },
+  { name: "Gemini", url: "https://gemini.google.com/app", icon: nano },
+  { name: "Grok", url: "https://grok.com/", icon: grok },
+];
+
+// Fisher-Yates shuffle
+const shuffleArray = (array) => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
+// Reusable engine card — same HUD card style as Hero's "RUNS ON" panel
+const EngineGrid = memo(function EngineGrid() {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-md">
+      {ENGINES.map((engine) => (
+        <a
+          key={engine.name}
+          href={engine.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex flex-col items-center gap-2 rounded-xl border border-[var(--glass-border)] bg-black/30 py-3 px-2 hover:border-[var(--cyan)]/60 hover:bg-black/50 transition-colors"
+        >
+          <img
+            src={engine.icon}
+            alt={engine.name}
+            className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-lg group-hover:scale-110 transition-transform"
+          />
+          <span className="font-mono text-[10px] text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors text-center">
+            {engine.name}
+          </span>
+        </a>
+      ))}
+    </div>
+  );
+});
 
 const PromptPage = () => {
+  const navigate = useNavigate();
   const [clickedImageId, setClickedImageId] = useState(null);
   const [copiedPromptId, setCopiedPromptId] = useState(null);
   const [copyClickedId, setCopyClickedId] = useState(null);
   const [isRandomizing, setIsRandomizing] = useState(false);
   const [displayData, setDisplayData] = useState([]);
 
-  const PromptPage = useNavigate();
+  const [expandedIds, setExpandedIds] = useState(new Set());
+
+  const toggleExpand = (id) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
 
   const promptData = [
     {
@@ -1239,24 +1291,13 @@ const PromptPage = () => {
     },
   ];
 
-  // Initialize displayData with original order
   React.useEffect(() => {
     setDisplayData([...promptData]);
   }, []);
 
-  // Fisher-Yates shuffle algorithm
-  const shuffleArray = (array) => {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-  };
-
   const handleRandomize = () => {
     setIsRandomizing(true);
-    const totalDuration = 1000; // ms
+    const totalDuration = 1000;
     const shuffleSteps = 10;
     const interval = totalDuration / shuffleSteps;
 
@@ -1269,7 +1310,6 @@ const PromptPage = () => {
         lastUpdate = now;
         currentStep++;
       }
-
       if (currentStep < shuffleSteps) {
         requestAnimationFrame(animate);
       } else {
@@ -1303,427 +1343,241 @@ const PromptPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-purple-900 via-black to-blue-800 text-white overflow-hidden ">
-      {/* Animated Background */}
-      <div className="absolute inset-0 z-0">
-        {/* Gradient mesh background */}
-        <div className="absolute inset-0 bg-gradient-to-br bg-gradient-to-br from-purple-900 via-black to-blue-800 text-white"></div>
-
-        {/* Floating orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-violet-600/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-
-        <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-pink-600/5 to-violet-600/5 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "4s" }}
-        ></div>
-
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
-      </div>
+    <div className="relative min-h-screen bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-hidden">
+      {/* Ambient glow blobs - same language as Hero/ImageSlider */}
+      <div className="absolute top-10 -left-20 w-[32rem] h-[32rem] bg-[var(--violet)]/25 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
+      <div className="absolute bottom-10 -right-20 w-[40rem] h-[40rem] bg-[var(--cyan)]/20 rounded-full blur-[140px] animate-drift-rev pointer-events-none mix-blend-screen" />
+      <div className="absolute top-1/3 left-1/3 w-[30rem] h-[30rem] bg-[var(--magenta)]/15 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
 
       <div className="relative z-10 pt-16 pb-20 px-4 sm:pt-24 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
+          {/* Header */}
           <div className="text-center mb-16 sm:mb-20">
-            <div className="inline-block">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
-                  AI Prompt
-                </span>
-                <br />
-                <span className="text-white/90">Gallery</span>
-              </h1>
-              <div className="h-1 w-24 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto rounded-full mb-6"></div>
-            </div>
-            <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
-              Discover stunning AI-generated images with their creative prompts.
-              Click to explore, copy to create.
+            <p className="font-mono text-xs sm:text-sm text-[var(--cyan)] tracking-widest mb-4">
+              // FULL PROMPT INDEX
+            </p>
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--magenta)] via-[var(--violet)] to-[var(--cyan)]">
+                Prompt
+              </span>{" "}
+              <span className="text-[var(--text-primary)]">Gallery</span>
+            </h1>
+            <p className="text-[var(--text-muted)] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+              Browse AI-generated images with their exact prompts. Click to
+              preview, copy to create.
             </p>
 
-            {/* Randomize Button */}
-            <div className="flex justify-center">
-              <button
-                onClick={handleRandomize}
-                disabled={isRandomizing}
-                className={`min-w-[130px] px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group relative overflow-hidden ${
-                  isRandomizing
-                    ? "bg-gradient-to-r from-orange-500 to-red-500 text-white scale-105 shadow-lg shadow-orange-500/25 cursor-not-allowed"
-                    : "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-500 hover:to-blue-500 hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25"
-                }`}
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2 font-ubuntu">
-                  {isRandomizing ? (
-                    <>
-                      <svg
-                        className="w-4 h-4 animate-spin"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                      </svg>
-                      Shuffling...
-                    </>
-                  ) : (
-                    <>
-                      <svg
-                        className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                      </svg>
-                      Randomize
-                    </>
-                  )}
-                </span>
-
-                {/* Button pulse effect */}
-                {isRandomizing && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-400/20 animate-pulse rounded-xl"></div>
-                )}
-              </button>
-            </div>
+            <button
+              onClick={handleRandomize}
+              disabled={isRandomizing}
+              className={`min-w-[140px] px-5 py-2.5 font-mono text-sm rounded-xl transition-all duration-300 relative overflow-hidden ${
+                isRandomizing
+                  ? "bg-[var(--magenta)]/80 text-white cursor-not-allowed"
+                  : "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.4)]"
+              }`}
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <svg
+                  className={`w-4 h-4 ${isRandomizing ? "animate-spin" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                {isRandomizing ? "SHUFFLING..." : "RANDOMIZE"}
+              </span>
+            </button>
           </div>
 
-          {/* Gallery Grid */}
+          {/* Gallery */}
           <div className="space-y-16 sm:space-y-20">
             {displayData.map((item, index) => (
               <motion.div
                 key={`${item.id}-${index}`}
                 initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6 }}
                 className={`flex flex-col ${
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } gap-8 lg:gap-12 items-center`}
               >
-                {/* Image Section */}
+                {/* Image */}
                 <div className="w-full lg:w-1/2">
                   <div
-                    className={`group relative cursor-pointer transition-all duration-700 ease-out ${
+                    className={`group relative cursor-pointer transition-all duration-500 ${
                       clickedImageId === item.id
-                        ? "scale-105"
-                        : "hover:scale-[1.02]"
-                    } ${isRandomizing ? "animate-pulse" : ""}`}
+                        ? "scale-[1.02]"
+                        : "hover:scale-[1.01]"
+                    }`}
                     onClick={() => handleImageClick(item.id)}
                   >
-                    {/* Image container with glassmorphism border */}
-                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-1 backdrop-blur-sm border border-white/10">
-                      <div className="relative overflow-hidden rounded-xl">
-                        <motion.img
-                          loading="lazy"
-                          src={item.image}
-                          srcSet={`
-                                                  ${item.image} 400w,
-                                                  ${item.image} 800w,
-                                                  ${item.image} 1200w
-                                                  `}
-                          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
-                          alt={item.alt}
-                          className="w-full h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] object-cover"
-                          initial={{ opacity: 0, y: 50 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.8 }}
-                          viewport={{ once: false, amount: 0.5 }}
-                        />
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div className="relative overflow-hidden rounded-2xl glass-panel">
+                      <img
+                        loading="lazy"
+                        src={item.image}
+                        alt={item.alt}
+                        className="w-full h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                        {/* Click effect */}
-                        {clickedImageId === item.id && (
-                          <div className="absolute inset-0">
-                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-pink-500/20 to-cyan-500/20 animate-pulse rounded-xl"></div>
-                            <div className="absolute -inset-4 bg-gradient-to-r from-violet-500/30 via-pink-500/30 to-cyan-500/30 rounded-2xl blur-xl animate-ping"></div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                      {/* corner brackets */}
+                      <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl" />
+                      <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br" />
 
-                    {/* Floating badge */}
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-violet-600 to-pink-600 text-white text-sm font-bold px-3 py-1 rounded-full shadow-lg">
-                      #{item.id}
+                      {clickedImageId === item.id && (
+                        <div className="absolute -inset-2 bg-gradient-to-r from-[var(--violet)]/30 via-[var(--magenta)]/30 to-[var(--cyan)]/30 rounded-2xl blur-xl animate-ping" />
+                      )}
                     </div>
                   </div>
                 </div>
 
-                {/* Prompt Section */}
+                {/* Prompt panel */}
                 <div className="w-full lg:w-1/2">
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      {/* Header */}
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                        <h3 className="text-lg sm:text-xl font-bold text-white font-ubuntu">
-                          Try these AI platforms:
-                        </h3>
-                      </div>
-
-                      {/* AI Platform Logos Grid */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-md">
-                        {/* Copilot */}
-                        <a
-                          href="https://copilot.microsoft.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={copilot}
-                              alt="Microsoft Copilot"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            Copilot
-                          </span>
-                        </a>
-
-                        {/* ChatGPT */}
-                        <a
-                          href="https://chatgpt.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={gpt}
-                              alt="ChatGPT"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 1,
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            ChatGPT
-                          </span>
-                        </a>
-
-                        {/* Nano (Claude) */}
-                        <a
-                          href="https://gemini.google.com/app"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={nano}
-                              alt="Claude AI"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 2,
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            Gemini
-                          </span>
-                        </a>
-
-                        {/* Grok */}
-                        <a
-                          href="https://grok.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={grok}
-                              alt="Grok AI"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 3,
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            Grok
-                          </span>
-                        </a>
-                      </div>
+                  <div className="space-y-5">
+                    <div className="space-y-3">
+                      <h3 className="font-mono text-xs text-[var(--text-muted)] tracking-wide">
+                        RUNS ON
+                      </h3>
+                      <EngineGrid />
                     </div>
 
-                    {/*<div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-violet-600 to-pink-600 text-white scale-105 shadow-lg shadow-violet-500/25  rounded-lg flex items-center justify-center">
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                    <div className="relative glass-panel rounded-2xl p-6">
+                      {/* scanline */}
+                      <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                        <div className="absolute left-0 right-0 h-1/3 bg-gradient-to-b from-transparent via-[var(--cyan)]/5 to-transparent animate-scanline" />
+                      </div>
+
+                      <div className="flex flex-col gap-3">
+                        <p
+                          className={`text-sm sm:text-base text-[var(--text-muted)] leading-relaxed break-words transition-all duration-300 ${
+                            expandedIds.has(item.id) ? "" : "line-clamp-4"
+                          }`}
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 10V3L4 14h7v7l9-11h-7z"
-                          />
-                        </svg> 
-                      </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white font-ubuntu">
-                        AI Prompt
-                      </h3>
-                    </div>*}
+                          {item.prompt}
+                        </p>
 
-                    {/* Prompt container with glassmorphism */}
-                    <motion.div
-                      className="bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl"
-                      initial={{ opacity: 0, y: 50 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8 }}
-                      viewport={{ once: false, amount: 0.4 }}
-                    >
-                      <div className="relative">
-                        <div className="bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
-                          <div className="flex flex-col sm:flex-row gap-4">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-ubuntu break-words">
-                                {item.prompt}
-                              </p>
-                            </div>
+                        <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border)]">
+                          <button
+                            onClick={() => toggleExpand(item.id)}
+                            className="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1 transition-colors"
+                          >
+                            {expandedIds.has(item.id) ? (
+                              <>
+                                <svg
+                                  className="w-3 h-3"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M5 15l7-7 7 7"
+                                  />
+                                </svg>
+                                SHOW LESS
+                              </>
+                            ) : (
+                              <>
+                                <svg
+                                  className="w-3 h-3"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                  />
+                                </svg>
+                                SHOW MORE
+                              </>
+                            )}
+                          </button>
 
-                            {/* Copy button */}
-                            <div className="flex-shrink-0 flex justify-center sm:justify-start ">
-                              <button
-                                onClick={() => handleCopy(item.id, item.prompt)}
-                                className={`h-[50px] group relative overflow-hidden px-6 py-3 font-bold text-sm transition-all duration-200 w-[110px] rounded-full ${
-                                  copiedPromptId === item.id
-                                    ? "bg-gradient-to-r from-purple-500 to-purple-500 text-white scale-105 shadow-lg shadow-green-500/25"
-                                    : copyClickedId === item.id
-                                    ? "bg-gradient-to-r from-violet-600 to-pink-600 text-white scale-105 shadow-lg shadow-violet-500/25"
-                                    : "bg-gradient-to-r from-violet-600/80 to-pink-600/80 text-white hover:from-violet-500 hover:to-pink-500 hover:scale-105 hover:shadow-lg hover:shadow-violet-500/25"
-                                }`}
-                                style={{ minWidth: "110px" }}
-                                disabled={copiedPromptId === item.id}
-                              >
-                                <span className="relative z-10 flex items-center justify-center gap-2 font-ubuntu">
-                                  {copiedPromptId === item.id ? (
-                                    <>
-                                      <svg
-                                        className="w-4 h-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M5 13l4 4L19 7"
-                                        />
-                                      </svg>
-                                      Copied!
-                                    </>
-                                  ) : (
-                                    <>
-                                      <svg
-                                        className="w-4 h-4 font-ubuntu"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                        />
-                                      </svg>
-                                      Copy
-                                    </>
-                                  )}
-                                </span>
-
-                                {/* Button effects */}
-                                {copyClickedId === item.id &&
-                                  copiedPromptId !== item.id && (
-                                    <div className="absolute inset-0 bg-white/20 animate-ping rounded-xl"></div>
-                                  )}
-
-                                {copiedPromptId === item.id && (
-                                  <div className="absolute inset-0 bg-green-400/20 animate-pulse rounded-xl"></div>
-                                )}
-                              </button>
-                            </div>
-                          </div>
+                          <button
+                            onClick={() => handleCopy(item.id, item.prompt)}
+                            disabled={copiedPromptId === item.id}
+                            className={`h-[44px] w-[110px] rounded-full font-mono text-xs font-semibold transition-all duration-200 relative overflow-hidden ${
+                              copiedPromptId === item.id
+                                ? "bg-[var(--cyan)]/20 text-[var(--cyan)] border border-[var(--cyan)]/50"
+                                : "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+                            }`}
+                          >
+                            <span className="relative z-10 flex items-center justify-center gap-1.5">
+                              {copiedPromptId === item.id ? (
+                                <>
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M5 13l4 4L19 7"
+                                    />
+                                  </svg>
+                                  COPIED
+                                </>
+                              ) : (
+                                <>
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                    />
+                                  </svg>
+                                  COPY
+                                </>
+                              )}
+                            </span>
+                          </button>
                         </div>
-
-                        {/* Glow effect */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 via-pink-600/20 to-cyan-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ))}
-            {/* next page button part*/}
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-10">
-              {/* Next Button */}
+
+            <div className="flex justify-center mt-10">
               <button
-                className="bg-black hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full w-[150px] transition duration-600"
-                onClick={() => PromptPage("/prompt")}
+                onClick={() => navigate("/prompt")}
+                className="px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-colors"
               >
-                Next →
+                NEXT →
               </button>
             </div>
           </div>
 
           {/* Footer CTA */}
-          <div className="text-center mt-20 pt-12 border-t border-white/10 ">
-            <div className="inline-flex items-center gap-2 text-gray-400 text-sm">
-              <div className=" w-2 h-2 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full animate-pulse"></div>
+          <div className="text-center mt-20 pt-12 border-t border-[var(--glass-border)]">
+            <p className="font-mono text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />
+              </span>
               Create your own AI masterpieces with these prompts
-              <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-violet-500 rounded-full animate-pulse"></div>
-            </div>
+            </p>
           </div>
         </div>
       </div>

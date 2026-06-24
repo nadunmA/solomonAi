@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import collage26 from "../assets/photos/collage26.webp";
 import collage27 from "../assets/photos/collage27.webp";
@@ -22,245 +24,267 @@ import collage43 from "../assets/photos/collage43.webp";
 import collage44 from "../assets/photos/collage44.webp";
 import collage45 from "../assets/photos/collage45.webp";
 import collage46 from "../assets/photos/collage46.webp";
-import collage47 from "../assets/photos/collage47.webp"; //promptData instead display data
+import collage47 from "../assets/photos/collage47.webp";
 import collage48 from "../assets/photos/collage48.webp";
 import collage49 from "../assets/photos/collage49.webp";
 import collage50 from "../assets/photos/collage50.webp";
 
+import copilot from "../assets/pilot.png";
 import gpt from "../assets/gpt.png";
 import nano from "../assets/nano.png";
 import grok from "../assets/grok.png";
-import copilot from "../assets/pilot.png";
-import { motion } from "framer-motion";
+
+const ENGINES = [
+  { name: "Microsoft", url: "https://copilot.microsoft.com/", icon: copilot },
+  { name: "ChatGPT", url: "https://chatgpt.com/", icon: gpt },
+  { name: "Gemini", url: "https://gemini.google.com/app", icon: nano },
+  { name: "Grok", url: "https://grok.com/", icon: grok },
+];
+
+const shuffleArray = (array) => {
+  const a = [...array];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const EngineGrid = memo(function EngineGrid() {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-md">
+      {ENGINES.map((e) => (
+        <a
+          key={e.name}
+          href={e.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex flex-col items-center gap-2 rounded-xl border border-[var(--glass-border)] bg-black/30 py-3 px-2 hover:border-[var(--cyan)]/60 hover:bg-black/50 transition-colors"
+        >
+          <img
+            src={e.icon}
+            alt={e.name}
+            className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-lg group-hover:scale-110 transition-transform"
+          />
+          <span className="font-mono text-[10px] text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors text-center">
+            {e.name}
+          </span>
+        </a>
+      ))}
+    </div>
+  );
+});
+
+const promptData = [
+  {
+    id: 26,
+    image: collage26,
+    alt: "Images",
+    prompt:
+      "A laid-back young man reclines on a vintage red couch, lost in music with earphones in and a smartphone in hand. Scattered vinyl records surround him on a wooden floor, alongside a classic record player, a worn paperback novel, and a pack of cigarettes. The lighting is soft and moody, casting nostalgic shadows across the scene. The atmosphere evokes lazy afternoons, analog warmth, and introspective vibes. Retro color grading, shallow depth of field, cinematic framing, 3:2 aspect ratio.",
+  },
+  {
+    id: 27,
+    image: collage27,
+    alt: "Images",
+    prompt:
+      "A cinematic black and white portrait of a muscular man standing alone in a dark studio environment. The man is wearing a loose olive green T-shirt and dark pants.His arms are slightly flexed, revealing defined muscles and veins. A soft spotlight from 7 above casts dramatic shadows across his body and face, highlighting his form while the background fades into deep black. The image has a moodyeditorial tone with a U high contrast, matte finish.",
+  },
+  {
+    id: 28,
+    image: collage28,
+    alt: "Images",
+    prompt:
+      "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
+  },
+  {
+    id: 29,
+    image: collage29,
+    alt: "Images",
+    prompt:
+      "Ultra-realistic full-body portrait of a 28 years old, 164 cm tall, medium build, side-parted hair styled with pomade, clean look, wearing a white oversized T-shirt from Uniqlo, olive green cargo pants from H&M, white Nike Air Force 1 sneakers, denim sling bag, posing on Jalan Braga Bandung, surrounded by classic Dutch-style buildings, textured walls, vintage street lamps, soft afternoon lighting, fashion lookbook photography style, DSLR camera feel, 32k, 9:16 aspect ratio.",
+  },
+  {
+    id: 30,
+    image: collage30,
+    alt: "Images",
+    prompt:
+      "An overhead cinematic shot of me, leaning against the hood of a black M3 gtr on the street, wearing a black suit, left hand in my pocket, right hand smoking a cigarette. I have good gyn physique. A blurry crowd of cars and people are running on the street around me. Gloomy lighting, 35mm film style, shallow depth of field, sharp focus on me. Aspect ratio 9:16. 8K resolution",
+  },
+  {
+    id: 31,
+    image: collage31,
+    alt: "Images",
+    prompt:
+      "Produce a luxurious rooftop portrait with skyline in the background. Maintain the original selfie's face without any Al face modification. The subject is in a smart-casual outfit — open collar shirt, linen blazer, watch visible on wrist and black sunglasses. Sunset lighting casts soft golden tones across the skin. Behind, a modern city skyline fades into warm bokeh. Clean, editorial look with professional photography vibes. 4K clarity, vertical 9:16.",
+  },
+  {
+    id: 32,
+    image: collage32,
+    alt: "Images",
+    prompt:
+      "A cinematic overhead portrait of a man exactly in the image lying relaxed on a red couch, surrounded by a chaotic and stylish retro setup. He has thick wavy hair and a beard, wearing a dark checkered shirt, brown trousers, sunglasses, and earphones connected to a smartphone resting on his chest. His arm is resting top on a stack of books, including The 5 People You Meet in Heaven and Horace Silver, with visible cigarette packs and vinyl records nearby.",
+  },
+  {
+    id: 33,
+    image: collage33,
+    alt: "Images",
+    prompt:
+      "A cinematic side-profile portrait of a young man in a black suit, illuminated from behind by a glowing orange neon halo ring. The background is dark with warm tones, emphasizing the silhouette and creating a dramatic, moody atmosphere. Soft shadows and high contrast, professional studio lighting, 35mm film look.",
+  },
+  {
+    id: 34,
+    image: collage34,
+    alt: "Images",
+    prompt:
+      "A tense, dystopian moment captured in a fluorescent-lit corridor—centered on a defiant protagonist wearing a worn green tracksuit marked “456,” staring down the lens with weary determination. The hallway is filled with similarly dressed players in deep shadow, faces blurred in motion or anxiety. Harsh top-down lighting creates dramatic silhouettes and oppressive atmosphere.  Moody composition, shallow depth of field, grainy textures, editorial tone with cinematic color grading—think bleak, hyperreal aesthetic with cultural overlays and social commentary.",
+  },
+  {
+    id: 35,
+    image: collage35,
+    alt: "Images",
+    prompt:
+      "A dynamic mid-air shot of a young man leaping above a glowing futuristic cityscape at dusk, wearing a modern white streetwear t-shirt emblazoned with bold, colorful text XTREME — cinematic ultra-wide angle, strong backlighting casting long shadows, blurred neon lights below suggesting speed and altitude, sense of gravity-defying motion, inspired by parkour action, editorial sports photography style, cool-toned color grading, shallow depth of field, dramatic sky with urban skyline fade-out — shot on 50mm f/1.4 lens, ISO 400, shutter speed 1/1000s",
+  },
+  {
+    id: 36,
+    image: collage36,
+    alt: "Images",
+    prompt:
+      "A confident young man leans casually against an open car door on a moody city street. He wears a black leather jacket and matching black shirt, exuding cool intensity. The background is softly blurred with hints of urban grit—distant neon signs, muted building silhouettes, and the subtle glint of wet pavement reflecting city lights. Capture a dramatic editorial vibe with low-angle lighting, soft shadows, and a shallow depth of field to accentuate his silhouette. Moody tones of charcoal, steel blue, and espresso dominate the palette. Style the frame with cinematic flair—like a still from a modern action film noir.",
+  },
+  {
+    id: 37,
+    image: collage37,
+    alt: "Images",
+    prompt:
+      "Take a picture of a Southeast Asian man standing casually on the banks of the Seine river, facing slightly to the right, not looking directly at the camera. Behind it, the Eiffel Tower lights up majestically with golden yellow lighting, creating a dramatic contrast with the dense night sky. The highlights of the city lights and the light of the Eiffel Tower are beautifully reflected on the calm but slightly rissing river surface because of the passing boat. This man wears a stylish and elegant outfit: a white turtle neck t-shirt, covered with a light beige long coat, combined with light beige chino trousers and a classic black belt. The style is simple but fashionable, giving a modern and sophisticated impression. His pose is relaxed but confident, his right hand holds the edge of the river barrier wall, while his left hand is allowed to relax beside the body. His gaze was directed to the bottom right, as if he was enjoying the beauty of Paris at night. Shooting is done with an eye-level angle, the camera position is parallel to the subject's chest. The lighting is dominated by the warm yellow light from the Eiffel Tower and street lights, creating a romantic and iconic atmosphere typical of Paris. Light reflection in river water adds a rich and cinematic visual dimension. The background shows the iconic Paris bridge, the city buildings in the distance, and the tourist boat traffic on the quiet Seine River. The evening atmosphere feels elegant, full of charm, and iconic. Aspect ratio 9:16",
+  },
+  {
+    id: 38,
+    image: collage38,
+    alt: "Images",
+    prompt:
+      "A sharply dressed man in a black suit and tie walks confidently alongside a majestic black horse on an empty road surrounded by mist. The man has a modern, well-groomed haircut and a composed expression, holding the horse’s reins with one hand. The horse is strong and elegant, with a white diamond mark on its forehead. The background is softly blurred with muted tones and fog, creating a cinematic, mysterious atmosphere. The scene conveys calm power, elegance, and control",
+  },
+  {
+    id: 39,
+    image: collage39,
+    alt: "Images",
+    prompt:
+      "A young man sitting confidently inside a sleek, white luxury supercar with butterfly doors open at day. The car interior is a striking red and black with racing seats and a modern dashboard featuring a digital display and Ferrari logo on the steering wheel e man is wearing a white suit and white shoes",
+  },
+  {
+    id: 40,
+    image: collage40,
+    alt: "Images",
+    prompt:
+      "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
+  },
+  {
+    id: 41,
+    image: collage41,
+    alt: "Images",
+    prompt:
+      "create a shot of a man in the photo uploaded with the same face details, standing in the middle in a suit, red tie and there are thousands of press and paparazzi, surrounding him with cameras and microphones, everyone is looking at him but he is looking up at the camera, Birds Eye shot, taken with a digital camera, London, should look like a scene from a movie with dramatic lighting, keep my face details as you can.",
+  },
+  {
+    id: 42,
+    image: collage42,
+    alt: "Images",
+    prompt:
+      "a man whose face and upper body are split into two distinct halves. The left side (from the viewer's perspective) appears normal, depicting a man with dark hair, a beard, and a serious expression, wearing a dark green or black suit jacket over a dark shirt. The right side of his face and body is transformed, appearing icy blue and cracked, with electric blue veins or energy coursing through it. His right eye glows with an intense blue light, and the right side of his suit jacket also appears to be covered in ice or frost, with a frosty, textured appearance. The overall impression is one of a duality, perhaps representing a human side and a supernatural or elemental (ice/cold) side.",
+  },
+  {
+    id: 43,
+    image: collage43,
+    alt: "Images",
+    prompt:
+      "Photography realistic dramatic portrait of a young man in uploaded photo with same face details, in 3:4 ratio. He has shoulder length wavy black hair, a thin mustache, and no beard. His expression is confident with a subtle smirk. He wears a dark high-collared leather jacket. His left hand is extended toward the viewer as he throws several playing cards (ace of spades, hearts, clubs, diamonds) floating mid-air surrounded by smoke effects. Dramatic lighting with a gradient background from dark blue to black. Ultra-realistic style, resembling a fantasy-action movie or game character poster in realistic",
+  },
+  {
+    id: 44,
+    image: collage44,
+    alt: "Images",
+    prompt:
+      "wearing an oversized black shirt. His face is illuminated by glowing green digital code streams, similar to The Matrix aesthetic. The environment is futuristic cyberpunk cityscape at night, with digital rain of binary codes falling from the sky, some projecting onto his skin like a hologram interface. He tilts his head slightly upward with eyes closed, immersed in data. Ratio 3:4, detailed lighting, neon glow",
+  },
+  {
+    id: 45,
+    image: collage45,
+    alt: "Images",
+    prompt:
+      "Grunge-style analog photos around 2025. I was taking picture in front of bmw m3gtr car together. Where tokiyo Japan, I was sitting in the front engine car with a post model style turn toward camera, wearing black t-shirts outfit baggy jeans and Nike air Jordan low shoes, using flash",
+  },
+  {
+    id: 46,
+    image: collage46,
+    alt: "Images",
+    prompt:
+      "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
+  },
+  {
+    id: 47,
+    image: collage47,
+    alt: "Images",
+    prompt:
+      "Create a high-resolution, cinematic black-and-white portrait of me standing on a side view under a dramatic spotlight in a dark, moody studio. The spotlight creates a powerful beam of light from above, casting deep shadows down a muscular body and intense contrast across his torso and face. With faint smoke surrounding the scene and making the beam of light stand out Important: Use the my real face from the original reference image exactly as it is — no editing, no retouching, no smoothing, no alterations. Preserve all natural skin texture, facial hair, expression, and lighting on the face. Maintain the raw, authentic look of the original. I should have a confident yet mysterious aura, dark trousers. The atmosphere is cinematic, bold, and dramatic — similar to a fashion editorial or performance art scene. The background is dark with soft gradients, and the spotlight fades into the shadows behind him. Format: Vertical 9:16, ultra-sharp DSLR-style detail, with professional-grade lighting and depth.",
+  },
+  {
+    id: 48,
+    image: collage48,
+    alt: "Images",
+    prompt:
+      "the lighting is cinematic with a dual tone neon red and blue light setup.creating a deep . high contrast atmosi. the background is dark and minimal. his pose and expression are intense evoking a mysterious and thougghtfull mood . shot in ultra .detailed . hyper . realistic style with soft shadows and professional studio quality. cinematic color tone with neon lighting...",
+  },
+  {
+    id: 49,
+    image: collage49,
+    alt: "Images",
+    prompt:
+      "A cinematic low-angle portrait of a stylish man in a dark trench coat sitting in an urban cityscape at night, towering skyscrapers in the background, moody green atmospheric lighting, dramatic shadows on the face, intense expression, multiple silver rings and accessories on fingers, hand extended toward the camera, cloudy night sky, Gotham city vibe, shot with a wide-angle lens, dramatic perspective, neon tones, gritty street aesthetic.",
+  },
+  {
+    id: 50,
+    image: collage50,
+    alt: "Images",
+    prompt:
+      "A stylish young man stands confidently, wearing a sleek black dress shirt with the sleeves rolled up and matching black trousers. His hair is neatly styled back with volume on top, and he has a calm, serious expression. The background is dark and minimal, making him the focal point of the image. Studio lighting creates a dramatic and professional atmosphere.",
+  },
+];
 
 const SecondPromptPage = () => {
+  const navigate = useNavigate();
   const [clickedImageId, setClickedImageId] = useState(null);
   const [copiedPromptId, setCopiedPromptId] = useState(null);
-  const [copyClickedId, setCopyClickedId] = useState(null);
   const [isRandomizing, setIsRandomizing] = useState(false);
-  const [displayData, setDisplayData] = useState([]);
+  const [displayData, setDisplayData] = useState([...promptData]);
+  const [expandedIds, setExpandedIds] = useState(new Set());
 
-  const ThirdPromptPage = useNavigate();
-  const PromptPage = useNavigate();
-
-  const promptData = [
-    {
-      id: 26,
-      image: collage26,
-      alt: "Images",
-      prompt:
-        "A laid-back young man reclines on a vintage red couch, lost in music with earphones in and a smartphone in hand. Scattered vinyl records surround him on a wooden floor, alongside a classic record player, a worn paperback novel, and a pack of cigarettes. The lighting is soft and moody, casting nostalgic shadows across the scene. The atmosphere evokes lazy afternoons, analog warmth, and introspective vibes. Retro color grading, shallow depth of field, cinematic framing, 3:2 aspect ratio.",
-    },
-    {
-      id: 27,
-      image: collage27,
-      alt: "Images",
-      prompt:
-        "A cinematic black and white portrait of a muscular man standing alone in a dark studio environment. The man is wearing a loose olive green T-shirt and dark pants.His arms are slightly flexed, revealing defined muscles and veins. A soft spotlight from 7 above casts dramatic shadows across his body and face, highlighting his form while the background fades into deep black. The image has a moodyeditorial tone with a U high contrast, matte finish.",
-    },
-    {
-      id: 28,
-      image: collage28,
-      alt: "Images",
-      prompt:
-        "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
-    },
-    {
-      id: 29,
-      image: collage29,
-      alt: "Images",
-      prompt:
-        "Ultra-realistic full-body portrait of a 28 years old, 164 cm tall, medium build, side-parted hair styled with pomade, clean look, wearing a white oversized T-shirt from Uniqlo, olive green cargo pants from H&M, white Nike Air Force 1 sneakers, denim sling bag, posing on Jalan Braga Bandung, surrounded by classic Dutch-style buildings, textured walls, vintage street lamps, soft afternoon lighting, fashion lookbook photography style, DSLR camera feel, 32k, 9:16 aspect ratio.",
-    },
-    {
-      id: 30,
-      image: collage30,
-      alt: "Images",
-      prompt:
-        "An overhead cinematic shot of me, leaning against the hood of a black M3 gtr on the street, wearing a black suit, left hand in my pocket, right hand smoking a cigarette. I have good gyn physique. A blurry crowd of cars and people are running on the street around me. Gloomy lighting, 35mm film style, shallow depth of field, sharp focus on me. Aspect ratio 9:16. 8K resolution",
-    },
-    {
-      id: 31,
-      image: collage31,
-      alt: "Images",
-      prompt:
-        "Produce a luxurious rooftop portrait with skyline in the background. Maintain the original selfie's face without any Al face modification. The subject is in a smart-casual outfit — open collar shirt, linen blazer, watch visible on wrist and black sunglasses. Sunset lighting casts soft golden tones across the skin. Behind, a modern city skyline fades into warm bokeh. Clean, editorial look with professional photography vibes. 4K clarity, vertical 9:16.",
-    },
-    {
-      id: 32,
-      image: collage32,
-      alt: "Images",
-      prompt:
-        "A cinematic overhead portrait of a man exactly in the image lying relaxed on a red couch, surrounded by a chaotic and stylish retro setup. He has thick wavy hair and a beard, wearing a dark checkered shirt, brown trousers, sunglasses, and earphones connected to a smartphone resting on his chest. His arm is resting top on a stack of books, including The 5 People You Meet in Heaven and Horace Silver, with visible cigarette packs and vinyl records nearby.",
-    },
-    {
-      id: 33,
-      image: collage33,
-      alt: "Images",
-      prompt:
-        "A cinematic side-profile portrait of a young man in a black suit, illuminated from behind by a glowing orange neon halo ring. The background is dark with warm tones, emphasizing the silhouette and creating a dramatic, moody atmosphere. Soft shadows and high contrast, professional studio lighting, 35mm film look.",
-    },
-    {
-      id: 34,
-      image: collage34,
-      alt: "Images",
-      prompt:
-        "A tense, dystopian moment captured in a fluorescent-lit corridor—centered on a defiant protagonist wearing a worn green tracksuit marked “456,” staring down the lens with weary determination. The hallway is filled with similarly dressed players in deep shadow, faces blurred in motion or anxiety. Harsh top-down lighting creates dramatic silhouettes and oppressive atmosphere.  Moody composition, shallow depth of field, grainy textures, editorial tone with cinematic color grading—think bleak, hyperreal aesthetic with cultural overlays and social commentary.",
-    },
-    {
-      id: 35,
-      image: collage35,
-      alt: "Images",
-      prompt:
-        "A dynamic mid-air shot of a young man leaping above a glowing futuristic cityscape at dusk, wearing a modern white streetwear t-shirt emblazoned with bold, colorful text XTREME — cinematic ultra-wide angle, strong backlighting casting long shadows, blurred neon lights below suggesting speed and altitude, sense of gravity-defying motion, inspired by parkour action, editorial sports photography style, cool-toned color grading, shallow depth of field, dramatic sky with urban skyline fade-out — shot on 50mm f/1.4 lens, ISO 400, shutter speed 1/1000s",
-    },
-    {
-      id: 36,
-      image: collage36,
-      alt: "Images",
-      prompt:
-        "A confident young man leans casually against an open car door on a moody city street. He wears a black leather jacket and matching black shirt, exuding cool intensity. The background is softly blurred with hints of urban grit—distant neon signs, muted building silhouettes, and the subtle glint of wet pavement reflecting city lights. Capture a dramatic editorial vibe with low-angle lighting, soft shadows, and a shallow depth of field to accentuate his silhouette. Moody tones of charcoal, steel blue, and espresso dominate the palette. Style the frame with cinematic flair—like a still from a modern action film noir.",
-    },
-    {
-      id: 37,
-      image: collage37,
-      alt: "Images",
-      prompt:
-        "Take a picture of a Southeast Asian man standing casually on the banks of the Seine river, facing slightly to the right, not looking directly at the camera. Behind it, the Eiffel Tower lights up majestically with golden yellow lighting, creating a dramatic contrast with the dense night sky. The highlights of the city lights and the light of the Eiffel Tower are beautifully reflected on the calm but slightly rissing river surface because of the passing boat. This man wears a stylish and elegant outfit: a white turtle neck t-shirt, covered with a light beige long coat, combined with light beige chino trousers and a classic black belt. The style is simple but fashionable, giving a modern and sophisticated impression. His pose is relaxed but confident, his right hand holds the edge of the river barrier wall, while his left hand is allowed to relax beside the body. His gaze was directed to the bottom right, as if he was enjoying the beauty of Paris at night. Shooting is done with an eye-level angle, the camera position is parallel to the subject's chest. The lighting is dominated by the warm yellow light from the Eiffel Tower and street lights, creating a romantic and iconic atmosphere typical of Paris. Light reflection in river water adds a rich and cinematic visual dimension. The background shows the iconic Paris bridge, the city buildings in the distance, and the tourist boat traffic on the quiet Seine River. The evening atmosphere feels elegant, full of charm, and iconic. Aspect ratio 9:16",
-    },
-    {
-      id: 38,
-      image: collage38,
-      alt: "Images",
-      prompt:
-        "A sharply dressed man in a black suit and tie walks confidently alongside a majestic black horse on an empty road surrounded by mist. The man has a modern, well-groomed haircut and a composed expression, holding the horse’s reins with one hand. The horse is strong and elegant, with a white diamond mark on its forehead. The background is softly blurred with muted tones and fog, creating a cinematic, mysterious atmosphere. The scene conveys calm power, elegance, and control",
-    },
-    {
-      id: 39,
-      image: collage39,
-      alt: "Images",
-      prompt:
-        "A young man sitting confidently inside a sleek, white luxury supercar with butterfly doors open at day. The car interior is a striking red and black with racing seats and a modern dashboard featuring a digital display and Ferrari logo on the steering wheel e man is wearing a white suit and white shoes",
-    },
-    {
-      id: 40,
-      image: collage40,
-      alt: "Images",
-      prompt:
-        "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
-    },
-    {
-      id: 41,
-      image: collage41,
-      alt: "Images",
-      prompt:
-        "create a shot of a man in the photo uploaded with the same face details, standing in the middle in a suit, red tie and there are thousands of press and paparazzi, surrounding him with cameras and microphones, everyone is looking at him but he is looking up at the camera, Birds Eye shot, taken with a digital camera, London, should look like a scene from a movie with dramatic lighting, keep my face details as you can.",
-    },
-    {
-      id: 42,
-      image: collage42,
-      alt: "Images",
-      prompt:
-        "a man whose face and upper body are split into two distinct halves. The left side (from the viewer's perspective) appears normal, depicting a man with dark hair, a beard, and a serious expression, wearing a dark green or black suit jacket over a dark shirt. The right side of his face and body is transformed, appearing icy blue and cracked, with electric blue veins or energy coursing through it. His right eye glows with an intense blue light, and the right side of his suit jacket also appears to be covered in ice or frost, with a frosty, textured appearance. The overall impression is one of a duality, perhaps representing a human side and a supernatural or elemental (ice/cold) side.",
-    },
-    {
-      id: 43,
-      image: collage43,
-      alt: "Images",
-      prompt:
-        "Photography realistic dramatic portrait of a young man in uploaded photo with same face details, in 3:4 ratio. He has shoulder length wavy black hair, a thin mustache, and no beard. His expression is confident with a subtle smirk. He wears a dark high-collared leather jacket. His left hand is extended toward the viewer as he throws several playing cards (ace of spades, hearts, clubs, diamonds) floating mid-air surrounded by smoke effects. Dramatic lighting with a gradient background from dark blue to black. Ultra-realistic style, resembling a fantasy-action movie or game character poster in realistic",
-    },
-    {
-      id: 44,
-      image: collage44,
-      alt: "Images",
-      prompt:
-        "wearing an oversized black shirt. His face is illuminated by glowing green digital code streams, similar to The Matrix aesthetic. The environment is futuristic cyberpunk cityscape at night, with digital rain of binary codes falling from the sky, some projecting onto his skin like a hologram interface. He tilts his head slightly upward with eyes closed, immersed in data. Ratio 3:4, detailed lighting, neon glow",
-    },
-    {
-      id: 45,
-      image: collage45,
-      alt: "Images",
-      prompt:
-        "Grunge-style analog photos around 2025. I was taking picture in front of bmw m3gtr car together. Where tokiyo Japan, I was sitting in the front engine car with a post model style turn toward camera, wearing black t-shirts outfit baggy jeans and Nike air Jordan low shoes, using flash",
-    },
-    {
-      id: 46,
-      image: collage46,
-      alt: "Images",
-      prompt:
-        "A high-resolution, black-and-white portrait of a young man wearing a sharp black suit and black shirt with a tie. He stands confidently in a minimal studio setting, facing slightly to the side. Dramatic studio lighting casts bold geometric shadows across his face and background, with a strong diagonal beam of light cutting through darkness. His expression is calm, introspective, and slightly distant. The image has a high-fashion, cinematic noir tone, with high contrast and fine detail on the face and suit texture. Soft bokeh background, vertical frame (9:16), 8K resolution.",
-    },
-    {
-      id: 47,
-      image: collage47,
-      alt: "Images",
-      prompt:
-        "Create a high-resolution, cinematic black-and-white portrait of me standing on a side view under a dramatic spotlight in a dark, moody studio. The spotlight creates a powerful beam of light from above, casting deep shadows down a muscular body and intense contrast across his torso and face. With faint smoke surrounding the scene and making the beam of light stand out Important: Use the my real face from the original reference image exactly as it is — no editing, no retouching, no smoothing, no alterations. Preserve all natural skin texture, facial hair, expression, and lighting on the face. Maintain the raw, authentic look of the original. I should have a confident yet mysterious aura, dark trousers. The atmosphere is cinematic, bold, and dramatic — similar to a fashion editorial or performance art scene. The background is dark with soft gradients, and the spotlight fades into the shadows behind him. Format: Vertical 9:16, ultra-sharp DSLR-style detail, with professional-grade lighting and depth.",
-    },
-    {
-      id: 48,
-      image: collage48,
-      alt: "Images",
-      prompt:
-        "the lighting is cinematic with a dual tone neon red and blue light setup.creating a deep . high contrast atmosi. the background is dark and minimal. his pose and expression are intense evoking a mysterious and thougghtfull mood . shot in ultra .detailed . hyper . realistic style with soft shadows and professional studio quality. cinematic color tone with neon lighting...",
-    },
-    {
-      id: 49,
-      image: collage49,
-      alt: "Images",
-      prompt:
-        "A cinematic low-angle portrait of a stylish man in a dark trench coat sitting in an urban cityscape at night, towering skyscrapers in the background, moody green atmospheric lighting, dramatic shadows on the face, intense expression, multiple silver rings and accessories on fingers, hand extended toward the camera, cloudy night sky, Gotham city vibe, shot with a wide-angle lens, dramatic perspective, neon tones, gritty street aesthetic.",
-    },
-    {
-      id: 50,
-      image: collage50,
-      alt: "Images",
-      prompt:
-        "A stylish young man stands confidently, wearing a sleek black dress shirt with the sleeves rolled up and matching black trousers. His hair is neatly styled back with volume on top, and he has a calm, serious expression. The background is dark and minimal, making him the focal point of the image. Studio lighting creates a dramatic and professional atmosphere.",
-    },
-  ];
-
-  //const SecondPromptPage = useNavigate();
-
-  // Initialize displayData with original order
-  React.useEffect(() => {
-    setDisplayData([...promptData]);
-  }, []);
-
-  // Fisher-Yates shuffle algorithm
-  const shuffleArray = (array) => {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
+  const toggleExpand = (id) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
   };
 
   const handleRandomize = () => {
     setIsRandomizing(true);
-    const totalDuration = 1000; // ms
-    const shuffleSteps = 10;
-    const interval = totalDuration / shuffleSteps;
-
-    let currentStep = 0;
-    let lastUpdate = performance.now();
+    const steps = 10;
+    const interval = 1000 / steps;
+    let step = 0;
+    let last = performance.now();
 
     const animate = (now) => {
-      if (now - lastUpdate >= interval) {
+      if (now - last >= interval) {
         setDisplayData(shuffleArray(promptData));
-        lastUpdate = now;
-        currentStep++;
+        last = now;
+        step++;
       }
-
-      if (currentStep < shuffleSteps) {
-        requestAnimationFrame(animate);
-      } else {
-        setIsRandomizing(false);
-      }
+      if (step < steps) requestAnimationFrame(animate);
+      else setIsRandomizing(false);
     };
-
     requestAnimationFrame(animate);
   };
 
@@ -269,430 +293,262 @@ const SecondPromptPage = () => {
     setTimeout(() => setClickedImageId(null), 800);
   };
 
-  const handleCopy = (id, promptText) => {
-    setCopyClickedId(id);
-    navigator.clipboard
-      .writeText(promptText)
-      .then(() => {
-        setCopiedPromptId(id);
-        setTimeout(() => {
-          setCopiedPromptId(null);
-          setCopyClickedId(null);
-        }, 2500);
-      })
-      .catch((err) => {
-        console.error("Failed to copy text: ", err);
-        setCopyClickedId(null);
-      });
+  const handleCopy = (id, text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedPromptId(id);
+      setTimeout(() => setCopiedPromptId(null), 2500);
+    });
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-purple-900 via-black to-blue-800 text-white overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 z-0">
-        {/* Gradient mesh background */}
-        <div className="absolute inset-0 bg-gradient-to-br bg-gradient-to-br from-purple-900 via-black to-blue-800 text-white"></div>
-
-        {/* Floating orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-violet-600/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-pink-600/5 to-violet-600/5 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "4s" }}
-        ></div>
-
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
-      </div>
+    <div className="relative min-h-screen bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-hidden">
+      {/* Ambient glow blobs */}
+      <div className="absolute top-10 -left-20 w-[32rem] h-[32rem] bg-[var(--violet)]/25 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
+      <div className="absolute bottom-10 -right-20 w-[40rem] h-[40rem] bg-[var(--cyan)]/20 rounded-full blur-[140px] animate-drift-rev pointer-events-none mix-blend-screen" />
+      <div className="absolute top-1/3 left-1/3 w-[30rem] h-[30rem] bg-[var(--magenta)]/15 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
 
       <div className="relative z-10 pt-16 pb-20 px-4 sm:pt-24 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
+          {/* ── Header ── */}
           <div className="text-center mb-16 sm:mb-20">
-            <div className="inline-block">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
-                  AI Prompt
-                </span>
-                <br />
-                <span className="text-white/90">Gallery</span>
-              </h1>
-              <div className="h-1 w-24 bg-gradient-to-r from-violet-500 to-cyan-500 mx-auto rounded-full mb-6"></div>
-            </div>
-            <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
-              Discover stunning AI-generated images with their creative prompts.
-              Click to explore, copy to create.
+            <p className="font-mono text-xs sm:text-sm text-[var(--cyan)] tracking-widest mb-4">
+              // FULL PROMPT INDEX
+            </p>
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--magenta)] via-[var(--violet)] to-[var(--cyan)]">
+                Prompt
+              </span>{" "}
+              <span className="text-[var(--text-primary)]">Gallery</span>
+            </h1>
+            <p className="text-[var(--text-muted)] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+              Browse AI-generated images with their exact prompts. Click to
+              preview, copy to create.
             </p>
 
-            {/* Randomize Button */}
-            <div className="flex justify-center mt-8">
-              <button
-                onClick={handleRandomize}
-                disabled={isRandomizing}
-                className={`min-w-[130px] px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group relative overflow-hidden ${
-                  isRandomizing
-                    ? "bg-gradient-to-r from-orange-500 to-red-500 text-white scale-105 shadow-lg shadow-orange-500/25 cursor-not-allowed"
-                    : "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-500 hover:to-blue-500 hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25"
-                }`}
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2 font-ubuntu">
-                  {isRandomizing ? (
-                    <>
-                      <svg
-                        className="w-4 h-4 animate-spin"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                      </svg>
-                      Shuffling...
-                    </>
-                  ) : (
-                    <>
-                      <svg
-                        className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                      </svg>
-                      Randomize
-                    </>
-                  )}
-                </span>
-
-                {/* Button pulse effect */}
-                {isRandomizing && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-400/20 animate-pulse rounded-xl"></div>
-                )}
-              </button>
-            </div>
+            <button
+              onClick={handleRandomize}
+              disabled={isRandomizing}
+              className={`min-w-[140px] px-5 py-2.5 font-mono text-sm rounded-xl transition-all duration-300 relative overflow-hidden ${
+                isRandomizing
+                  ? "bg-[var(--magenta)]/80 text-white cursor-not-allowed"
+                  : "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.4)]"
+              }`}
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <svg
+                  className={`w-4 h-4 ${isRandomizing ? "animate-spin" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                {isRandomizing ? "SHUFFLING..." : "RANDOMIZE"}
+              </span>
+            </button>
           </div>
 
-          {/* Gallery Grid */}
+          {/* ── Gallery ── */}
           <div className="space-y-16 sm:space-y-20">
             {displayData.map((item, index) => (
-              <div
-                key={item.id}
+              <motion.div
+                key={`${item.id}-${index}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6 }}
                 className={`flex flex-col ${
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } gap-8 lg:gap-12 items-center`}
               >
-                {/* Image Section */}
+                {/* ── Image ── */}
                 <div className="w-full lg:w-1/2">
                   <div
-                    className={`group relative cursor-pointer transition-all duration-700 ease-out ${
+                    className={`group relative cursor-pointer transition-all duration-500 ${
                       clickedImageId === item.id
-                        ? "scale-105"
-                        : "hover:scale-[1.02]"
+                        ? "scale-[1.02]"
+                        : "hover:scale-[1.01]"
                     }`}
                     onClick={() => handleImageClick(item.id)}
                   >
-                    {/* Image container with glassmorphism border */}
-                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-1 backdrop-blur-sm border border-white/10">
-                      <div className="relative overflow-hidden rounded-xl">
-                        <motion.img
-                          loading="lazy"
-                          src={item.image}
-                          srcSet={`
-                                                  ${item.image} 400w,
-                                                  ${item.image} 800w,
-                                                  ${item.image} 1200w
-                                                  `}
-                          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
-                          alt={item.alt}
-                          className="w-full h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] object-cover"
-                          initial={{ opacity: 0, y: 50 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.8 }}
-                          viewport={{ once: false, amount: 0.5 }}
-                        />
+                    <div className="relative overflow-hidden rounded-2xl border border-[var(--glass-border)]">
+                      <img
+                        loading="lazy"
+                        src={item.image}
+                        alt={item.alt}
+                        className="w-full h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] object-cover"
+                      />
 
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                        {/* Click effect */}
-                        {clickedImageId === item.id && (
-                          <div className="absolute inset-0">
-                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-pink-500/20 to-cyan-500/20 animate-pulse rounded-xl"></div>
-                            <div className="absolute -inset-4 bg-gradient-to-r from-violet-500/30 via-pink-500/30 to-cyan-500/30 rounded-2xl blur-xl animate-ping"></div>
-                          </div>
-                        )}
-                      </div>
+                      {/* Corner brackets */}
+                      <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl" />
+                      <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br" />
+
+                      {clickedImageId === item.id && (
+                        <div className="absolute -inset-2 bg-gradient-to-r from-[var(--violet)]/30 via-[var(--magenta)]/30 to-[var(--cyan)]/30 rounded-2xl blur-xl animate-ping" />
+                      )}
                     </div>
-
-                    {/* Floating badge 
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-violet-600 to-pink-600 text-white text-sm font-bold px-3 py-1 rounded-full shadow-lg">
-                      #{item.id}
-                    </div>*/}
                   </div>
                 </div>
 
-                {/* Prompt Section */}
-                <div className="w-full lg:w-1/2 ">
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      {/* Header */}
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                        <h3 className="text-lg sm:text-xl font-bold text-white font-ubuntu">
-                          Try these AI platforms:
-                        </h3>
-                      </div>
-
-                      {/* AI Platform Logos Grid */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-md">
-                        {/* Copilot */}
-                        <a
-                          href="https://copilot.microsoft.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={copilot}
-                              alt="Microsoft Copilot"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            Copilot
-                          </span>
-                        </a>
-
-                        {/* ChatGPT */}
-                        <a
-                          href="https://chatgpt.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={gpt}
-                              alt="ChatGPT"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 1,
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            ChatGPT
-                          </span>
-                        </a>
-
-                        {/* Nano (Claude) */}
-                        <a
-                          href="https://gemini.google.com/app"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={nano}
-                              alt="Claude AI"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 2,
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            Gemini
-                          </span>
-                        </a>
-
-                        {/* Grok */}
-                        <a
-                          href="https://grok.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex flex-col items-center p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                        >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mb-2">
-                            <motion.img
-                              loading="lazy"
-                              src={grok}
-                              alt="Grok AI"
-                              animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 3,
-                              }}
-                              className="w-full h-full object-cover rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
-                            Grok
-                          </span>
-                        </a>
-                      </div>
+                {/* ── Prompt panel ── */}
+                <div className="w-full lg:w-1/2">
+                  <div className="space-y-5">
+                    {/* Engine grid */}
+                    <div className="space-y-3">
+                      <h3 className="font-mono text-xs text-[var(--text-muted)] tracking-wide">
+                        RUNS ON
+                      </h3>
+                      <EngineGrid />
                     </div>
 
-                    {/* Prompt container with glassmorphism */}
-                    <motion.div
-                      className="bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl"
-                      initial={{ opacity: 0, y: 50 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8 }}
-                      viewport={{ once: false, amount: 0.4 }}
-                    >
-                      <div className="relative">
-                        <div className="bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
-                          <div className="flex flex-col sm:flex-row gap-4">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-gray-300 text-sm sm:text-base leading-relaxed break-words font-ubuntu">
-                                {item.prompt}
-                              </p>
-                            </div>
+                    {/* Prompt box */}
+                    <div className="relative glass-panel rounded-2xl overflow-hidden">
+                      {/* Scanline */}
+                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <div className="absolute left-0 right-0 h-1/3 bg-gradient-to-b from-transparent via-[var(--cyan)]/5 to-transparent animate-scanline" />
+                      </div>
 
-                            {/* Copy button */}
-                            <div className="flex-shrink-0 flex justify-center sm:justify-start">
-                              <button
-                                onClick={() => handleCopy(item.id, item.prompt)}
-                                className={`h-[50px] group relative overflow-hidden px-6 py-3 font-bold text-sm transition-all duration-200 w-[110px] rounded-full ${
-                                  copiedPromptId === item.id
-                                    ? "bg-gradient-to-r from-purple-500 to-purple-500 text-white scale-105 shadow-lg shadow-green-500/25"
-                                    : copyClickedId === item.id
-                                    ? "bg-gradient-to-r from-violet-600 to-pink-600 text-white scale-105 shadow-lg shadow-violet-500/25"
-                                    : "bg-gradient-to-r from-violet-600/80 to-pink-600/80 text-white hover:from-violet-500 hover:to-pink-500 hover:scale-105 hover:shadow-lg hover:shadow-violet-500/25"
-                                }`}
-                                style={{ minWidth: "110px" }}
-                                disabled={copiedPromptId === item.id}
-                              >
-                                <span className="relative z-10 flex items-center justify-center gap-2">
-                                  {copiedPromptId === item.id ? (
-                                    <>
-                                      <svg
-                                        className="w-4 h-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M5 13l4 4L19 7"
-                                        />
-                                      </svg>
-                                      Copied!
-                                    </>
-                                  ) : (
-                                    <>
-                                      <svg
-                                        className="w-4 h-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                        />
-                                      </svg>
-                                      Copy
-                                    </>
-                                  )}
-                                </span>
+                      <div className="relative p-6 flex flex-col gap-4">
+                        <p
+                          className={`text-sm sm:text-base text-[var(--text-muted)] leading-relaxed break-words transition-all duration-300 ${
+                            expandedIds.has(item.id) ? "" : "line-clamp-4"
+                          }`}
+                        >
+                          {item.prompt}
+                        </p>
 
-                                {/* Button effects */}
-                                {copyClickedId === item.id &&
-                                  copiedPromptId !== item.id && (
-                                    <div className="absolute inset-0 bg-white/20 animate-ping rounded-xl"></div>
-                                  )}
+                        <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border)]">
+                          {/* Toggle expand */}
+                          <button
+                            onClick={() => toggleExpand(item.id)}
+                            className="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors"
+                          >
+                            {expandedIds.has(item.id) ? (
+                              <>
+                                <svg
+                                  className="w-3 h-3"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M5 15l7-7 7 7"
+                                  />
+                                </svg>
+                                SHOW LESS
+                              </>
+                            ) : (
+                              <>
+                                <svg
+                                  className="w-3 h-3"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                  />
+                                </svg>
+                                SHOW MORE
+                              </>
+                            )}
+                          </button>
 
-                                {copiedPromptId === item.id && (
-                                  <div className="absolute inset-0 bg-green-400/20 animate-pulse rounded-xl"></div>
-                                )}
-                              </button>
-                            </div>
-                          </div>
+                          {/* Copy button */}
+                          <button
+                            onClick={() => handleCopy(item.id, item.prompt)}
+                            disabled={copiedPromptId === item.id}
+                            className={`h-[44px] w-[110px] rounded-full font-mono text-xs font-semibold transition-all duration-200 relative overflow-hidden ${
+                              copiedPromptId === item.id
+                                ? "bg-[var(--cyan)]/20 text-[var(--cyan)] border border-[var(--cyan)]/50"
+                                : "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+                            }`}
+                          >
+                            <span className="relative z-10 flex items-center justify-center gap-1.5">
+                              {copiedPromptId === item.id ? (
+                                <>
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M5 13l4 4L19 7"
+                                    />
+                                  </svg>
+                                  COPIED
+                                </>
+                              ) : (
+                                <>
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                    />
+                                  </svg>
+                                  COPY
+                                </>
+                              )}
+                            </span>
+                          </button>
                         </div>
-
-                        {/* Glow effect */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 via-pink-600/20 to-cyan-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-            {/* next page button part*/}
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-10">
-              {/* Back Button */}
+            {/* ── Navigation ── */}
+            <div className="flex justify-center gap-4 mt-10">
               <button
-                className="bg-blue-600 hover:bg-black text-white font-bold py-2 px-6 rounded-full w-[150px] transition duration-600"
-                onClick={() => PromptPage("/prompt")}
+                onClick={() => navigate("/prompt")}
+                className="px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-colors"
               >
-                ← Back
+                ← BACK
               </button>
-
-              {/* Next Button */}
               <button
-                className="bg-black hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full w-[150px] transition duration-600"
-                onClick={() => ThirdPromptPage("/thirdprompt")}
+                onClick={() => navigate("/thirdprompt")}
+                className="px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-colors"
               >
-                Next →
+                NEXT →
               </button>
             </div>
           </div>
 
-          {/* Footer CTA */}
-          <div className="text-center mt-20 pt-12 border-t border-white/10">
-            <div className="inline-flex items-center gap-2 text-gray-400 text-sm">
-              <div className="w-2 h-2 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full animate-pulse"></div>
+          {/* ── Footer CTA ── */}
+          <div className="text-center mt-20 pt-12 border-t border-[var(--glass-border)]">
+            <p className="font-mono text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />
+              </span>
               Create your own AI masterpieces with these prompts
-              <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-violet-500 rounded-full animate-pulse"></div>
-            </div>
+            </p>
           </div>
         </div>
       </div>

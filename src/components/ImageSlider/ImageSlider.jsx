@@ -1,103 +1,136 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, memo } from "react";
 import aiImage1 from "../../assets/c2.png";
 import aiImage2 from "../../assets/c8.png";
 import aiImage3 from "../../assets/c9.png";
 import aiImage4 from "../../assets/c10.png";
 
+// Static data — module scope, never recreated on render
+const FLOATING_IMAGES = [
+  {
+    src: aiImage1,
+    top: "10%",
+    left: "8%",
+    rotation: 12,
+    size: "w-20 h-24 sm:w-32 sm:h-40",
+  },
+  {
+    src: aiImage2,
+    top: "15%",
+    right: "10%",
+    rotation: -6,
+    size: "w-16 h-20 sm:w-28 sm:h-36",
+  },
+  {
+    src: aiImage3,
+    bottom: "25%",
+    left: "20%",
+    rotation: 45,
+    size: "w-14 h-18 sm:w-24 sm:h-32",
+  },
+  {
+    src: aiImage4,
+    bottom: "15%",
+    right: "20%",
+    rotation: -12,
+    size: "w-20 h-24 sm:w-36 sm:h-44",
+  },
+];
+
+const MAIN_IMAGES = [
+  { src: aiImage1, alt: "AI Generated Portrait", tag: "GEN_01" },
+  { src: aiImage2, alt: "AI Generated Landscape", tag: "GEN_02" },
+  { src: aiImage3, alt: "AI Generated Abstract Art", tag: "GEN_03" },
+  { src: aiImage4, alt: "AI Generated Character", tag: "GEN_04" },
+];
+
+const STATS = [
+  { value: "1,000+", label: "AI IMAGES" },
+  { value: "50+", label: "CATEGORIES" },
+  { value: "24/7", label: "AVAILABLE" },
+];
+
+const PARTICLE_POSITIONS = Array.from({ length: 6 }, (_, i) => ({
+  top: 20 + i * 12,
+  left: 15 + i * 15,
+  delay: i * 0.3,
+  duration: 3 + i * 0.5,
+}));
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, duration: 0.6 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+// Reusable HUD-framed image card
+const HudImage = memo(function HudImage({
+  image,
+  id,
+  loaded,
+  onLoad,
+  heightClass,
+}) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      transition={{ duration: 0.3 }}
+      className="group relative overflow-hidden rounded-xl cursor-pointer glass-panel"
+    >
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading="lazy"
+        onLoad={() => onLoad(id)}
+        className={`w-full ${heightClass} object-cover transition-opacity duration-500 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {!loaded && (
+        <div className="absolute inset-0 bg-[var(--panel)] animate-pulse" />
+      )}
+
+      {/* corner brackets */}
+      <span className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl" />
+      <span className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br" />
+
+      {/* tag */}
+      <span className="absolute bottom-1.5 left-1.5 font-mono text-[9px] text-[var(--text-primary)] bg-black/50 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+        {image.tag}
+      </span>
+
+      {/* scan overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--violet)]/0 to-[var(--cyan)]/0 group-hover:from-[var(--violet)]/15 group-hover:to-[var(--cyan)]/10 transition-colors duration-300" />
+    </motion.div>
+  );
+});
+
 const ImageSlider = () => {
   const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState({});
-  const [hoveredImage, setHoveredImage] = useState(null);
 
-  const handleImageLoad = (imageId) => {
-    setImageLoaded((prev) => ({ ...prev, [imageId]: true }));
+  const handleImageLoad = (id) => {
+    setImageLoaded((prev) => ({ ...prev, [id]: true }));
   };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        duration: 0.6,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  const floatingImages = [
-    {
-      src: aiImage1,
-      top: "10%",
-      left: "8%",
-      rotation: 12,
-      size: "w-20 h-24 sm:w-32 sm:h-40",
-    },
-    {
-      src: aiImage2,
-      top: "15%",
-      right: "10%",
-      rotation: -6,
-      size: "w-16 h-20 sm:w-28 sm:h-36",
-    },
-    {
-      src: aiImage3,
-      bottom: "25%",
-      left: "20%",
-      rotation: 45,
-      size: "w-14 h-18 sm:w-24 sm:h-32",
-    },
-    {
-      src: aiImage4,
-      bottom: "15%",
-      right: "20%",
-      rotation: -12,
-      size: "w-20 h-24 sm:w-36 sm:h-44",
-    },
-  ];
-
-  const mainImages = [
-    {
-      src: aiImage1,
-      alt: "AI Generated Portrait",
-      color: "blue",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      src: aiImage2,
-      alt: "AI Generated Landscape",
-      color: "purple",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      src: aiImage3,
-      alt: "AI Generated Abstract Art",
-      color: "green",
-      gradient: "from-green-500 to-emerald-500",
-    },
-    {
-      src: aiImage4,
-      alt: "AI Generated Character",
-      color: "orange",
-      gradient: "from-orange-500 to-red-500",
-    },
-  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-blue-800 relative overflow-hidden">
-      {/* Enhanced floating background images */}
-      <div className="absolute inset-0 opacity-15 pointer-events-none">
-        {floatingImages.map((img, index) => (
+    <div className="min-h-screen bg-[var(--void)] bg-grid relative overflow-hidden">
+      {/* faint floating watermark images */}
+      <div className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen">
+        {FLOATING_IMAGES.map((img, index) => (
           <motion.div
             key={index}
             className={`absolute ${img.size}`}
@@ -123,293 +156,156 @@ const ImageSlider = () => {
               src={img.src}
               alt=""
               loading="lazy"
-              className="w-full h-full object-cover rounded-lg shadow-2xl"
+              className="w-full h-full object-cover rounded-lg"
             />
           </motion.div>
         ))}
       </div>
 
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 -left-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-      </div>
+      {/* ambient glow blobs */}
+      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-[var(--violet)]/15 rounded-full blur-3xl animate-drift pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[var(--cyan)]/10 rounded-full blur-3xl animate-drift-rev pointer-events-none" />
+      <div className="absolute top-10 right-1/3 w-60 h-60 bg-[var(--magenta)]/10 rounded-full blur-3xl animate-drift pointer-events-none" />
 
-      {/* Main content */}
       <motion.div
         className="relative z-10 flex items-center min-h-screen"
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-20">
-          {/* Left side - Text content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-12 items-center py-20">
+          {/* LEFT — copy */}
           <motion.div
             variants={itemVariants}
-            className="text-white space-y-6 lg:space-y-8"
+            className="text-[var(--text-primary)] space-y-6 lg:space-y-8"
           >
-            <motion.h1
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <p className="font-mono text-xs sm:text-sm text-[var(--cyan)] tracking-widest">
+              // LIVE PROMPT GALLERY
+            </p>
+
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--magenta)] via-[var(--violet)] to-[var(--cyan)]">
+                1,000+ AI Creations
+              </span>
+              <span className="block mt-2 text-[var(--text-muted)] font-medium text-2xl sm:text-3xl lg:text-4xl">
+                ready to copy, paste, generate.
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-lg leading-relaxed">
+              Browse images already made by other creators, grab the exact
+              prompt behind them, and run it on the AI engine of your choice.
+            </p>
+
+            <motion.button
+              onClick={() => navigate("/prompt")}
+              className="group relative inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white font-semibold text-sm sm:text-base shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:shadow-[0_0_45px_rgba(139,92,246,0.6)] transition-shadow"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              aria-label="Explore AI prompts and creations"
             >
+              EXPLORE
               <motion.span
-                className="block bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-                animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
-                transition={{ duration: 5, repeat: Infinity }}
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
               >
-                1000+
+                →
               </motion.span>
-              <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent block sm:inline">
-                AI Creations
-              </span>
-              <span className="block mt-2 text-gray-200">with Advanced</span>
-              <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent block">
-                Generation
-              </span>
-            </motion.h1>
+            </motion.button>
 
-            <motion.p
-              className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-lg leading-relaxed"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Experience once, create across multiple platforms with our
-              advanced AI technology and creative tools. Transform your ideas
-              into stunning visual masterpieces.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <motion.button
-                onClick={() => navigate("/prompt")}
-                className="group relative bg-gradient-to-r from-white to-gray-100 hover:from-green-400 hover:to-green-600 text-black hover:text-white font-bold px-8 py-4 rounded-full transition-all duration-300 shadow-xl overflow-hidden"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(34, 197, 94, 0.4)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                aria-label="Explore AI prompts and creations"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  EXPLORE
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.span>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              </motion.button>
-            </motion.div>
-
-            {/* Enhanced stats section */}
-            <motion.div
-              className="flex gap-8 pt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <motion.div className="text-center" whileHover={{ scale: 1.1 }}>
-                <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                  1000+
-                </div>
-                <div className="text-sm text-gray-400">AI Images</div>
-              </motion.div>
-              <motion.div className="text-center" whileHover={{ scale: 1.1 }}>
-                <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                  50+
-                </div>
-                <div className="text-sm text-gray-400">Categories</div>
-              </motion.div>
-              <motion.div className="text-center" whileHover={{ scale: 1.1 }}>
-                <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  24/7
-                </div>
-                <div className="text-sm text-gray-400">Available</div>
-              </motion.div>
-            </motion.div>
+            {/* stats — each staggered */}
+            <div className="flex gap-8 pt-2">
+              {STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.5, delay: i * 0.1 },
+                    },
+                  }}
+                >
+                  <p className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                    {stat.value}
+                  </p>
+                  <p className="font-mono text-[10px] sm:text-xs text-[var(--text-muted)] tracking-wide mt-1">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Right side - Featured images */}
+          {/* RIGHT — HUD image grid */}
           <motion.div variants={itemVariants} className="relative">
-            {/* Main featured images grid */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8">
-              {/* Left column */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
               <div className="space-y-3 sm:space-y-4">
                 {[0, 1].map((index) => (
-                  <motion.div
+                  <HudImage
                     key={`left-${index}`}
-                    whileHover={{ scale: 1.05, rotateY: 5, z: 50 }}
-                    transition={{ duration: 0.3 }}
-                    className="group relative overflow-hidden rounded-2xl cursor-pointer"
-                    onMouseEnter={() => setHoveredImage(`img${index + 1}`)}
-                    onMouseLeave={() => setHoveredImage(null)}
-                  >
-                    <img
-                      src={mainImages[index].src}
-                      alt={mainImages[index].alt}
-                      loading="lazy"
-                      onLoad={() => handleImageLoad(`img${index + 1}`)}
-                      className={`w-full ${
-                        index === 0
-                          ? "h-40 sm:h-48 lg:h-56"
-                          : "h-28 sm:h-32 lg:h-40"
-                      } object-cover shadow-2xl transition-all duration-500 ${
-                        imageLoaded[`img${index + 1}`]
-                          ? "opacity-100"
-                          : "opacity-0"
-                      }`}
-                    />
-                    {!imageLoaded[`img${index + 1}`] && (
-                      <div className="absolute inset-0 bg-gray-800 animate-pulse rounded-2xl" />
-                    )}
-
-                    {/* Gradient overlay on hover */}
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-t ${mainImages[index].gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-300`}
-                    ></div>
-
-                    {/* Hover effect border */}
-                    <div
-                      className={`absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-2xl transition-all duration-300`}
-                    ></div>
-                  </motion.div>
+                    image={MAIN_IMAGES[index]}
+                    id={`img${index + 1}`}
+                    loaded={!!imageLoaded[`img${index + 1}`]}
+                    onLoad={handleImageLoad}
+                    heightClass={
+                      index === 0
+                        ? "h-40 sm:h-48 lg:h-56"
+                        : "h-28 sm:h-32 lg:h-40"
+                    }
+                  />
                 ))}
               </div>
-
-              {/* Right column */}
               <div className="space-y-3 sm:space-y-4 pt-6 sm:pt-8">
                 {[2, 3].map((index) => (
-                  <motion.div
+                  <HudImage
                     key={`right-${index}`}
-                    whileHover={{ scale: 1.05, rotateY: -5, z: 50 }}
-                    transition={{ duration: 0.3 }}
-                    className="group relative overflow-hidden rounded-2xl cursor-pointer"
-                    onMouseEnter={() => setHoveredImage(`img${index + 1}`)}
-                    onMouseLeave={() => setHoveredImage(null)}
-                  >
-                    <img
-                      src={mainImages[index].src}
-                      alt={mainImages[index].alt}
-                      loading="lazy"
-                      onLoad={() => handleImageLoad(`img${index + 1}`)}
-                      className={`w-full h-32 sm:h-40 lg:h-48 object-cover shadow-2xl transition-all duration-500 ${
-                        imageLoaded[`img${index + 1}`]
-                          ? "opacity-100"
-                          : "opacity-0"
-                      }`}
-                    />
-                    {!imageLoaded[`img${index + 1}`] && (
-                      <div className="absolute inset-0 bg-gray-800 animate-pulse rounded-2xl" />
-                    )}
-
-                    {/* Gradient overlay on hover */}
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-t ${mainImages[index].gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-300`}
-                    ></div>
-
-                    {/* Hover effect border */}
-                    <div
-                      className={`absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-2xl transition-all duration-300`}
-                    ></div>
-                  </motion.div>
+                    image={MAIN_IMAGES[index]}
+                    id={`img${index + 1}`}
+                    loaded={!!imageLoaded[`img${index + 1}`]}
+                    onLoad={handleImageLoad}
+                    heightClass="h-32 sm:h-40 lg:h-48"
+                  />
                 ))}
               </div>
             </div>
 
-            {/* Enhanced floating accent images */}
+            {/* floating accent badge */}
             <motion.div
-              animate={{ y: [0, -10, 0], rotate: [12, 17, 12] }}
+              animate={{ y: [0, -8, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 h-20 sm:w-24 sm:h-32 opacity-80 pointer-events-none"
+              className="absolute -top-4 -right-3 sm:-right-5 glass-panel rounded-lg px-3 py-2 pointer-events-none"
             >
-              <div className="relative w-full h-full">
-                <img
-                  src={aiImage1}
-                  alt=""
-                  className="w-full h-full object-cover rounded-lg shadow-xl"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent rounded-lg"></div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, 10, 0], rotate: [-6, -11, -6] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-14 h-18 sm:w-20 sm:h-28 opacity-70 pointer-events-none"
-            >
-              <div className="relative w-full h-full">
-                <img
-                  src={aiImage3}
-                  alt=""
-                  className="w-full h-full object-cover rounded-lg shadow-xl"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent rounded-lg"></div>
-              </div>
+              <p className="font-mono text-[10px] text-[var(--cyan)] flex items-center gap-1.5">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />
+                </span>
+                LIVE
+              </p>
             </motion.div>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Enhanced animated particles */}
+      {/* ambient particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, index) => (
+        {PARTICLE_POSITIONS.map((p, index) => (
           <motion.div
             key={index}
-            className={`absolute w-1 h-1 sm:w-2 sm:h-2 rounded-full ${
-              [
-                "bg-blue-400",
-                "bg-green-400",
-                "bg-purple-400",
-                "bg-orange-400",
-                "bg-pink-400",
-                "bg-cyan-400",
-              ][index]
-            }`}
-            style={{
-              top: `${20 + index * 12}%`,
-              left: `${15 + index * 15}%`,
-            }}
+            className="absolute w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[var(--cyan)]"
+            style={{ top: `${p.top}%`, left: `${p.left}%` }}
             animate={{
               y: [0, -30, 0],
-              opacity: [0.2, 1, 0.2],
-              scale: [1, 1.5, 1],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.4, 1],
             }}
             transition={{
-              duration: 3 + index * 0.5,
+              duration: p.duration,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: index * 0.3,
+              delay: p.delay,
             }}
           />
         ))}
