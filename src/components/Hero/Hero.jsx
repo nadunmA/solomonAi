@@ -154,7 +154,7 @@ const Hero = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link to="/sixthpromptpage">
+              <Link to="/prompt">
                 <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white font-semibold text-sm sm:text-base shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:shadow-[0_0_45px_rgba(139,92,246,0.6)] transition-shadow">
                   Browse prompts
                 </button>
