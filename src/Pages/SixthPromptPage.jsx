@@ -53,7 +53,7 @@ const shuffleArray = (array) => {
 
 const EngineGrid = memo(function EngineGrid() {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-md">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-md w-full box-border">
       {ENGINES.map((e) => (
         <a
           key={e.name}
@@ -309,16 +309,16 @@ const SixthPromptPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-hidden">
+    <div className="relative min-h-screen w-full bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-x-hidden box-border">
       {/* Ambient glow blobs */}
       <div className="absolute top-10 -left-20 w-[32rem] h-[32rem] bg-[var(--violet)]/25 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
       <div className="absolute bottom-10 -right-20 w-[40rem] h-[40rem] bg-[var(--cyan)]/20 rounded-full blur-[140px] animate-drift-rev pointer-events-none mix-blend-screen" />
       <div className="absolute top-1/3 left-1/3 w-[30rem] h-[30rem] bg-[var(--magenta)]/15 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
 
-      <div className="relative z-10 pt-16 pb-20 px-4 sm:pt-24 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 pt-16 pb-20 px-4 sm:pt-24 sm:px-6 lg:px-8 w-full box-border">
+        <div className="max-w-7xl mx-auto w-full box-border">
           {/* ── Header ── */}
-          <div className="text-center mb-16 sm:mb-20">
+          <div className="text-center mb-16 sm:mb-20 w-full">
             <p className="font-mono text-xs sm:text-sm text-[var(--cyan)] tracking-widest mb-4">
               // FULL PROMPT INDEX
             </p>
@@ -336,7 +336,7 @@ const SixthPromptPage = () => {
             <button
               onClick={handleRandomize}
               disabled={isRandomizing}
-              className={`min-w-[140px] px-5 py-2.5 font-mono text-sm rounded-xl transition-all duration-300 relative overflow-hidden ${
+              className={`min-w-[140px] px-5 py-2.5 rounded-xl font-mono text-sm transition-all duration-300 relative overflow-hidden cursor-pointer ${
                 isRandomizing
                   ? "bg-[var(--magenta)]/80 text-white cursor-not-allowed"
                   : "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.4)]"
@@ -362,7 +362,7 @@ const SixthPromptPage = () => {
           </div>
 
           {/* ── Gallery ── */}
-          <div className="space-y-16 sm:space-y-20">
+          <div className="space-y-16 sm:space-y-20 w-full box-border">
             {displayData.map((item, index) => (
               <motion.div
                 key={`${item.id}-${index}`}
@@ -372,19 +372,19 @@ const SixthPromptPage = () => {
                 transition={{ duration: 0.6 }}
                 className={`flex flex-col ${
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                } gap-8 lg:gap-12 items-center`}
+                } gap-8 lg:gap-12 items-center w-full box-border`}
               >
                 {/* ── Image ── */}
-                <div className="w-full lg:w-1/2">
+                <div className="w-full lg:w-1/2 box-border">
                   <div
-                    className={`group relative cursor-pointer transition-all duration-500 ${
+                    className={`group relative cursor-pointer transition-all duration-500 max-w-full box-border ${
                       clickedImageId === item.id
                         ? "scale-[1.02]"
                         : "hover:scale-[1.01]"
                     }`}
                     onClick={() => handleImageClick(item.id)}
                   >
-                    <div className="relative overflow-hidden rounded-2xl border border-[var(--glass-border)]">
+                    <div className="relative overflow-hidden rounded-2xl border border-[var(--glass-border)] max-w-full box-border z-10">
                       <img
                         loading="lazy"
                         src={item.image}
@@ -392,12 +392,11 @@ const SixthPromptPage = () => {
                         className="w-full h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] object-cover"
                       />
 
-                      {/* Hover overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                      {/* Corner brackets */}
-                      <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl" />
-                      <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br" />
+                      {/* Corner brackets — Fixed boundary points to avoid visual bugs */}
+                      <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl pointer-events-none" />
+                      <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br pointer-events-none" />
 
                       {clickedImageId === item.id && (
                         <div className="absolute -inset-2 bg-gradient-to-r from-[var(--violet)]/30 via-[var(--magenta)]/30 to-[var(--cyan)]/30 rounded-2xl blur-xl animate-ping" />
@@ -407,24 +406,21 @@ const SixthPromptPage = () => {
                 </div>
 
                 {/* ── Prompt panel ── */}
-                <div className="w-full lg:w-1/2">
-                  <div className="space-y-5">
-                    {/* Engine grid */}
-                    <div className="space-y-3">
+                <div className="w-full lg:w-1/2 box-border">
+                  <div className="space-y-5 w-full">
+                    <div className="space-y-3 w-full">
                       <h3 className="font-mono text-xs text-[var(--text-muted)] tracking-wide">
                         RUNS ON
                       </h3>
                       <EngineGrid />
                     </div>
 
-                    {/* Prompt box */}
-                    <div className="relative glass-panel rounded-2xl overflow-hidden">
-                      {/* Scanline */}
+                    <div className="relative glass-panel rounded-2xl overflow-hidden max-w-full box-border">
                       <div className="absolute inset-0 overflow-hidden pointer-events-none">
                         <div className="absolute left-0 right-0 h-1/3 bg-gradient-to-b from-transparent via-[var(--cyan)]/5 to-transparent animate-scanline" />
                       </div>
 
-                      <div className="relative p-6 flex flex-col gap-4">
+                      <div className="relative p-6 flex flex-col gap-4 w-full box-border">
                         <p
                           className={`text-sm sm:text-base text-[var(--text-muted)] leading-relaxed break-words transition-all duration-300 ${
                             expandedIds.has(item.id) ? "" : "line-clamp-4"
@@ -433,11 +429,10 @@ const SixthPromptPage = () => {
                           {item.prompt}
                         </p>
 
-                        <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border)]">
-                          {/* Toggle expand */}
+                        <div className="flex items-center justify-between pt-3 border-t border-[var(--glass-border)] w-full">
                           <button
                             onClick={() => toggleExpand(item.id)}
-                            className="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors"
+                            className="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors cursor-pointer"
                           >
                             {expandedIds.has(item.id) ? (
                               <>
@@ -476,11 +471,10 @@ const SixthPromptPage = () => {
                             )}
                           </button>
 
-                          {/* Copy button */}
                           <button
                             onClick={() => handleCopy(item.id, item.prompt)}
                             disabled={copiedPromptId === item.id}
-                            className={`h-[44px] w-[110px] rounded-full font-mono text-xs font-semibold transition-all duration-200 relative overflow-hidden ${
+                            className={`h-[44px] w-[110px] rounded-full font-mono text-xs font-semibold transition-all duration-200 relative overflow-hidden cursor-pointer ${
                               copiedPromptId === item.id
                                 ? "bg-[var(--cyan)]/20 text-[var(--cyan)] border border-[var(--cyan)]/50"
                                 : "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]"
@@ -532,13 +526,26 @@ const SixthPromptPage = () => {
               </motion.div>
             ))}
 
-            {/* ── Dynamic HUD Navigation ── */}
-            <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
-              {/* PREV - Disabled dynamically if on Page 1 */}
+            {/* ── Dynamic HUD Navigation (Correctly setup for Page 06 active state) ── */}
+            <div className="flex justify-center items-center gap-2 mt-10 flex-wrap w-full box-border">
               <button
                 disabled={window.location.hash === "#/prompt"}
-                onClick={() => navigate("/prompt")}
-                className={`px-4 py-2.5 rounded-full font-mono text-xs border transition-all ${
+                onClick={() => {
+                  const currentHash = window.location.hash;
+                  if (currentHash.endsWith("/secondprompt"))
+                    navigate("/prompt");
+                  else if (currentHash.endsWith("/thirdprompt"))
+                    navigate("/secondprompt");
+                  else if (currentHash.endsWith("/forthpromptpage"))
+                    navigate("/thirdprompt");
+                  else if (currentHash.endsWith("/fifthpromptpage"))
+                    navigate("/forthpromptpage");
+                  else if (currentHash.endsWith("/sixthpromptpage"))
+                    navigate("/fifthpromptpage");
+                  else if (currentHash.endsWith("/seventhpromptpage"))
+                    navigate("/sixthpromptpage");
+                }}
+                className={`px-4 py-2.5 rounded-full font-mono text-xs border transition-all cursor-pointer ${
                   window.location.hash === "#/prompt"
                     ? "border-[var(--glass-border)] text-[var(--text-muted)] opacity-30 cursor-not-allowed"
                     : "border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)]"
@@ -547,12 +554,10 @@ const SixthPromptPage = () => {
                 ← PREV
               </button>
 
-              {/* Divider */}
               <span className="text-[var(--text-muted)] font-mono text-xs opacity-40 mx-1">
                 |
               </span>
 
-              {/* Page numbers */}
               {[
                 { label: "01", path: "/prompt" },
                 { label: "02", path: "/secondprompt" },
@@ -568,7 +573,7 @@ const SixthPromptPage = () => {
                   <React.Fragment key={p.label}>
                     <button
                       onClick={() => navigate(p.path)}
-                      className={`w-10 h-10 rounded-full font-mono text-xs transition-all duration-200 border ${
+                      className={`w-10 h-10 rounded-full font-mono text-xs transition-all duration-200 border cursor-pointer ${
                         isActive
                           ? "bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white border-transparent shadow-[0_0_15px_rgba(139,92,246,0.4)] font-bold"
                           : "border-[var(--glass-border)] text-[var(--text-muted)] hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)]"
@@ -585,14 +590,12 @@ const SixthPromptPage = () => {
                 );
               })}
 
-              {/* Divider */}
               <span className="text-[var(--text-muted)] font-mono text-xs opacity-40 mx-1">
                 |
               </span>
 
-              {/* NEXT - Disabled dynamically if on the last page */}
               <button
-                disabled={window.location.hash === "#/sixthpromptpage"}
+                disabled={window.location.hash === "#/seventhpromptpage"}
                 onClick={() => {
                   const currentHash = window.location.hash;
                   if (currentHash.endsWith("/prompt"))
@@ -608,7 +611,7 @@ const SixthPromptPage = () => {
                   else if (currentHash.endsWith("/sixthpromptpage"))
                     navigate("/seventhpromptpage");
                 }}
-                className={`px-4 py-2.5 rounded-full font-mono text-xs border transition-all ${
+                className={`px-4 py-2.5 rounded-full font-mono text-xs border transition-all cursor-pointer ${
                   window.location.hash === "#/seventhpromptpage"
                     ? "border-[var(--glass-border)] text-[var(--text-muted)] opacity-30 cursor-not-allowed"
                     : "border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)]"
@@ -620,7 +623,7 @@ const SixthPromptPage = () => {
           </div>
 
           {/* ── Footer CTA ── */}
-          <div className="text-center mt-20 pt-12 border-t border-[var(--glass-border)]">
+          <div className="text-center mt-20 pt-12 border-t border-[var(--glass-border)] w-full">
             <p className="font-mono text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />

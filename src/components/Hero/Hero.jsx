@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, memo } from "react";
-import { Link, useNavigate } from "react-router-dom"; // 👈 navigate කරන්න useNavigate එකතු කළා
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import gpt from "../../assets/gpt.png";
 import copilot from "../../assets/pilot.png";
 import nano from "../../assets/nano.png";
 import grok from "../../assets/grok.png";
-import AnnouncementBanner from "../announcement-banner/AnnouncementBanner";
 
 const PROMPTS = [
   "A majestic dragon soaring through neon-lit cyberpunk clouds",
@@ -53,12 +52,12 @@ const PromptDecoder = memo(function PromptDecoder() {
   }, []);
 
   return (
-    <div className="relative glass-panel rounded-2xl p-5 sm:p-6 overflow-hidden">
-      {/* corner brackets */}
-      <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/70 rounded-tl" />
-      <span className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--cyan)]/70 rounded-tr" />
-      <span className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--cyan)]/70 rounded-bl" />
-      <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/70 rounded-br" />
+    <div className="relative glass-panel rounded-2xl p-5 sm:p-6 overflow-hidden max-w-full box-border z-10">
+      {/* corner brackets — fixed positions for responsive layout */}
+      <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/70 rounded-tl pointer-events-none" />
+      <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--cyan)]/70 rounded-tr pointer-events-none" />
+      <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[var(--cyan)]/70 rounded-bl pointer-events-none" />
+      <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/70 rounded-br pointer-events-none" />
 
       {/* scanline */}
       <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
@@ -115,19 +114,17 @@ const PromptDecoder = memo(function PromptDecoder() {
 });
 
 const Hero = () => {
-  const navigate = useNavigate(); // 👈 Navigation වැඩ කරන්න අවශ්‍යයි
-  const [showAlert, setShowAlert] = useState(true); // 👈 Alert එක පාලනය කරන්න state එක
+  const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(true);
 
   return (
     <div className="relative min-h-screen bg-[var(--void)] bg-grid overflow-hidden">
-      <AnnouncementBanner />
-
-      {/* Glow blobs වල size සහ opacity එකත් මෙතනින් තව චුට්ටක් වැඩි කළා */}
       <div className="absolute -top-32 -left-20 w-[32rem] h-[32rem] bg-[var(--violet)]/25 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
       <div className="absolute top-1/3 -right-24 w-[36rem] h-[36rem] bg-[var(--cyan)]/20 rounded-full blur-[140px] animate-drift-rev pointer-events-none mix-blend-screen" />
       <div className="absolute bottom-0 left-1/3 w-[28rem] h-[28rem] bg-[var(--magenta)]/15 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-24">
+      {/* මෙතන pt-16 sm:pt-20 වෙනුවට pt-28 sm:pt-36 lg:pt-44 ලෙස වෙනස් කර ඇත */}
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-44 pb-24">
         {/* ── Cyberpunk System Update Alert ── */}
         {showAlert && (
           <div className="w-full max-w-7xl mx-auto mb-10 font-mono text-xs">

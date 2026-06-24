@@ -76,7 +76,7 @@ const itemVariants = {
   },
 };
 
-// Reusable HUD-framed image card
+// Reusable HUD-framed image card — Responsive Optimized
 const HudImage = memo(function HudImage({
   image,
   id,
@@ -88,7 +88,7 @@ const HudImage = memo(function HudImage({
     <motion.div
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.3 }}
-      className="group relative overflow-hidden rounded-xl cursor-pointer glass-panel"
+      className="group relative overflow-hidden rounded-xl cursor-pointer glass-panel max-w-full box-border z-10"
     >
       <img
         src={image.src}
@@ -103,9 +103,9 @@ const HudImage = memo(function HudImage({
         <div className="absolute inset-0 bg-[var(--panel)] animate-pulse" />
       )}
 
-      {/* corner brackets */}
-      <span className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl" />
-      <span className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br" />
+      {/* corner brackets — adjusted to 0 bounds to prevent horizontal scroll bugs */}
+      <span className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-tl pointer-events-none" />
+      <span className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/80 transition-colors rounded-br pointer-events-none" />
 
       {/* tag */}
       <span className="absolute bottom-1.5 left-1.5 font-mono text-[9px] text-[var(--text-primary)] bg-black/50 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -127,9 +127,9 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--void)] bg-grid relative overflow-hidden">
+    <div className="min-h-screen w-full bg-[var(--void)] bg-grid relative overflow-x-hidden">
       {/* faint floating watermark images */}
-      <div className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen">
+      <div className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen overflow-hidden">
         {FLOATING_IMAGES.map((img, index) => (
           <motion.div
             key={index}
@@ -174,7 +174,7 @@ const ImageSlider = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-12 items-center py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-12 items-center py-20 w-full">
           {/* LEFT — copy */}
           <motion.div
             variants={itemVariants}
@@ -240,7 +240,7 @@ const ImageSlider = () => {
           </motion.div>
 
           {/* RIGHT — HUD image grid */}
-          <motion.div variants={itemVariants} className="relative">
+          <motion.div variants={itemVariants} className="relative max-w-full">
             <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
               <div className="space-y-3 sm:space-y-4">
                 {[0, 1].map((index) => (

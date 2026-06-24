@@ -43,7 +43,6 @@ const NavBar = () => {
       if (e.key === "Escape") setIsMenuOpen(false);
     };
 
-    // works for both mouse and touch
     const handleOutside = (e) => {
       if (
         menuRef.current &&
@@ -78,11 +77,14 @@ const NavBar = () => {
     setIsMenuOpen(false);
   };
 
-  const isActiveRoute = (path) => location.pathname === path;
+  // HashRouter සහ සාමාන්‍ය Router දෙකටම ගැළපෙන ලෙස සකස් කළා
+  const isActiveRoute = (path) => {
+    return location.pathname === path || window.location.hash.endsWith(path);
+  };
 
   return (
     <motion.nav
-      className={`font-ubuntu fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-300 ${
+      className={`font-ubuntu fixed top-0 left-0 right-0 w-full box-border z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-300 ${
         scrolled
           ? "bg-[var(--void)]/85 backdrop-blur-xl border-b border-[var(--glass-border)] shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
           : "bg-transparent backdrop-blur-md"
@@ -180,7 +182,7 @@ const NavBar = () => {
         <motion.button
           ref={hamburgerRef}
           onClick={toggleMenu}
-          className="md:hidden p-2 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--cyan)]/50 rounded-lg"
+          className="md:hidden p-2 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--cyan)]/50 rounded-lg z-50"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
           whileHover={{ scale: 1.05 }}
@@ -215,14 +217,13 @@ const NavBar = () => {
         </motion.button>
       </div>
 
-      {/* ── Mobile Menu (portal → renders at document.body, outside nav stacking context) ── */}
+      {/* ── Mobile Menu ── */}
       {createPortal(
         <AnimatePresence>
           {isMenuOpen && (
             <>
-              {/* Full-screen backdrop — dims entire page correctly */}
               <motion.div
-                className="fixed inset-0 bg-black/75 backdrop-blur-sm"
+                className="fixed inset-0 bg-black/75 backdrop-blur-sm max-w-full"
                 style={{ zIndex: 9998 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -232,10 +233,9 @@ const NavBar = () => {
                 onTouchStart={() => setIsMenuOpen(false)}
               />
 
-              {/* Dropdown panel */}
               <motion.div
                 ref={menuRef}
-                className="fixed left-4 right-4 rounded-2xl shadow-2xl overflow-hidden"
+                className="fixed left-4 right-4 rounded-2xl shadow-2xl overflow-hidden box-border max-w-[calc(100vw-32px)]"
                 style={{
                   zIndex: 9999,
                   top: "68px",
@@ -319,7 +319,7 @@ const NavBar = () => {
                   style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
                 >
                   <p className="font-mono text-[10px] text-white/30 text-center">
-                    © 2025 Solomon Inc.
+                    © 2026 Solomon Inc.
                   </p>
                 </div>
               </motion.div>

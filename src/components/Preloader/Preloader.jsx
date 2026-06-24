@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 
 const Preloader = () => {
   return (
-    <div className="loader bg-[var(--void)]">
+    // w-full, max-w-full සහ overflow-hidden දමා mobile screens වල පිටතට පැනීම සම්පූර්ණයෙන්ම වැළැක්වූවා
+    <div className="loader bg-[var(--void)] w-full max-w-full overflow-hidden box-border flex justify-center items-center">
       <svg height="0" width="0" viewBox="0 0 64 64" className="absolute">
         <defs>
           <linearGradient id="b" x1="0" y1="62" x2="0" y2="2">
@@ -28,73 +30,73 @@ const Preloader = () => {
         </defs>
       </svg>
 
-      {/* Animated SVG icons */}
-      <svg
-        fill="none"
-        viewBox="0 0 64 64"
-        height="64"
-        width="64"
-        className="inline-block"
-      >
-        <path
-          stroke="url(#b)"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="dash"
-          d="M 54.722656,3.9726563 A 2.0002,2.0002 0 0 0 54.941406,4 h 5.007813 
-             C 58.955121,17.046124 49.099667,27.677057 36.121094,29.580078 a 2.0002,2.0002 0 0 0 -1.708985,1.978516 
-             V 60 H 29.587891 V 31.558594 A 2.0002,2.0002 0 0 0 27.878906,29.580078 
-             C 14.900333,27.677057 5.0448787,17.046124 4.0507812,4 H 9.28125 
-             c 1.231666,11.63657 10.984383,20.554048 22.6875,20.734375 
-             a 2.0002,2.0002 0 0 0 0.02344,0 
-             c 11.806958,0.04283 21.70649,-9.003371 22.730469,-20.7617187 z"
-        />
-      </svg>
+      {/* Animated SVG icons — wrapper එකක් ඇතුළට දමා flex layout එකක් මඟින් සීමා කළා */}
+      <div className="flex items-center justify-center max-w-full box-border gap-1 sm:gap-2">
+        <svg
+          fill="none"
+          viewBox="0 0 64 64"
+          height="64"
+          width="64"
+          className="inline-block shrink-0 max-w-[50px] sm:max-w-[64px]"
+        >
+          <path
+            stroke="url(#b)"
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="dash"
+            d="M 54.722656,3.9726563 A 2.0002,2.0002 0 0 0 54.941406,4 h 5.007813 
+               C 58.955121,17.046124 49.099667,27.677057 36.121094,29.580078 a 2.0002,2.0002 0 0 0 -1.708985,1.978516 
+               V 60 H 29.587891 V 31.558594 A 2.0002,2.0002 0 0 0 27.878906,29.580078 
+               C 14.900333,27.677057 5.0448787,17.046124 4.0507812,4 H 9.28125 
+               c 1.231666,11.63657 10.984383,20.554048 22.6875,20.734375 
+               a 2.0002,2.0002 0 0 0 0.02344,0 
+               c 11.806958,0.04283 21.70649,-9.003371 22.730469,-20.7617187 z"
+          />
+        </svg>
 
-      <svg
-        fill="none"
-        viewBox="0 0 64 64"
-        height="64"
-        width="64"
-        className="inline-block"
-      >
-        <path
-          stroke="url(#c)"
-          strokeWidth="10"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="spin"
-          d="M 32 32
-            m 0 -27
-            a 27 27 0 1 1 0 54
-            a 27 27 0 1 1 0 -54"
-        />
-      </svg>
+        <svg
+          fill="none"
+          viewBox="0 0 64 64"
+          height="64"
+          width="64"
+          className="inline-block shrink-0 max-w-[50px] sm:max-w-[64px]"
+        >
+          <path
+            stroke="url(#c)"
+            strokeWidth="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="spin"
+            d="M 32 32
+              m 0 -27
+              a 27 27 0 1 1 0 54
+              a 27 27 0 1 1 0 -54"
+          />
+        </svg>
 
-      <div className="w-2"></div>
-
-      <svg
-        fill="none"
-        viewBox="0 0 64 64"
-        height="64"
-        width="64"
-        className="inline-block"
-      >
-        <path
-          stroke="url(#d)"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="dash"
-          d="M 4,4 h 4.6230469 v 25.919922 c -0.00276,11.916203 9.8364941,21.550422 21.7500001,21.296875 
-             11.616666,-0.240651 21.014356,-9.63894 21.253906,-21.25586 
-             a 2.0002,2.0002 0 0 0 0,-0.04102 V 4 H 56.25 v 25.919922 
-             c 0,14.33873 -11.581192,25.919922 -25.919922,25.919922 
-             a 2.0002,2.0002 0 0 0 -0.0293,0 
-             C 15.812309,56.052941 3.998433,44.409961 4,29.919922 Z"
-        />
-      </svg>
+        <svg
+          fill="none"
+          viewBox="0 0 64 64"
+          height="64"
+          width="64"
+          className="inline-block shrink-0 max-w-[50px] sm:max-w-[64px]"
+        >
+          <path
+            stroke="url(#d)"
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="dash"
+            d="M 4,4 h 4.6230469 v 25.919922 c -0.00276,11.916203 9.8364941,21.550422 21.7500001,21.296875 
+               11.616666,-0.240651 21.014356,-9.63894 21.253906,-21.25586 
+               a 2.0002,2.0002 0 0 0 0,-0.04102 V 4 H 56.25 v 25.919922 
+               c 0,14.33873 -11.581192,25.919922 -25.919922,25.919922 
+               a 2.0002,2.0002 0 0 0 -0.0293,0 
+               C 15.812309,56.052941 3.998433,44.409961 4,29.919922 Z"
+          />
+        </svg>
+      </div>
     </div>
   );
 };

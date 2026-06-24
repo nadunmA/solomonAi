@@ -5,16 +5,17 @@ import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    <div className="relative min-h-screen bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-hidden pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    // w-full, overflow-x-hidden සහ box-border දමා Android horizontal scrolling දෝෂය සම්පූර්ණයෙන්ම නැති කළා
+    <div className="relative min-h-screen w-full bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-x-hidden box-border pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       {/* ── Ambient glow blobs ── */}
       <div className="absolute top-20 -left-10 w-72 h-72 bg-[var(--violet)]/15 rounded-full blur-3xl animate-drift pointer-events-none" />
       <div className="absolute bottom-20 -right-10 w-96 h-96 bg-[var(--cyan)]/10 rounded-full blur-3xl animate-drift-rev pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[var(--magenta)]/8 rounded-full blur-3xl animate-drift pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto w-full box-border">
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-14 w-full"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -63,10 +64,10 @@ const About = () => {
         </motion.div>
 
         {/* ── Cards ── */}
-        <div className="space-y-6">
+        <div className="space-y-6 w-full box-border">
           {/* What is Solomon */}
           <motion.div
-            className="relative glass-panel rounded-2xl overflow-hidden group"
+            className="relative glass-panel rounded-2xl overflow-hidden group max-w-full box-border"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -78,7 +79,7 @@ const About = () => {
               <div className="absolute left-0 right-0 h-1/3 bg-gradient-to-b from-transparent via-[var(--cyan)]/5 to-transparent animate-scanline" />
             </div>
 
-            <div className="relative p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-4">
+            <div className="relative p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-4 w-full box-border">
               <div
                 className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
                 style={{
@@ -99,11 +100,11 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <h2 className="font-mono text-xs text-[var(--cyan)] tracking-widest mb-2">
                   WHAT IS SOLOMON?
                 </h2>
-                <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
+                <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed break-words">
                   <span className="text-[var(--text-primary)] font-semibold">
                     Solomon
                   </span>{" "}
@@ -121,7 +122,7 @@ const About = () => {
 
           {/* How it Works */}
           <motion.div
-            className="relative glass-panel rounded-2xl overflow-hidden group"
+            className="relative glass-panel rounded-2xl overflow-hidden group max-w-full box-border"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -132,7 +133,7 @@ const About = () => {
               <div className="absolute left-0 right-0 h-1/3 bg-gradient-to-b from-transparent via-[var(--magenta)]/4 to-transparent animate-scanline" />
             </div>
 
-            <div className="relative p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-4">
+            <div className="relative p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-4 w-full box-border">
               <div
                 className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
                 style={{
@@ -154,7 +155,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <h2 className="font-mono text-xs text-[var(--magenta)] tracking-widest mb-2">
                   HOW IT WORKS
                 </h2>
@@ -166,7 +167,7 @@ const About = () => {
                       </span>
                       {i < 3 && (
                         <svg
-                          className="w-4 h-4 text-[var(--cyan)]/60"
+                          className="w-4 h-4 text-[var(--cyan)]/60 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -182,7 +183,7 @@ const About = () => {
                     </React.Fragment>
                   ))}
                 </div>
-                <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed mt-2">
+                <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed mt-2 break-words">
                   Browse our gallery → copy a prompt → paste into ChatGPT or
                   Microsoft Copilot → generate your image!
                 </p>
@@ -193,7 +194,7 @@ const About = () => {
 
           {/* Note */}
           <motion.div
-            className="relative rounded-2xl overflow-hidden"
+            className="relative rounded-2xl overflow-hidden max-w-full box-border"
             style={{
               background:
                 "linear-gradient(135deg, rgba(139,92,246,0.08), rgba(0,0,0,0.4), rgba(6,182,212,0.08))",
@@ -204,7 +205,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-4">
+            <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-4 w-full box-border">
               <div className="flex-shrink-0 mt-0.5">
                 <svg
                   className="w-5 h-5 text-yellow-400"
@@ -218,7 +219,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed break-words">
                 <span className="text-yellow-400 font-semibold font-mono">
                   NOTE:
                 </span>{" "}
@@ -232,13 +233,13 @@ const About = () => {
 
         {/* ── Back Button ── */}
         <motion.div
-          className="flex justify-center mt-12"
+          className="flex justify-center mt-12 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
           <Link to="/">
-            <button className="group flex items-center gap-2 px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-all duration-300">
+            <button className="group flex items-center gap-2 px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-all duration-300 cursor-pointer">
               <svg
                 className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300"
                 fill="none"
@@ -258,12 +259,12 @@ const About = () => {
         </motion.div>
 
         {/* ── Footer dot ── */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-10 w-full">
           <p className="font-mono text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />
             </span>
-            © 2025 Solomon Inc.
+            © 2026 Solomon Inc.
           </p>
         </div>
       </div>

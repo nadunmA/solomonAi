@@ -53,13 +53,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[var(--void)] border-t border-[var(--glass-border)] bg-grid">
+    // w-full, box-border සහ overflow-hidden දමා overflow ප්‍රශ්නය සම්පූර්ණයෙන්ම නැති කළා
+    <footer className="relative w-full bg-[var(--void)] border-t border-[var(--glass-border)] bg-grid overflow-hidden box-border">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--violet)]/60 to-transparent" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 py-14">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 py-14 w-full box-border">
         {/* Grid columns — staggered fade in */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 w-full"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -92,7 +93,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <button
                     onClick={link.action}
-                    className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+                    className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-left"
                   >
                     {link.name}
                   </button>
@@ -125,7 +126,7 @@ const Footer = () => {
             <h4 className="font-mono text-xs tracking-widest text-[var(--violet)] mb-4">
               FOLLOW
             </h4>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-4 sm:grid-cols-3 gap-2.5 max-w-[180px] sm:max-w-full">
               {SOCIAL_LINKS.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -145,9 +146,9 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Newsletter */}
+        {/* Newsletter — max-w-full දමා responsive ශක්තිමත් කළා */}
         <motion.div
-          className="glass-panel rounded-2xl p-6 sm:p-8 mb-10 max-w-lg mx-auto text-center"
+          className="glass-panel rounded-2xl p-6 sm:p-8 mb-10 max-w-lg mx-auto text-center box-border w-full"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -159,18 +160,21 @@ const Footer = () => {
           <p className="text-sm text-[var(--text-muted)] mb-4">
             New prompts, dropped in your inbox.
           </p>
-          <form onSubmit={handleSubscribe} className="flex gap-2">
+          <form
+            onSubmit={handleSubscribe}
+            className="flex gap-2 w-full box-border"
+          >
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               required
-              className="flex-1 px-4 py-2.5 bg-[var(--void)] border border-[var(--glass-border)] rounded-lg focus:border-[var(--cyan)]/50 focus:outline-none text-[var(--text-primary)] placeholder-[var(--text-muted)] text-sm"
+              className="flex-1 min-w-0 px-4 py-2.5 bg-[var(--void)] border border-[var(--glass-border)] rounded-lg focus:border-[var(--cyan)]/50 focus:outline-none text-[var(--text-primary)] placeholder-[var(--text-muted)] text-sm"
             />
             <button
               type="submit"
-              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white font-medium text-sm whitespace-nowrap"
+              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-[var(--magenta)] to-[var(--violet)] text-white font-medium text-sm whitespace-nowrap cursor-pointer hover:opacity-90 transition-opacity"
             >
               Subscribe
             </button>
@@ -184,13 +188,13 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <motion.div
-          className="flex flex-col md:flex-row justify-between items-center gap-3 border-t border-[var(--glass-border)] pt-6 font-mono text-xs text-[var(--text-muted)]"
+          className="flex flex-col md:flex-row justify-between items-center gap-3 border-t border-[var(--glass-border)] pt-6 font-mono text-xs text-[var(--text-muted)] w-full"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <span>© 2025 Solomon. All rights reserved.</span>
+          <span>© 2026 Solomon. All rights reserved.</span>
           <span className="flex items-center gap-2">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />

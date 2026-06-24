@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -18,19 +18,21 @@ const CATEGORY_COLORS = {
   Improvement: { dot: "var(--violet)", border: "var(--violet)" },
   Performance: { dot: "#22d3ee", border: "#22d3ee" },
   Launch: { dot: "var(--magenta)", border: "var(--magenta)" },
+  "UI Update": { dot: "var(--cyan)", border: "var(--cyan)" }, // ui update එක සඳහා badge colors එකතු කළා
 };
 
 const getCategoryIcon = (category) => {
-  switch (category) {
-    case "Update":
+  switch (category?.toLowerCase()) {
+    case "update":
+    case "ui update":
       return "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15";
-    case "Feature":
+    case "feature":
       return "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z";
-    case "Improvement":
+    case "improvement":
       return "M13 10V3L4 14h7v7l9-11h-7z";
-    case "Performance":
+    case "performance":
       return "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6";
-    case "Launch":
+    case "launch":
       return "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z";
     default:
       return null;
@@ -41,11 +43,11 @@ const newsItems = [
   {
     id: 2107,
     image: newui,
-    title: "Unveiling a Shaper, Immersive Visual Experience",
+    title: "Unveiling a Sharper, Immersive Visual Experience",
     date: "June 24, 2026",
     description:
       "Engineered for clarity. Our brand-new interface brings advanced layout micro-interactions and dark-grid optimization tailored for global digital artists.",
-    category: "ui update",
+    category: "UI Update",
   },
   {
     id: 2106,
@@ -117,16 +119,16 @@ const News = () => {
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <div className="relative min-h-screen bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-hidden pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen w-full bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-x-hidden box-border pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       {/* ── Ambient glow blobs ── */}
       <div className="absolute top-20 -left-10 w-72 h-72 bg-[var(--violet)]/15 rounded-full blur-3xl animate-drift pointer-events-none" />
       <div className="absolute bottom-20 -right-10 w-96 h-96 bg-[var(--cyan)]/10 rounded-full blur-3xl animate-drift-rev pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[var(--magenta)]/8 rounded-full blur-3xl animate-drift pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto w-full box-border">
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-14 sm:mb-16"
+          className="text-center mb-14 sm:mb-16 w-full"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -176,7 +178,7 @@ const News = () => {
         </motion.div>
 
         {/* ── News Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 w-full box-border">
           {newsItems.map((news, index) => {
             const colors = CATEGORY_COLORS[news.category] ?? {
               dot: "var(--cyan)",
@@ -186,7 +188,7 @@ const News = () => {
             return (
               <motion.div
                 key={news.id}
-                className="group relative glass-panel rounded-2xl overflow-hidden cursor-default"
+                className="group relative glass-panel rounded-2xl overflow-hidden cursor-default max-w-full box-border"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
@@ -206,7 +208,7 @@ const News = () => {
                 </div>
 
                 {/* ── Image ── */}
-                <div className="relative h-48 sm:h-52 overflow-hidden">
+                <div className="relative h-48 sm:h-52 overflow-hidden w-full">
                   <img
                     src={news.image}
                     alt={news.title}
@@ -215,9 +217,9 @@ const News = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-                  {/* Corner brackets */}
-                  <span className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/70 transition-colors rounded-tl" />
-                  <span className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/70 transition-colors rounded-br" />
+                  {/* Corner brackets — Fixed boundary metrics to eliminate overflow */}
+                  <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/70 transition-colors rounded-tl pointer-events-none" />
+                  <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--cyan)]/0 group-hover:border-[var(--cyan)]/70 transition-colors rounded-br pointer-events-none" />
 
                   {/* Category badge */}
                   <div
@@ -237,7 +239,7 @@ const News = () => {
                 </div>
 
                 {/* ── Content ── */}
-                <div className="relative p-6">
+                <div className="relative p-6 w-full box-border">
                   {/* Date */}
                   <div className="flex items-center gap-1.5 mb-3">
                     <svg
@@ -264,14 +266,14 @@ const News = () => {
                   </h2>
 
                   {/* Description */}
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed mb-5">
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed mb-5 break-words">
                     {news.description}
                   </p>
 
                   {/* Read more */}
                   <button
                     onClick={() => navigate("/sixthpromptpage")}
-                    className="group/btn flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)] hover:text-[var(--cyan)] transition-colors duration-200"
+                    className="group/btn flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)] hover:text-[var(--cyan)] transition-colors duration-200 cursor-pointer"
                   >
                     <span>READ MORE</span>
                     <svg
@@ -295,9 +297,9 @@ const News = () => {
         </div>
 
         {/* ── Back button ── */}
-        <div className="flex justify-center">
+        <div className="flex justify-center w-full">
           <Link to="/">
-            <button className="group flex items-center gap-2 px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-all duration-300">
+            <button className="group flex items-center gap-2 px-7 py-2.5 rounded-full border border-[var(--glass-border)] text-[var(--text-primary)] font-mono text-sm hover:border-[var(--cyan)]/50 hover:text-[var(--cyan)] transition-all duration-300 cursor-pointer">
               <svg
                 className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300"
                 fill="none"
@@ -317,7 +319,7 @@ const News = () => {
         </div>
 
         {/* ── Footer dot ── */}
-        <div className="text-center mt-12 pt-10 border-t border-[var(--glass-border)]">
+        <div className="text-center mt-12 pt-10 border-t border-[var(--glass-border)] w-full">
           <p className="font-mono text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--cyan)] animate-blink-dot" />
