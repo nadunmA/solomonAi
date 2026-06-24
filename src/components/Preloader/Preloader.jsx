@@ -3,7 +3,6 @@ import React from "react";
 
 const Preloader = () => {
   return (
-    // w-full, max-w-full සහ overflow-hidden දමා mobile screens වල පිටතට පැනීම සම්පූර්ණයෙන්ම වැළැක්වූවා
     <div className="loader bg-[var(--void)] w-full max-w-full overflow-hidden box-border flex justify-center items-center">
       <svg height="0" width="0" viewBox="0 0 64 64" className="absolute">
         <defs>
@@ -30,7 +29,7 @@ const Preloader = () => {
         </defs>
       </svg>
 
-      {/* Animated SVG icons — wrapper එකක් ඇතුළට දමා flex layout එකක් මඟින් සීමා කළා */}
+      {/* Animated SVG icons */}
       <div className="flex items-center justify-center max-w-full box-border gap-1 sm:gap-2">
         <svg
           fill="none"

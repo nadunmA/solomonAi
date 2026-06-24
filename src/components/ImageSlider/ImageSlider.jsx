@@ -7,7 +7,6 @@ import aiImage2 from "../../assets/c8.webp";
 import aiImage3 from "../../assets/c9.webp";
 import aiImage4 from "../../assets/c10.webp";
 
-// Static data — module scope, never recreated on render
 const FLOATING_IMAGES = [
   {
     src: aiImage1,

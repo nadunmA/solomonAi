@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    // w-full, overflow-x-hidden සහ box-border දමා Android horizontal scrolling දෝෂය සම්පූර්ණයෙන්ම නැති කළා
     <div className="relative min-h-screen w-full bg-[var(--void)] bg-grid text-[var(--text-primary)] overflow-x-hidden box-border pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       {/* ── Ambient glow blobs ── */}
       <div className="absolute top-20 -left-10 w-72 h-72 bg-[var(--violet)]/15 rounded-full blur-3xl animate-drift pointer-events-none" />

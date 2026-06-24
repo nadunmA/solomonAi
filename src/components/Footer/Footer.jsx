@@ -53,7 +53,6 @@ const Footer = () => {
   };
 
   return (
-    // w-full, box-border සහ overflow-hidden දමා overflow ප්‍රශ්නය සම්පූර්ණයෙන්ම නැති කළා
     <footer className="relative w-full bg-[var(--void)] border-t border-[var(--glass-border)] bg-grid overflow-hidden box-border">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--violet)]/60 to-transparent" />
 
@@ -146,7 +145,7 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Newsletter — max-w-full දමා responsive ශක්තිමත් කළා */}
+        {/* Newsletter */}
         <motion.div
           className="glass-panel rounded-2xl p-6 sm:p-8 mb-10 max-w-lg mx-auto text-center box-border w-full"
           initial={{ opacity: 0, y: 30 }}

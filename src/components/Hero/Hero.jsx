@@ -123,7 +123,6 @@ const Hero = () => {
       <div className="absolute top-1/3 -right-24 w-[36rem] h-[36rem] bg-[var(--cyan)]/20 rounded-full blur-[140px] animate-drift-rev pointer-events-none mix-blend-screen" />
       <div className="absolute bottom-0 left-1/3 w-[28rem] h-[28rem] bg-[var(--magenta)]/15 rounded-full blur-[120px] animate-drift pointer-events-none mix-blend-screen" />
 
-      {/* මෙතන pt-16 sm:pt-20 වෙනුවට pt-28 sm:pt-36 lg:pt-44 ලෙස වෙනස් කර ඇත */}
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-44 pb-24">
         {/* ── Cyberpunk System Update Alert ── */}
         {showAlert && (

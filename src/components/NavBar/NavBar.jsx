@@ -77,7 +77,6 @@ const NavBar = () => {
     setIsMenuOpen(false);
   };
 
-  // HashRouter සහ සාමාන්‍ය Router දෙකටම ගැළපෙන ලෙස සකස් කළා
   const isActiveRoute = (path) => {
     return location.pathname === path || window.location.hash.endsWith(path);
   };
