@@ -12,4 +12,4 @@ Disallow: /404.html
 Disallow: /search.html
 
 # Sitemap location
-Sitemap: https://solomonprompts.site/sitemap.xml
+Sitemap: https://solomonprompts.space/sitemap.xml
